@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const pessoa = sequelize.define('pessoa', {
-    cpf: {type:DataTypes.STRING, primaryKey: true},
+  const view_moderador = sequelize.define('view-moderador', {
+    cpf: DataTypes.STRING,
     nome: DataTypes.STRING,
     sobrenome: DataTypes.STRING,
     data_nascimento: DataTypes.DATEONLY,
@@ -9,10 +9,10 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     celular: DataTypes.STRING,
   }, {
-    freezeTableName: true,
+    freezeTableName: true
   });
-  pessoa.associate = function(models) {
-    
+  view_moderador.associate = function(models) {
+    // associations can be defined here
   };
-  return pessoa;
+  return view - moderador;
 };

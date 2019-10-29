@@ -1,9 +1,9 @@
 module.exports = {
-    dialect: 'mariadb',
     username: 'root',
     password: null,
     database: 'exitus',
     host: 'localhost',
+    dialect: 'mariadb',
     define : {
         underscored: true,
         freezeTableName: true  
