@@ -14,5 +14,5 @@ module.exports = (sequelize, DataTypes) => {
   view_moderador.associate = function(models) {
     // associations can be defined here
   };
-  return view - moderador;
+  return view_moderador;
 };

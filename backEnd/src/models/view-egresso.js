@@ -14,5 +14,5 @@ module.exports = (sequelize, DataTypes) => {
   view_egresso.associate = function(models) {
     // associations can be defined here
   };
-  return view - egresso;
+  return view_egresso;
 };

@@ -78,5 +78,39 @@ module.exports = {
 
     },
 
-    async update(requisition, response) {}
+    async update(requisition, response) {
+        const campos = {
+            cpf,
+            nome,
+            sobrenome,
+            data_nascimento,
+            email,
+            celular
+        } = requisition
+        const camposValidados = []
+        
+        for([chave, valor] of Object.entries(campos)){
+            if(valor && chave != cpf){
+                camposValidados.push(chave)
+            }
+        }
+
+        const camposAAtualizar = (campos) => {
+            let resultado = ''
+            campos.forEach((valor, indice, array) => {
+                resultado = '"' + valor + '" : "' + valor + '",'
+            })
+            return JSON.parse(('{' + resultado.substr(0, resultado.length -1) + '}'))
+        }
+        
+        pessoa.update(
+            camposAAtualizar(camposValidados), {
+            where: cpf
+        }).then((resultado) => {
+            console.log('ok')
+            console.log(resultado)
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
 }
