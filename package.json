@@ -1,0 +1,10 @@
+{
+  "name": "Exitus",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "install-backEnd": "cd backEnd && npm install sequelize-cli -D",
+    "install-frontEnd": "cd frontEnd && npm install",
+    "installAll": "npm run install-backEnd && npm run install-frontEnd"
+  }
+}
