@@ -1,13 +1,13 @@
 const {
-    pessoa
+    egresso
 } = require('../models/');
-const color = require('colors')
+const color = require('colors');
 
 module.exports = {
 
     async index(request, response) {
 
-        let registros = await pessoa.findAll({
+        let registros = await egresso.findAll({
             raw: true
         }).then((resultado) => {
             console.log(color.green(`Operação executada com sucesso *-*`))
@@ -26,7 +26,7 @@ module.exports = {
             cpf
         } = request.body;
 
-        let registro = await pessoa.findOne({
+        let registro = await egresso.findOne({
             where: {
                 cpf
             },
@@ -46,19 +46,12 @@ module.exports = {
     async store(request, response) {
         const {
             cpf,
-            nome,
-            sobrenome,
-            data_nascimento,
-            email,
-            celular
+            senha,
         } = request.body;
 
-        let novoRegistro = await pessoa.create({
+        let novoRegistro = await egresso.create({
             cpf,
-            nome,
-            sobrenome,
-            data_nascimento,
-            email,
+            senha,
             celular
         }).then((resultado) => {
             console.log(color.green(`Operação executada com sucesso =D`))
@@ -77,7 +70,7 @@ module.exports = {
             cpf
         } = request.body;
 
-        let registroDeletado = await pessoa.destroy({
+        await egresso.destroy({
             where: {
                 cpf
             },
@@ -91,25 +84,18 @@ module.exports = {
             return []
         });
 
-        return response.status(200).json(registroDeletado);
+        return response.status(200).json(request.body);
     },
 
     async update(request, response) {
         const {
             cpf,
-            nome,
-            sobrenome,
-            data_nascimento,
-            email,
-            celular
+            senha,
         } = request.body;
 
         await pessoa.update({
-            nome,
-            sobrenome,
-            data_nascimento,
-            email,
-            celular
+            cpf,
+            senha,
         }, {
             where: {
                 cpf
@@ -125,4 +111,4 @@ module.exports = {
 
         return response.status(200).json(request.body);
     },
-}
+};

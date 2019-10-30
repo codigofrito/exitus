@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     email_egresso: DataTypes.STRING,
     celular_egresso: DataTypes.STRING,
     idade_egresso: DataTypes.INTEGER,
-    data_participacao: DataTypes.DATE
+    data_participacao: DataTypes.DATE,
   }, {});
   view_Egresso_particiou_entrevista.associate = function(models) {
     // associations can be defined here

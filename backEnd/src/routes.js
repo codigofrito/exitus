@@ -1,16 +1,24 @@
 const express = require('express');
 const routes = express.Router();
-const PessoaController = require('./controllers/PessoaController');
 
+const PessoaController = require('./controllers/PessoaController');
+const EgressoController = require('./controllers/EgressoController')
 
 //===PessoaController.js Routes===//
-routes.post('/newPerson', PessoaController.store)
-routes.get('/showAllPerson', PessoaController.index)
-routes.get('/searchPerson', PessoaController.show)
-routes.delete('/deletePerson', PessoaController.destroy)
-routes.put('/updatePerson', PessoaController.update)
+routes.post('/newPerson', PessoaController.store);
+routes.get('/showAllPerson', PessoaController.index);
+routes.get('/searchPerson', PessoaController.show);
+routes.delete('/deletePerson', PessoaController.destroy);
+routes.put('/updatePerson', PessoaController.update);
 //=== -------------------------===//
 
+//===EgressoController.js Routes===//
+routes.post('/newEgresso', EgressoController.store);
+routes.get('/showAllEgresso', EgressoController.index);
+routes.get('/searchEgresso', EgressoController.show);
+routes.delete('/deleteEgresso', EgressoController.destroy);
+routes.put('/updateEgresso', EgressoController.update);
+//=== -------------------------===//
 
 module.exports = routes;
 

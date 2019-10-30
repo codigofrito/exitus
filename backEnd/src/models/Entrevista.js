@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'cpf',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
-    })
+    });
   };
   return entrevista;
 };

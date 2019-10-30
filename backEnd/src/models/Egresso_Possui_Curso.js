@@ -18,19 +18,19 @@ module.exports = (sequelize, DataTypes) => {
     observacao: DataTypes.STRING,
     atuacao: DataTypes.STRING,
     ano_inicio_curso: DataTypes.INTEGER,
-    ano_termino_curso: DataTypes.INTEGER
+    ano_termino_curso: DataTypes.INTEGER,
   }, {});
   egresso_possui_curso.associate = function (models) {
     egresso_possui_curso.belongsTo(models.egresso, {
       foreignKey: 'cpf',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
-    })
+    });
     egresso_possui_curso.belongsTo(models.curso, {
       foreignKey: 'id',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
-    })
+    });
   };
   return egresso_possui_curso;
 };

@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'id',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
-    })
+    });
   };
   return pergunta;
 };
