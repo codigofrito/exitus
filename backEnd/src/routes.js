@@ -1,9 +1,13 @@
 const express = require('express');
-
-const FilialController = require('./controllers/FilialController');
-
 const routes = express.Router();
+const PessoaController = require('./controllers/PessoaController');
 
+
+routes.post('/pessoa', PessoaController.store)
+routes.put('/pessoaFind', PessoaController.update)
+
+
+/*
 function verifyAttributesRequestJson(arrayNotNullAttributes, requestJson){
 
     let isValidJson = true;
@@ -13,7 +17,7 @@ function verifyAttributesRequestJson(arrayNotNullAttributes, requestJson){
         if (!requestJson.hasOwnProperty(attributeArray)){
             isValidJson = false
         }   
-    })    
+    })
 
     return isValidJson;
 
@@ -23,9 +27,9 @@ function verifyAttributesRequestJson(arrayNotNullAttributes, requestJson){
 //======================================================================================================
 
 
-routes.post('/cadastrarFilial', (request, response) => {
+routes.post('/cadastrarPessoa', (request, response) => {
 
-    let arrayNotNullAttributes = ['nome_filial', 'cidade'];
+    let arrayNotNullAttributes = ['nome_Pessoa', 'cidade'];
 
     if (verifyAttributesRequestJson(arrayNotNullAttributes, request.body)){
         FilialController.store(request, response);
@@ -37,8 +41,6 @@ routes.post('/cadastrarFilial', (request, response) => {
     }
 
 });
-
-
-
+*/
 
 module.exports = routes;

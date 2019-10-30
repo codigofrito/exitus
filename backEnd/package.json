@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "body-parser": "^1.19.0",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
     "crypto-js": "^3.1.9-1",
@@ -12,6 +13,7 @@
     "sequelize-cli": "^5.5.1"
   },
   "scripts": {
+    "go-server": "nodemon src/server.js",
     "go": "yarn install && npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:all",
     "reset-migrations": "npx sequelize db:migrate:undo:all",
     "start-migrations": "npx sequelize db:migrate",

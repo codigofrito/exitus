@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     celular: DataTypes.STRING,
   }, {
     freezeTableName: true,
+    timestamp: true
   });
   pessoa.associate = function(models) {
     

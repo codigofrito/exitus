@@ -1,16 +1,13 @@
 const express = require('express');
-//const routes = require('./routes')
-const p = require('./controllers/PessoaController')
-//require('./database');
+const routes = require('./routes')
+const cors = require('cors');
+const bodyParser = require('body-parser')
 
-//const app = express();
+const app = express();
 
-//app.use(express.json());
-//app.use(routes);
+app.options('*',cors);
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
+app.use(routes);
 
-//app.listen(3333);
-const data = {
-    cpf: '123456789',
-    email: '123@mail.com'
-}
-p.update(data)
+app.listen(8080);
