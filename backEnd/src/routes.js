@@ -3,8 +3,33 @@ const routes = express.Router();
 const PessoaController = require('./controllers/PessoaController');
 
 
-routes.post('/pessoa', PessoaController.store)
-routes.put('/pessoaFind', PessoaController.update)
+//===PessoaController.js Routes===//
+routes.post('/newPerson', PessoaController.store)
+routes.get('/showAllPerson', PessoaController.index)
+routes.get('/searchPerson', PessoaController.show)
+routes.delete('/deletePerson', PessoaController.destroy)
+routes.put('/updatePerson', PessoaController.update)
+//=== -------------------------===//
+
+
+
+module.exports = routes;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
@@ -43,4 +68,3 @@ routes.post('/cadastrarPessoa', (request, response) => {
 });
 */
 
-module.exports = routes;
