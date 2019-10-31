@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Egresso_particiou_entrevista', {
+    return queryInterface.createTable('egresso_participou_entrevista', {
       id_entrevista: {
         primaryKey: true,
         allowNull: false,
@@ -10,21 +10,19 @@ module.exports = {
       cpf_egresso: {
         primaryKey: true,
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.BIGINT(11).ZEROFILL
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
-    },{
-      freezeTableName: true
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Egresso_particiou_entrevista');
+    return queryInterface.dropTable('egresso_participou_entrevista');
   }
 };

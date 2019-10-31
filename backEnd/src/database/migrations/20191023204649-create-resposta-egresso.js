@@ -34,21 +34,19 @@ module.exports = {
           model: 'egresso',
           key: 'cpf'
         },
-        type: Sequelize.STRING
+        type: Sequelize.BIGINT(11).ZEROFILL
       },
       resposta_subjetiva: {
         type: Sequelize.STRING
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
-    }, {
-      freezeTableName: true
     });
   },
   down: (queryInterface, Sequelize) => {

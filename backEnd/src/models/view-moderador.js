@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const view_moderador = sequelize.define('view-moderador', {
-    cpf: DataTypes.STRING,
+    cpf: DataTypes.BIGINT(11).ZEROFILL,
     nome: DataTypes.STRING,
     sobrenome: DataTypes.STRING,
     data_nascimento: DataTypes.DATEONLY,

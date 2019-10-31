@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const moderador = sequelize.define('moderador', {
-    cpf: DataTypes.STRING,
+    cpf: DataTypes.BIGINT(11).ZEROFILL,
     id_filial: DataTypes.INTEGER,
     senha: DataTypes.STRING
   }, {});
