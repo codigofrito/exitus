@@ -4,25 +4,26 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     const sequelize = new Sequelize(config)
     return sequelize.query(`
-    CREATE VIEW view_moderador AS
+    CREATE VIEW IF NOT EXISTS view_moderador AS
     SELECT 
-        p.cpf AS cpf,
-        p.nome AS nome,
-        p.sobrenome AS sobrenome,
-        p.data_nascimento AS data_nascimento,
-        p.idade AS idade,
-        p.email AS email,
-        p.celular AS celular,
-        m.createdAt AS createdAt,
-        m.updatedAt AS updatedAt
+        pessoa.cpf,
+        nome,
+        sobrenome,
+        data_nascimento,
+        idade,
+        email,
+        celular,
+        moderador.created_at,
+        moderador.updated_at
     FROM
-        (moderador as m
-        JOIN pessoa as p)
-    WHERE
-        p.cpf = m.cpf`);
+        moderador
+    JOIN
+        pessoa
+    ON
+        pessoa.cpf = moderador.cpf`);
   },
   down: (queryInterface, Sequelize) => {
     const sequelize = new Sequelize(config)
-    return sequelize.query('DROP VIEW view_egresso')
+    return sequelize.query('DROP VIEW IF EXISTS view_egresso')
   }
 };

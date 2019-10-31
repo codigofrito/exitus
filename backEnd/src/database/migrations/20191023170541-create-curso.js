@@ -23,16 +23,14 @@ module.exports = {
       area: {
         type: Sequelize.ENUM(['EXATAS','HUMANAS','SAÚDE',])
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
-    }, {
-      freezeTableName: true
     });
   },
   down: (queryInterface, Sequelize) => {

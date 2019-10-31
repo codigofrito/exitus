@@ -1,9 +1,9 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const view_Egresso_particiou_entrevista = sequelize.define('view_Egresso_particiou_entrevista', {
+  const view_Egresso_particiou_entrevista = sequelize.define('view_egresso_participou_entrevista', {
     id_entrevista: DataTypes.INTEGER,
     titulo_entrevista: DataTypes.STRING,
-    cpf_egresso: DataTypes.STRING,
+    cpf_egresso: DataTypes.BIGINT(11).ZEROFILL,
     nome_egresso: DataTypes.STRING,
     sobrenome_egresso: DataTypes.STRING,
     data_nascimento_egresso: DataTypes.DATE,

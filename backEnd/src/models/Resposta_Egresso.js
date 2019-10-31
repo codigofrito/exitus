@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const resposta_egresso = sequelize.define('resposta_egresso', {
     id_pergunta: DataTypes.INTEGER,
     id_alternativa: DataTypes.INTEGER,
-    cpf_egresso: DataTypes.STRING,
+    cpf_egresso: DataTypes.BIGINT(11).ZEROFILL,
     resposta_subjetiva: DataTypes.STRING
   }, {});
   resposta_egresso.associate = function (models) {

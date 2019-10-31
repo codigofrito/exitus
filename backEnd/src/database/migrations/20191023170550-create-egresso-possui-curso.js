@@ -11,7 +11,7 @@ module.exports = {
         },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
-        type: Sequelize.STRING
+        type: Sequelize.BIGINT(11).ZEROFILL
       },
       id_curso: {
         allowNull: false,
@@ -45,16 +45,14 @@ module.exports = {
       ano_termino_curso: {
         type: Sequelize.INTEGER
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
-    }, {
-      freezeTableName: true
     });
   },
   down: (queryInterface, Sequelize) => {

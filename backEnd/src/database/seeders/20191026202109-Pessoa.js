@@ -9,8 +9,8 @@ module.exports = {
         data_nascimento: '1996-07-28',
         email: 'nleo@mail.com',
         celular: '73988992345',
-        createdAt: Sequelize.fn('NOW'),
-        updatedAt: Sequelize.fn('NOW')
+        created_at: Sequelize.fn('NOW'),
+        updated_at: Sequelize.fn('NOW')
       },
       {
         cpf: '987456321',
@@ -19,8 +19,8 @@ module.exports = {
         data_nascimento: '1996-10-29',
         email: 'mail@mail.com',
         celular: '739898989',
-        createdAt: Sequelize.fn('NOW'),
-        updatedAt: Sequelize.fn('NOW'),
+        created_at: Sequelize.fn('NOW'),
+        updated_at: Sequelize.fn('NOW'),
       }
     ], {});
 

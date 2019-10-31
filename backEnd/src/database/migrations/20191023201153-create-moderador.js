@@ -12,7 +12,7 @@ module.exports = {
         },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
-        type: Sequelize.STRING
+        type: Sequelize.BIGINT(11).ZEROFILL
       },
       id_filial: {
         allowNull: false,
@@ -28,16 +28,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
-    }, {
-      freezeTableName: true
     });
   },
   down: (queryInterface, Sequelize) => {

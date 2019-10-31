@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const pessoa = sequelize.define('pessoa', {
-    cpf: {type:DataTypes.STRING, primaryKey: true},
+    cpf: {type:DataTypes.BIGINT(11).ZEROFILL, primaryKey: true},
     nome: DataTypes.STRING,
     sobrenome: DataTypes.STRING,
     data_nascimento: DataTypes.DATEONLY,

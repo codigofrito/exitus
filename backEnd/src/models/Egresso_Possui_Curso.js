@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const egresso_possui_curso = sequelize.define('egresso_possui_curso', {
     cpf_egresso: {
-      type: DataTypes.STRING,
+      type: DataTypes.BIGINT(11).ZEROFILL,
       primaryKey: true
     },
     id_curso: {
