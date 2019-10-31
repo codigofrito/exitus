@@ -1,13 +1,12 @@
 const {
-    egresso
-} = require('../models/');
+    egresso_particiou_entrevista
+} = require('../models');
 const color = require('colors');
 
 module.exports = {
 
     async index(request, response) {
-
-        let registros = await egresso.findAll({
+        let registros = await egresso_particiou_entrevista.findAll({
             raw: true
         }).then((resultado) => {
             console.log(color.green(`Operação executada com sucesso *-*`))
@@ -23,20 +22,21 @@ module.exports = {
 
     async show(request, response) {
         const {
-            cpf
+            cpf_egresso
         } = request.body;
 
-        let registro = await egresso.findOne({
+        let registro = await egresso_particiou_entrevista.findOne({
             where: {
-                cpf
+                cpf_egresso
             },
             raw: true
+
         }).then((resultado) => {
             console.log(color.green(`Operação executada com sucesso =D`))
             return resultado
         }).catch((err) => {
             console.log(err)
-            console.log(color.red(`Falha ao executar operação =O`))
+            console.log(color.red(`Falha ao executar operação o_o`))
             return []
         });
 
@@ -45,13 +45,14 @@ module.exports = {
 
     async store(request, response) {
         const {
-            cpf,
-            senha,
+            id_entrevista,
+            cpf_egresso,
         } = request.body;
 
-        let novoRegistro = await egresso.create({
-            cpf,
-            senha,
+        let novoRegistro = await egresso_particiou_entrevista.create({
+            id_entrevista,
+            cpf_egresso,
+
         }).then((resultado) => {
             console.log(color.green(`Operação executada com sucesso =D`))
             return resultado
@@ -66,12 +67,14 @@ module.exports = {
 
     async destroy(request, response) {
         const {
-            cpf
+            id_entrevista,
+            cpf_egresso,
         } = request.body;
 
-        await egresso.destroy({
+        await egresso.egresso_particiou_entrevista({
             where: {
-                cpf
+                id_entrevista,
+                cpf_egresso,
             },
             raw: true
         }).then((resultado) => {
@@ -88,16 +91,15 @@ module.exports = {
 
     async update(request, response) {
         const {
-            cpf,
-            senha,
+            id_entrevista,
+            cpf_egresso,
         } = request.body;
 
         await pessoa.update({
-            cpf,
-            senha,
+            id_entrevista,
         }, {
             where: {
-                cpf
+                cpf_egresso
             }
         }).then((resultado) => {
             console.log(color.green(`Operação executada com sucesso *-*`))

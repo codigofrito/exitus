@@ -1,13 +1,12 @@
 const {
-    egresso
-} = require('../models/');
+    egresso_possui_curso
+} = require('../models');
 const color = require('colors');
 
 module.exports = {
 
     async index(request, response) {
-
-        let registros = await egresso.findAll({
+        let registros = await egresso_possui_curso.findAll({
             raw: true
         }).then((resultado) => {
             console.log(color.green(`Operação executada com sucesso *-*`))
@@ -26,7 +25,7 @@ module.exports = {
             cpf
         } = request.body;
 
-        let registro = await egresso.findOne({
+        let registro = await egresso_possui_curso.findOne({
             where: {
                 cpf
             },
@@ -45,13 +44,26 @@ module.exports = {
 
     async store(request, response) {
         const {
-            cpf,
-            senha,
+            cpf_egresso,
+            id_curso,
+            concluiu,
+            impressao,
+            observacao,
+            atuacao,
+            ano_inicio_curso,
+            ano_terminocurso
         } = request.body;
 
-        let novoRegistro = await egresso.create({
-            cpf,
-            senha,
+        let novoRegistro = await egresso_possui_curso.create({
+            cpf_egresso,
+            id_curso,
+            concluiu,
+            impressao,
+            observacao,
+            atuacao,
+            ano_inicio_curso,
+            ano_terminocurso,
+
         }).then((resultado) => {
             console.log(color.green(`Operação executada com sucesso =D`))
             return resultado
@@ -66,12 +78,14 @@ module.exports = {
 
     async destroy(request, response) {
         const {
-            cpf
+            cpf_egresso,
+            id_curso,
         } = request.body;
 
-        await egresso.destroy({
+        await egresso_possui_curso.destroy({
             where: {
-                cpf
+                cpf_egresso,
+                id_curso
             },
             raw: true
         }).then((resultado) => {
@@ -88,16 +102,27 @@ module.exports = {
 
     async update(request, response) {
         const {
-            cpf,
-            senha,
+            cpf_egresso,
+            id_curso,
+            concluiu,
+            impressao,
+            observacao,
+            atuacao,
+            ano_inicio_curso,
+            ano_terminocurso,
         } = request.body;
 
-        await pessoa.update({
-            cpf,
-            senha,
+        await egresso_possui_curso.update({
+            id_curso,
+            concluiu,
+            impressao,
+            observacao,
+            atuacao,
+            ano_inicio_curso,
+            ano_terminocurso,
         }, {
             where: {
-                cpf
+                cpf_egresso
             }
         }).then((resultado) => {
             console.log(color.green(`Operação executada com sucesso *-*`))

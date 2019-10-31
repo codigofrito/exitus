@@ -1,13 +1,12 @@
 const {
-    egresso
-} = require('../models/');
+    moderador
+} = require('../models');
 const color = require('colors');
 
 module.exports = {
 
     async index(request, response) {
-
-        let registros = await egresso.findAll({
+        let registros = await moderador.findAll({
             raw: true
         }).then((resultado) => {
             console.log(color.green(`Operação executada com sucesso *-*`))
@@ -26,7 +25,7 @@ module.exports = {
             cpf
         } = request.body;
 
-        let registro = await egresso.findOne({
+        let registro = await moderador.findOne({
             where: {
                 cpf
             },
@@ -46,11 +45,13 @@ module.exports = {
     async store(request, response) {
         const {
             cpf,
+            id_filial,
             senha,
         } = request.body;
 
-        let novoRegistro = await egresso.create({
+        let novoRegistro = await moderador.create({
             cpf,
+            id_filial,
             senha,
         }).then((resultado) => {
             console.log(color.green(`Operação executada com sucesso =D`))
@@ -69,7 +70,7 @@ module.exports = {
             cpf
         } = request.body;
 
-        await egresso.destroy({
+        await moderador.destroy({
             where: {
                 cpf
             },
@@ -89,11 +90,13 @@ module.exports = {
     async update(request, response) {
         const {
             cpf,
+            id_filial,
             senha,
         } = request.body;
 
         await pessoa.update({
             cpf,
+            id_filial,
             senha,
         }, {
             where: {

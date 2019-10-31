@@ -1,13 +1,12 @@
 const {
-    egresso
-} = require('../models/');
+    entrevista
+} = require('../models');
 const color = require('colors');
 
 module.exports = {
 
     async index(request, response) {
-
-        let registros = await egresso.findAll({
+        let registros = await entrevista.findAll({
             raw: true
         }).then((resultado) => {
             console.log(color.green(`Operação executada com sucesso *-*`))
@@ -23,21 +22,21 @@ module.exports = {
 
     async show(request, response) {
         const {
-            cpf
+            id
         } = request.body;
 
-        let registro = await egresso.findOne({
+        let registro = await entrevista.findOne({
             where: {
-                cpf
+                id
             },
             raw: true
         }).then((resultado) => {
-            console.log(color.green(`Operação executada com sucesso =D`))
-            return resultado
+            console.log(color.green(`Operação executada com sucesso =D`));
+            return resultado;
         }).catch((err) => {
-            console.log(err)
-            console.log(color.red(`Falha ao executar operação =O`))
-            return []
+            console.log(err);
+            console.log(color.red(`Falha ao executar operação =O`));
+            return [];
         });
 
         return response.status(200).json(registro);
@@ -45,13 +44,15 @@ module.exports = {
 
     async store(request, response) {
         const {
-            cpf,
-            senha,
+            cpf_moderador,
+            titulo,
+            descricao,
         } = request.body;
 
-        let novoRegistro = await egresso.create({
-            cpf,
-            senha,
+        let novoRegistro = await entrevista.create({
+            cpf_moderador,
+            titulo,
+            descricao,
         }).then((resultado) => {
             console.log(color.green(`Operação executada com sucesso =D`))
             return resultado
@@ -60,18 +61,17 @@ module.exports = {
             console.log(color.red(`Falha ao executar operação =O`))
             return []
         });
-
         return response.status(200).json(novoRegistro);
     },
 
     async destroy(request, response) {
         const {
-            cpf
+            id
         } = request.body;
 
-        await egresso.destroy({
+        await entrevista.destroy({
             where: {
-                cpf
+                id
             },
             raw: true
         }).then((resultado) => {
@@ -88,16 +88,19 @@ module.exports = {
 
     async update(request, response) {
         const {
-            cpf,
-            senha,
+            id,
+            cpf_moderador,
+            titulo,
+            descricao,
         } = request.body;
 
-        await pessoa.update({
-            cpf,
-            senha,
+        await entrevista.update({
+            cpf_moderador,
+            titulo,
+            descricao,
         }, {
             where: {
-                cpf
+                id
             }
         }).then((resultado) => {
             console.log(color.green(`Operação executada com sucesso *-*`))
