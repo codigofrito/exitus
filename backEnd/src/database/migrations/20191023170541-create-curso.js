@@ -1,4 +1,5 @@
-'use strict';
+/* eslint-disable no-unused-vars */
+'use strict'
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('curso', {
@@ -21,7 +22,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       area: {
-        type: Sequelize.ENUM(['EXATAS','HUMANAS','SAÚDE',])
+        type: Sequelize.ENUM(['EXATAS', 'HUMANAS', 'SAÚDE'])
       },
       created_at: {
         allowNull: false,
@@ -31,9 +32,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    })
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('curso');
+    return queryInterface.dropTable('curso')
   }
-};
+}

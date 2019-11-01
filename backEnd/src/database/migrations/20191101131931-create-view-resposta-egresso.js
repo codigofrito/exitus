@@ -1,10 +1,11 @@
+/* eslint-disable linebreak-style */
 'use strict';
-const config = require('../../config/database.js')
+const config = require('../../config/database.js');
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    const sequelize = new Sequelize(config)
-    return sequelize.query(`
-    CREATE VIEW IF NOT EXISTS view_resposta_egresso AS
+	up: (queryInterface, Sequelize) => {
+		const sequelize = new Sequelize(config);
+		return sequelize.query(`
+    CREATE VIEW IF NOT EXISTS view_resposta_egresso AS 
     SELECT
         egresso.cpf AS cpf_egresso,
         entrevista.id AS id_entrevista,
@@ -19,7 +20,7 @@ module.exports = {
         entrevista,
         pergunta,
         alternativa,
-        resposta_egresso
+        resposta_egressop
     WHERE
         resposta_egresso.cpf_egresso = egresso.cpf
     AND
@@ -28,9 +29,10 @@ module.exports = {
         resposta_egresso.id_pergunta = pergunta.id
     AND
         resposta_egresso.id_alternativa = alternativa.id`);
-  },
-  down: (queryInterface, Sequelize) => {
-    const sequelize = new Sequelize(config)
-    return sequelize.query('DROP VIEW IF EXISTS view_resposta_egresso')
-  }
+	},
+
+	down: (queryInterface, Sequelize) => {
+		const sequelize = new Sequelize(config);
+		return sequelize.query('DROP VIEW IF EXISTS view_resposta_egresso');
+	}
 };

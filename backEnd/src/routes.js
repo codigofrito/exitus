@@ -3,7 +3,7 @@ const routes = express.Router();
 
 const PessoaController = require('./controllers/PessoaController');
 const EgressoController = require('./controllers/EgressoController');
-const EgressoPossuiCursoController = require('./controllers/EgressoPossuiCursoController')
+const EgressoPossuiCursoController = require('./controllers/EgressoPossuiCursoController');
 const EgressoParticiouCursoController = require('./controllers/EgressoParticipouEntrevistaController');
 const ModeradorController = require('./controllers/ModeradorController');
 const EntrevistaController = require('./controllers/EntrevistaController');
@@ -117,5 +117,4 @@ routes.get('/viewModerator', ViewModeradorController.show);
 routes.get('/viewEgressAnswers', ViewRespostaEgressoController.index);
 routes.get('/viewEgressAnswer', ViewRespostaEgressoController.show);
 //=== === ===-------------------------=== === ===//
-
 module.exports = routes;

@@ -1,12 +1,13 @@
-'use strict';
+/* eslint-disable no-unused-vars */
+'use strict'
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('pessoa', {
       cpf: {
         allowNull: false,
         unique: true,
-        primaryKey:true,
-        type: Sequelize.BIGINT(11).ZEROFILL,
+        primaryKey: true,
+        type: Sequelize.BIGINT(11).ZEROFILL
       },
       nome: {
         allowNull: false,
@@ -35,9 +36,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    })
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('pessoa');
+    return queryInterface.dropTable('pessoa')
   }
-};
+}

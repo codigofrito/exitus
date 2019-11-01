@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 const config = require('../../config/database.js')
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -20,10 +20,10 @@ module.exports = {
     WHERE
         entrevista.id = egresso_participou_entrevista.id_entrevista
     AND
-        pessoa.cpf = egresso_participou_entrevista.cpf_egresso`);
+        pessoa.cpf = egresso_participou_entrevista.cpf_egresso`)
   },
   down: (queryInterface, Sequelize) => {
     const sequelize = new Sequelize(config)
     return sequelize.query('DROP VIEW IF EXISTS entrevista_egresso')
   }
-};
+}
