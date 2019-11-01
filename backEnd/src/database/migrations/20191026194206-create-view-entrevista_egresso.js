@@ -1,9 +1,9 @@
-'use strict'
-const config = require('../../config/database.js')
+'use strict';
+const config = require('../../config/database.js');
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    const sequelize = new Sequelize(config)
-    return sequelize.query(`
+	up: (queryInterface, Sequelize) => {
+		const sequelize = new Sequelize(config);
+		return sequelize.query(`
     CREATE VIEW IF NOT EXISTS entrevista_egresso AS 
     SELECT
         entrevista.id as id_entrevista,
@@ -20,10 +20,10 @@ module.exports = {
     WHERE
         entrevista.id = egresso_participou_entrevista.id_entrevista
     AND
-        pessoa.cpf = egresso_participou_entrevista.cpf_egresso`)
-  },
-  down: (queryInterface, Sequelize) => {
-    const sequelize = new Sequelize(config)
-    return sequelize.query('DROP VIEW IF EXISTS entrevista_egresso')
-  }
-}
+        pessoa.cpf = egresso_participou_entrevista.cpf_egresso`);
+	},
+	down: (queryInterface, Sequelize) => {
+		const sequelize = new Sequelize(config);
+		return sequelize.query('DROP VIEW IF EXISTS entrevista_egresso');
+	}
+};

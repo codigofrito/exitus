@@ -12,6 +12,6 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(routes);
 
-app.listen(8080) ?
+app.listen(process.env.PORT || 8080) ?
 	console.log(color.yellow('SERVER ON-LINE')) 
 	: console.log(color.red('SERVER OFF-LINE'));
