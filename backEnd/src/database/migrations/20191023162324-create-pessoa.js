@@ -20,9 +20,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATEONLY
       },
-      idade: {
-        type: Sequelize.INTEGER
-      },
       email: {
         unique: true,
         type: Sequelize.STRING

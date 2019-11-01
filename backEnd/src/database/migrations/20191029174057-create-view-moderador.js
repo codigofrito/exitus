@@ -7,12 +7,11 @@ module.exports = {
     CREATE VIEW IF NOT EXISTS view_moderador AS
     SELECT 
         pessoa.cpf,
-        nome,
-        sobrenome,
-        data_nascimento,
-        idade,
-        email,
-        celular,
+        pessoa.nome,
+        pessoa.sobrenome,
+        pessoa.data_nascimento,
+        pessoa.email,
+        pessoa.celular,
         moderador.created_at,
         moderador.updated_at
     FROM

@@ -7,6 +7,7 @@
     "dialect": "mariadb",
     "operatorsAliases": false,
     "define" : {
+      "underscored" : true,
       "timestamp" : true,
       "freezeTableName" : true
     }

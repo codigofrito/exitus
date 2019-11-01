@@ -1,14 +1,12 @@
 const {
-    pessoa
-} = require('../models/');
+    filial
+} = require('../models');
 const color = require('colors');
-const calcularIdade = require('../scripts/calcularIdade');
 
 module.exports = {
 
     async index(request, response) {
-
-        let registrosBrutos = await pessoa.findAll({
+        let registros = await filial.findAll({
             raw: true
         }).then((resultado) => {
             console.log(color.green(`Operação executada com sucesso *-*`))
@@ -19,22 +17,17 @@ module.exports = {
             return []
         });
 
-        let registros = registrosBrutos.map(registro => {
-            registro.idade = calcularIdade(registro.data_nascimento);
-            return registro
-        })
-
         return response.status(200).json(registros);
     },
 
     async show(request, response) {
         const {
-            cpf
+            id
         } = request.body;
 
-        let registroBruto = await pessoa.findOne({
+        let registro = await filial.findOne({
             where: {
-                cpf
+                id
             },
             raw: true
         }).then((resultado) => {
@@ -46,31 +39,20 @@ module.exports = {
             return []
         });
 
-        let registro = registroBruto.map(registro => {
-            registro.idade = calcularIdade(registro.data_nascimento);
-            return registro
-        })
-
         return response.status(200).json(registro);
     },
 
     async store(request, response) {
         const {
-            cpf,
-            nome,
-            sobrenome,
-            data_nascimento,
-            email,
-            celular
+            nome_filial,
+            estado,
+            cidade,
         } = request.body;
 
-        let novoRegistro = await pessoa.create({
-            cpf,
-            nome,
-            sobrenome,
-            data_nascimento,
-            email,
-            celular
+        let novoRegistro = await filial.create({
+            nome_filial,
+            estado,
+            cidade,
         }).then((resultado) => {
             console.log(color.green(`Operação executada com sucesso =D`))
             return resultado
@@ -85,12 +67,12 @@ module.exports = {
 
     async destroy(request, response) {
         const {
-            cpf
+            id
         } = request.body;
 
-        let registroDeletado = await pessoa.destroy({
+        await filial.destroy({
             where: {
-                cpf
+                id
             },
             raw: true
         }).then((resultado) => {
@@ -102,28 +84,24 @@ module.exports = {
             return []
         });
 
-        return response.status(200).json(registroDeletado);
+        return response.status(200).json(request.body);
     },
 
     async update(request, response) {
         const {
-            cpf,
-            nome,
-            sobrenome,
-            data_nascimento,
-            email,
-            celular
+            id,
+            nome_filial,
+            estado,
+            cidade,
         } = request.body;
 
         await pessoa.update({
-            nome,
-            sobrenome,
-            data_nascimento,
-            email,
-            celular
+            nome_filial,
+            estado,
+            cidade,
         }, {
             where: {
-                cpf
+                id
             }
         }).then((resultado) => {
             console.log(color.green(`Operação executada com sucesso *-*`))
@@ -136,4 +114,4 @@ module.exports = {
 
         return response.status(200).json(request.body);
     },
-}
+};

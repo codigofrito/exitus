@@ -1,12 +1,12 @@
 const {
-    egresso_particiou_entrevista
+    egresso_participou_entrevista
 } = require('../models');
 const color = require('colors');
 
 module.exports = {
 
     async index(request, response) {
-        let registros = await egresso_particiou_entrevista.findAll({
+        let registros = await egresso_participou_entrevista.findAll({
             raw: true
         }).then((resultado) => {
             console.log(color.green(`Operação executada com sucesso *-*`))
@@ -25,7 +25,7 @@ module.exports = {
             cpf_egresso
         } = request.body;
 
-        let registro = await egresso_particiou_entrevista.findOne({
+        let registro = await egresso_participou_entrevista.findOne({
             where: {
                 cpf_egresso
             },
@@ -49,7 +49,7 @@ module.exports = {
             cpf_egresso,
         } = request.body;
 
-        let novoRegistro = await egresso_particiou_entrevista.create({
+        let novoRegistro = await egresso_participou_entrevista.create({
             id_entrevista,
             cpf_egresso,
 
@@ -71,7 +71,7 @@ module.exports = {
             cpf_egresso,
         } = request.body;
 
-        await egresso.egresso_particiou_entrevista({
+        await egresso.egresso_participou_entrevista({
             where: {
                 id_entrevista,
                 cpf_egresso,

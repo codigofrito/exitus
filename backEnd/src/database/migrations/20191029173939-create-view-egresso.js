@@ -10,7 +10,6 @@ module.exports = {
         pessoa.nome ,
         pessoa.sobrenome,
         pessoa.data_nascimento,
-        pessoa.idade,
         pessoa.email,
         pessoa.celular ,
         egresso.created_at,
