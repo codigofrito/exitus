@@ -32,12 +32,13 @@
   },
   "scripts": {
     "go-server": "nodemon src/server.js",
-    "go": "yarn install && npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:all",
+    "go": "yarn install && npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:all && yarn db:populate",
     "reset-migrations": "npx sequelize db:migrate:undo:all",
     "start-migrations": "npx sequelize db:migrate",
     "reset-seeders": "npx sequelize db:seed:undo:all",
     "start-seeders": "npx sequelize db:seed:all",
-    "test": "jest"
+    "db:populate": "node src/database/seeders/data/generate.js",
+    "db:unpopulate" : "node src/database/seeders/data/clear.js"
   },
   "name": "backend",
   "version": "1.0.0",
