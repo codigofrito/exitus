@@ -20,7 +20,7 @@ module.exports = {
         entrevista,
         pergunta,
         alternativa,
-        resposta_egressop
+        resposta_egresso
     WHERE
         resposta_egresso.cpf_egresso = egresso.cpf
     AND

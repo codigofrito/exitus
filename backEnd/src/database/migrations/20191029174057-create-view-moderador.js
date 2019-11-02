@@ -9,7 +9,7 @@ module.exports = {
         pessoa.cpf,
         pessoa.nome,
         pessoa.sobrenome,
-        pessoa.data_nascimentpo,
+        pessoa.data_nascimento,
         pessoa.email,
         pessoa.celular,
         moderador.created_at,
