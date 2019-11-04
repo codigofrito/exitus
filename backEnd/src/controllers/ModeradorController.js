@@ -1,117 +1,115 @@
-const {
-	moderador
-} = require('../models');
-const color = require('colors');
+const Moderador = require('../models').moderador;
+const Mensagem = require('./mensagem');
 const bcrypt = require('bcryptjs');
 
 module.exports = {
 
 	async index(request, response) {
-		let registros = await moderador.findAll({
-			raw: true
-		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso *-*'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-			return [];
-		});
+		await Moderador.findAll({ raw: true })
+			.then((resultado) => {
 
-		return response.status(200).json(registros);
+				return response.status(200).json({
+					resultado,
+					registros: resultado.length,
+					mensagem: Mensagem.sucesso
+				});
+			}).catch(() => {
+
+				return response.status(404).json({
+					resultado: [],
+					registros: 0,
+					mensagem: Mensagem.falha
+				});
+			});
 	},
 
 	async show(request, response) {
-		const {
-			cpf
-		} = request.body;
+		const { cpf } = request.body;
 
-		let registro = await moderador.findOne({
-			where: {
-				cpf
-			},
+		await Moderador.findOne({
+			where: { cpf },
 			raw: true
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso =D'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
 
-		return response.status(200).json(registro);
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async store(request, response) {
-		const {
-			cpf,
-			id_filial,
-			senha,
-		} = request.body;
+		const { cpf, id_filial, senha } = request.body;
 
-		let novoRegistro = await moderador.create({
+		await Moderador.create({
 			cpf,
 			id_filial,
 			senha: bcrypt.hashSync(senha, 10),
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso =D'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
 
-		return response.status(200).json(novoRegistro);
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(403).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async destroy(request, response) {
-		const {
-			cpf
-		} = request.body;
+		const { cpf } = request.body;
 
-		await moderador.destroy({
-			where: {
-				cpf
-			},
+		await Moderador.destroy({
+			where: { cpf },
 			raw: true
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso ^^'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
 
-		return response.status(200).json(request.body);
+			return response.status(200).json({
+				resultado: request.body,
+				registros: resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				registros: 0,
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async update(request, response) {
-		const {
-			cpf,
-			id_filial,
-			senha,
-		} = request.body;
+		const { cpf, id_filial, senha } = request.body;
 
-		await moderador.update({
+		await Moderador.update({
 			cpf,
 			id_filial,
 			senha,
 		}, {
-			where: {
-				cpf
-			}
+			where: { cpf }
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso *-*'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-			return [];
-		});
 
-		return response.status(200).json(request.body);
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 };

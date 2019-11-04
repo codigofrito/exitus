@@ -1,45 +1,47 @@
-const {
-	egresso_possui_curso
-} = require('../models');
-const color = require('colors');
+const  EgressoPossuiCurso  = require('../models').egresso_possui_curso;
+const Mensagem = require('./mensagem');
 
 module.exports = {
 
 	async index(request, response) {
-		let registros = await egresso_possui_curso.findAll({
+		await EgressoPossuiCurso.findAll({
 			raw: true
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso *-*'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-			return [];
-		});
 
-		return response.status(200).json(registros);
+			return response.status(200).json({
+				resultado,
+				registros: resultado.length,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				registros: 0,
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async show(request, response) {
-		const {
-			cpf
-		} = request.body;
+		const { cpf } = request.body;
 
-		let registro = await egresso_possui_curso.findOne({
-			where: {
-				cpf
-			},
+		await EgressoPossuiCurso.findOne({
+			where: { cpf },
 			raw: true
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso =D'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
 
-		return response.status(200).json(registro);
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async store(request, response) {
@@ -54,7 +56,7 @@ module.exports = {
 			ano_terminocurso
 		} = request.body;
 
-		let novoRegistro = await egresso_possui_curso.create({
+		await EgressoPossuiCurso.create({
 			cpf_egresso,
 			id_curso,
 			concluiu,
@@ -65,39 +67,41 @@ module.exports = {
 			ano_terminocurso,
 
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso =D'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
 
-		return response.status(200).json(novoRegistro);
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async destroy(request, response) {
-		const {
-			cpf_egresso,
-			id_curso,
-		} = request.body;
+		const { cpf_egresso, id_curso } = request.body;
 
-		await egresso_possui_curso.destroy({
-			where: {
-				cpf_egresso,
-				id_curso
-			},
+		await EgressoPossuiCurso.destroy({
+			where: {cpf_egresso, id_curso },
 			raw: true
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso ^^'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
 
-		return response.status(200).json(request.body);
+			return response.status(200).json({
+				resultado: request.body,
+				registros: resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: request.body,
+				registros: 0,
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async update(request, response) {
@@ -112,7 +116,7 @@ module.exports = {
 			ano_terminocurso,
 		} = request.body;
 
-		await egresso_possui_curso.update({
+		await EgressoPossuiCurso.update({
 			id_curso,
 			concluiu,
 			impressao,
@@ -125,14 +129,17 @@ module.exports = {
 				cpf_egresso
 			}
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso *-*'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-			return [];
-		});
 
-		return response.status(200).json(request.body);
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 };

@@ -1,36 +1,24 @@
-const { curso } = require('../models');
-const color = require('colors');
+const Curso = require('../models').curso;
+const Mensagem = require('./mensagem');
 
 module.exports = {
 
 	async index(request, response) {
-		await curso.findAll({ raw: true })
+		await Curso.findAll({ raw: true })
 			.then((resultado) => {
 
-				console.log(color.green('Operação executada com sucesso *-*'));
+				return response.status(200).json({
+					resultado,
+					registros: resultado.length,
+					mensagem: Mensagem.sucesso
+				});
 
-				if(resultado.length > 0)
-					return response.status(200).json({
-						resultado,
-						registros: resultado.length,
-						mensagem: 'Registros encontrados com sucesso!'
-					});
-
-				if(resultado == 0)
-					return response.status(200).json({
-						resultado,
-						registros: 0,
-						mensagem: 'Não foram encontrados registros para sua requisição!'
-					});
 			})
-			.catch((err) => {
+			.catch(() => {
 
-				console.log(err);
-				console.log(color.red('Falha ao executar operação =/'));
-
-				return response.status(417).json({
+				return response.status(404).json({
 					resultado: [],
-					mensagem: 'Ocorreu um erro com sua requisição! o_o'
+					mensagem: Mensagem.falha
 				});
 			});
 	},
@@ -38,56 +26,38 @@ module.exports = {
 	async show(request, response) {
 		const { id } = request.body;
 
-		await curso.findOne({
+		await Curso.findOne({
 			where: { id },
 			raw: true
 		}).then((resultado) => {
-			
-			console.log(color.green('Operação executada com sucesso =D'));
 
-			if(resultado !== null)
-				return response.status(200).json({
-					resultado,
-					mensagem: 'Registro encontrado com sucesso =D'
-				});
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
 
-			if(resultado == null)
-				return response.status(200).json({
-					resultado,
-					mensagem: 'Nenhum registro encontrado =/'
-				});
-		}).catch((err) => {
-
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-
-			return response.status(417).json({
+			return response.status(404).json({
 				resultado: [],
-				mensagem: 'Ocorreu um erro com sua requisição! o_o'
+				mensagem: Mensagem.falha
 			});
 		});
 	},
 
 	async store(request, response) {
-		const { id_filial, nome_curso, area } = request.body;
+		const { id_filial, nome_Curso, area } = request.body;
 
-		await curso.create({ id_filial, nome_curso, area }).then((resultado) => {
+		await Curso.create({ id_filial, nome_Curso, area }).then((resultado) => {
 
-			console.log(color.green('Operação executada com sucesso =D'));
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+
+		}).catch(() => {
 			
-			if(resultado !== [])
-				return response.status(200).json({
-					resultado,
-					mensagem: 'Registro salvo com sucesso *-*'
-				});
-
-		}).catch((err) => {
-
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			
-			return response.status(417).json({
-				mensagem: 'Falha ao tentar salvar um novo registro o_o'
+			return response.status(404).json({
+				mensagem: Mensagem.falha
 			});
 
 		});
@@ -96,73 +66,46 @@ module.exports = {
 	async destroy(request, response) {
 		const { id } = request.body;
 
-		await curso.destroy({
+		await Curso.destroy({
 			where: { id },
 			raw: true
 		}).then((resultado) => {
 
-			console.log(color.green('Operação executada com sucesso ^^'));
+			return response.status(200).json({
+				resultado: request.body,
+				registros: resultado,
+				mensagem: Mensagem.sucesso
+			});
 
-			if(resultado > 0)
-				return response.status(200).json({
-					resultado: request.body,
-					registros: resultado,
-					mensagem: 'Os registros foram excluídos da base de dados ^^'
-				});
+		}).catch(() => {
 
-			if(resultado === 0)
-				return response.status(203).json({
-					resultado: request.body,
-					registros: 0,
-					mensagem: 'Nenhum registro foi apagado da base de dados!'
-				});
-
-		}).catch((err) => {
-
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-
-			return response.status(417).json({
+			return response.status(404).json({
 				resultado: [],
-				mensagem: 'Ocorreu um erro com sua requisição! o_o'
+				mensagem: Mensagem.falha
 			});
 
 		});
-
-		return response.status(200).json(request.body);
 	},
 
 	async update(request, response) {
-		const { id, id_filial, nome_curso, area } = request.body;
+		const { id, id_filial, nome_Curso, area } = request.body;
 
-		await curso.update({
+		await Curso.update({
 			id_filial,
-			nome_curso,
+			nome_Curso,
 			area,
-		}, { where: { id } }).then((resultado) => {
-
-			console.log(color.green('Operação executada com sucesso *-*'));
+		}, { where: { id } }).then(() => {
 			
-			if(resultado[0] == 1)
-				return response.status(200).json({
-					resultado: request.body,
-					mensagem: 'Registro atualizado com sucesso!'
-				});
+			return response.status(200).json({
+				resultado: request.body,
+				mensagem: Mensagem.sucesso
+			});
 
-			if(resultado[0] == 0)
-				return response.status(203).json({
-					resultado: request.body,
-					mensagem: 'Nenhum registrofoi atualizado.'
-				});
+		}).catch(() => {
 
-		}).catch((err) => {
-
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-
-			return response.status(417).json({
+			return response.status(404).json({
 				resultado: [],
-				mensagem: 'Ocorreu um erro com sua requisição! o_o'
+				mensagem: Mensagem.falha
 			});
 		});
 	},

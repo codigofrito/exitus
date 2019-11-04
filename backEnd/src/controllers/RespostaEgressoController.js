@@ -1,23 +1,25 @@
-const {
-	resposta_egresso
-} = require('../models');
-const color = require('colors');
+const RespostaEgresso = require('../models').resposta_egresso;
+const Mensagem = require('./mensagem');
 
 module.exports = {
 
 	async index(request, response) {
-		let registros = await resposta_egresso.findAll({
-			raw: true
-		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso *-*'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-			return [];
-		});
+		await RespostaEgresso.findAll({ raw: true })
+			.then((resultado) => {
 
-		return response.status(200).json(registros);
+				return response.status(200).json({
+					resultado,
+					registros: resultado.length,
+					mensagem: Mensagem.sucesso
+				});
+			}).catch(() => {
+
+				return response.status(404).json({
+					resultado: [],
+					registros: 0,
+					mensagem: Mensagem.falha
+				});
+			});
 	},
 
 	async store(request, response) {
@@ -28,43 +30,47 @@ module.exports = {
 			resposta_subjetiva,
 		} = request.body;
 
-		let novoRegistro = await resposta_egresso.create({
+		await RespostaEgresso.create({
 			id_pergunta,
 			id_alternativa,
 			cpf_egresso,
 			resposta_subjetiva,
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso =D'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
 
-		return response.status(200).json(novoRegistro);
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async destroy(request, response) {
-		const {
-			id
-		} = request.body;
+		const { id } = request.body;
 
-		await resposta_egresso.destroy({
-			where: {
-				id
-			},
+		await RespostaEgresso.destroy({
+			where: { id },
 			raw: true
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso ^^'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
 
-		return response.status(200).json(request.body);
+			return response.status(200).json({
+				resultado: request.body,
+				registros: resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				registros: 0,
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async update(request, response) {
@@ -76,25 +82,26 @@ module.exports = {
 			resposta_subjetiva,
 		} = request.body;
 
-		await resposta_egresso.update({
+		await RespostaEgresso.update({
 			id,
 			id_pergunta,
 			id_alternativa,
 			cpf_egresso,
 			resposta_subjetiva,
 		}, {
-			where: {
-				id
-			}
+			where: { id }
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso *-*'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-			return [];
-		});
 
-		return response.status(200).json(request.body);
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 };

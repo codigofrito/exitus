@@ -1,81 +1,51 @@
-const {
-	egresso
-} = require('../models/');
-const color = require('colors');
+const Egresso = require('../models/').egresso;
+const Mensagem = require('./mensagem');
 const bcrypt = require('bcryptjs');
 
 module.exports = {
 
 	async index(request, response) {
 
-		let registros = await egresso.findAll({
+		await Egresso.findAll({
 			raw: true
 		}).then((resultado) => {
 
-			console.log(color.green('Operação executada com sucesso *-*'));
-
-			if(resultado.length > 0)
-				return response.status(200).json({
-					resultado,
-					registros: resultado.length,
-					mensagem: 'Registros encontrados com sucesso!'
-				});
-
-			if(resultado == 0)
-				return response.status(200).json({
-					resultado,
-					registros: 0,
-					mensagem: 'Não foram encontrados registros para sua requisição!'
-				});
-
-		}).catch((err) => {
-
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-			
-			return response.status(417).json({
-				resultado: [],
-				mensagem: 'Ocorreu um erro com sua requisição! o_o'
+			return response.status(200).json({
+				resultado,
+				registros: resultado.length,
+				mensagem: Mensagem.sucesso
 			});
 
-		});
+		}).catch(() => {
 
-		return response.status(200).json(registros);
+			return response.status(417).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async show(request, response) {
-		const {
-			cpf
-		} = request.body;
 
-		let registro = await egresso.findOne({
-			where: {
-				cpf
-			},
+		const { cpf } = request.body;
+
+		await Egresso.findOne({
+			where: { cpf },
 			raw: true
 		}).then((resultado) => {
-
-			console.log(color.green('Operação executada com sucesso =D'));
 			
-			if(resultado !== null)
-				return response.status(200).json({
-					resultado,
-					mensagem: 'Registro encontrado com sucesso =D'
-				});
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
 
-			if(resultado == null)
-				return response.status(200).json({
-					resultado,
-					mensagem: 'Nenhum registro encontrado =/'
-				});
+		}).catch(() => {
 
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
+			return response.status(417).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
 		});
-
-		return response.status(200).json(registro);
 	},
 
 	async store(request, response) {
@@ -84,65 +54,67 @@ module.exports = {
 			senha,
 		} = request.body;
 
-		let novoRegistro = await egresso.create({
+		await Egresso.create({
 			cpf,
 			senha: bcrypt.hashSync(senha, 10),
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso =D'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
+			
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
 
-		return response.status(200).json(novoRegistro);
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async destroy(request, response) {
-		const {
-			cpf
-		} = request.body;
+		const { cpf } = request.body;
 
-		await egresso.destroy({
-			where: {
-				cpf
-			},
+		await Egresso.destroy({
+			where: { cpf} ,
 			raw: true
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso ^^'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
 
-		return response.status(200).json(request.body);
+			return response.status(200).json({
+				resultado: request.body,
+				registros: resultado,
+				mensagem: Mensagem.sucesso
+			});
+
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				registros: 0,
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async update(request, response) {
-		const {
-			cpf,
-			senha,
-		} = request.body;
+		const {cpf, senha } = request.body;
 
-		await egresso.update({
-			cpf,
-			senha,
-		}, {
-			where: {
-				cpf
-			}
-		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso *-*'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-			return [];
+		await Egresso.update({cpf, senha }, {
+			where: { cpf } 
+		}).then(() => {
+
+			return response.status(200).json({
+				resultado: request.body,
+				mensagem: Mensagem.sucesso
+			});
+
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
 		});
-
-		return response.status(200).json(request.body);
 	},
 };

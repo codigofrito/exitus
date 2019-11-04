@@ -1,56 +1,54 @@
-const {
-	pessoa
-} = require('../models/');
-const color = require('colors');
+const Pessoa = require('../models/').pessoa;
+const Mensagem = require('./mensagem');
 const calcularIdade = require('../scripts/calcularIdade');
 
 module.exports = {
 
 	async index(request, response) {
-		let registrosBrutos = await pessoa.findAll({
-			raw: true
-		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso *-*'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-			return [];
-		});
+		await Pessoa.findAll({ raw: true })
+			.then((resultado) => {
 
-		let registros = registrosBrutos.map(registro => {
-			registro.idade = calcularIdade(registro.data_nascimento);
-			return registro;
-		});
+				let registros = resultado.map(registro => {
+					registro.idade = calcularIdade(registro.data_nascimento);
+					return registro;
+				});
 
-		return response.status(200).json(registros);
+				return response.status(200).json({
+					resultado: registros,
+					registros: resultado.length,
+					mensagem: Mensagem.sucesso
+				});
+			}).catch(() => {
+
+				return response.status(404).json({
+					resultado: [],
+					registros: 0,
+					mensagem: Mensagem.falha
+				});
+			});
 	},
 
 	async show(request, response) {
-		const {
-			cpf
-		} = request.body;
+		const { cpf } = request.body;
 
-		let registro = await pessoa.findOne({
-			where: {
-				cpf
-			},
+		let registro = await Pessoa.findOne({
+			where: { cpf },
 			raw: true
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso =D'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
-		if(registro !== null) {
-			registro.idade = calcularIdade(registro.data_nascimento);
-			return response.status(200).json(registro);
-		} else {
-			return response.status(404).json(registro);
-		}
-		
+
+			resultado.idade = calcularIdade(registro.data_nascimento);
+			
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});	
 	},
 
 	async store(request, response) {
@@ -63,7 +61,7 @@ module.exports = {
 			celular
 		} = request.body;
 
-		let novoRegistro = await pessoa.create({
+		await Pessoa.create({
 			cpf,
 			nome,
 			sobrenome,
@@ -71,45 +69,41 @@ module.exports = {
 			email,
 			celular
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso =D'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
 
-		if( Object.keys(novoRegistro).length !== 0) {
-			return response.status(200).json(novoRegistro);
-		} else {
-			return response.status(401).json(novoRegistro);
-		}
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async destroy(request, response) {
-		const {
-			cpf
-		} = request.body;
+		const { cpf } = request.body;
 
-		let registroDeletado = await pessoa.destroy({
-			where: {
-				cpf
-			},
+		await Pessoa.destroy({
+			where: { cpf },
 			raw: true
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso ^^'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
 
-		if(registroDeletado >= 1) {
-			return response.status(200).json(request.body);
-		} else {
-			return response.status(404).json(request.body);
-		}
+			return response.status(200).json({
+				resultado: request.body,
+				registros: resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				registros: 0,
+				mensagem: Mensagem.falha
+			});
+		});
 		
 	},
 
@@ -123,24 +117,26 @@ module.exports = {
 			celular
 		} = request.body;
 
-		await pessoa.update({
+		await Pessoa.update({
 			nome,
 			sobrenome,
 			data_nascimento,
 			email,
 			celular
 		}, {
-			where: {
-				cpf
-			}
+			where: { cpf }
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso *-*'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-			return [];
+
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
 		});
-		return response.status(200).json(request.body);
 	},
 };

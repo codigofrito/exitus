@@ -1,37 +1,25 @@
 const Alternativa = require('../models').alternativa;
-const color = require('colors');
+const Mensagem = require('./mensagem');
 
 module.exports = {
 
 	async index(request, response) {
 
-		await Alternativa.findAll({ raw: true }).then((resultado) => {
+		await Alternativa.findAll({ raw: true })
+			.then((resultado) => {
 
-			console.log(color.green('Operação executada com sucesso *-*'));
-			if (resultado.length !== 0)
 				return response.status(200).json({
 					resultado,
 					registros: resultado.length,
-					messagem: 'Foram entrados registros ^^'
+					mesagem: Mensagem.sucesso
 				});
-			
-			if (resultado.length === 0)
-				return response.status(204).json({
-					resultado,
-					registros: 0,
-					mesagem: 'Não foi encontrado nenhum registro =/'
+			}).catch(() => {
+
+				return response.status(404).json({
+					resultado: [],
+					mensagem: Mensagem.falha
 				});
-
-		}).catch((err) => {
-
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-
-			return response.status(417).json({
-				resultado: [],
-				mensagem: 'Ocorreu um erro com sua requisição! o_o'
 			});
-		});
 	},
 
 	async show(request, response) {
@@ -40,36 +28,24 @@ module.exports = {
 		await Alternativa.findOne({
 			where: { id },
 			raw: true
-
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso =D'));
 
-			if (resultado !== null)
-				return response.status(200).json({resultado,
-					mesagem: 'Registro encontrado ;D'});
-			
+			return response.status(200).json({
+				resultado,
+				mesagem: Mensagem.sucesso
+			});
 
-			if (resultado == null)
-				return response.status(204).json({resultado,
-					mesagem: 'Nenhum registro encontrado =('
-				});
+		}).catch(() => {
 
-		}).catch((err) => {
-
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-
-			return response.status(417).json({
+			return response.status(404).json({
 				resultado: [],
-				mensagem: 'Ocorreu um erro com sua requisição! o_o'
+				mensagem: Mensagem.falha
 			});
 		});
-
-		
 	},
 
 	async store(request, response) {
-		const { id_pergunta, alternativa,  objetiva } = request.body;
+		const { id_pergunta, alternativa, objetiva } = request.body;
 
 		await Alternativa.create({
 			id_pergunta,
@@ -78,24 +54,17 @@ module.exports = {
 
 		}).then((resultado) => {
 
-			console.log(color.green('Operação executada com sucesso =D'));
-
-			if(resultado !== [])
-				return response.status(200).json({
-					resultado,
-					messagem: 'Registro salvo com sucesso *-*'
-				});
-
-		}).catch((err) => {
-
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-
-			return response.status(203).json({
-				resultado: [],
-				mensagem: 'Não foi possível gravar os dados!'
+			return response.status(200).json({
+				resultado,
+				messagem: Mensagem.sucesso
 			});
 
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
 		});
 	},
 
@@ -106,30 +75,19 @@ module.exports = {
 			where: { id },
 			raw: true
 
-		}).then((resultado)=> {
-			console.log(color.green('Operação executada com sucesso ^^'));
+		}).then((resultado) => {
 
-			if(resultado > 0)
-				return response.status(200).json({
-					resultado: request.body,
-					registros: resultado,
-					mensagem: 'Os registros foram deletados com sucesso *-*'
-				});
-			
-			if(resultado === 0)
-				return response.status(404).json({
-					resultado: request.body,
-					registros: 0,
-					mensagem: 'Nenhum registro foi apagado da base de dados....'
-				});
+			return response.status(200).json({
+				resultado: request.body,
+				registros: resultado,
+				mensagem: Mensagem.sucesso
+			});
 
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
+		}).catch(() => {
 
 			return response.status(417).json({
 				resultado: [],
-				mensagem: 'Ocorreu um erro com sua requisição! o_o'
+				mensagem: Mensagem.falha
 			});
 		});
 	},
@@ -141,30 +99,18 @@ module.exports = {
 			id_pergunta,
 			alternativa,
 			objetiva,
-		}, { where: { id } }).then((resultado) => {
+		}, { where: { id } }).then(() => {
 
-			console.log(color.green('Operação executada com sucesso *-*'));
+			return response.status(200).json({
+				resultado: request.body,
+				mensagem: Mensagem.sucesso
+			});
 
-			if(resultado[0] == 1)
-				return response.status(200).json({
-					resultado: request.body,
-					mensagem: 'Os dados foram atualizados com sucesso ;D'
-				});
-			
-			if(resultado[0] == 0)
-				return response.status(404).json({
-					resultado: request.body,
-					mensagem: 'Nenhum dado foi alterado na base de dados ^^'
-				});
+		}).catch(() => {
 
-		}).catch((err) => {
-
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-
-			return response.status(417).json({
+			return response.status(404).json({
 				resultado: [],
-				mensagem: 'Ocorreu um erro com sua requisição! o_o'
+				mensagem: 'Erro ao tentar executara a operação.'
 			});
 		});
 	},

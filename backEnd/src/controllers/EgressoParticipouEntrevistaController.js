@@ -1,115 +1,115 @@
-const {
-	egresso_participou_entrevista
-} = require('../models');
-const color = require('colors');
+const EgressoParticiouEntrevista = require('../models').egresso_participou_entrevista;
+const Mensagem = require('./mensagem');
 
 module.exports = {
 
 	async index(request, response) {
-		let registros = await egresso_participou_entrevista.findAll({
+		await EgressoParticiouEntrevista.findAll({
 			raw: true
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso *-*'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-			return [];
-		});
 
-		return response.status(200).json(registros);
+			return response.status(200).json({
+				resultado,
+				registros: resultado.length,
+				mensagem: Mensagem.sucesso
+			});
+
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async show(request, response) {
-		const {
-			cpf_egresso
-		} = request.body;
+		const { cpf_egresso } = request.body;
 
-		let registro = await egresso_participou_entrevista.findOne({
-			where: {
-				cpf_egresso
-			},
+		await EgressoParticiouEntrevista.findOne({
+			where: { cpf_egresso },
 			raw: true
-
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso =D'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação o_o'));
-			return [];
-		});
 
-		return response.status(200).json(registro);
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async store(request, response) {
-		const {
-			id_entrevista,
-			cpf_egresso,
-		} = request.body;
+		const { id_entrevista, cpf_egresso } = request.body;
 
-		let novoRegistro = await egresso_participou_entrevista.create({
+		await EgressoParticiouEntrevista.create({
 			id_entrevista,
 			cpf_egresso,
 
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso =D'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
 
-		return response.status(200).json(novoRegistro);
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async destroy(request, response) {
-		const {
-			id_entrevista,
-			cpf_egresso,
-		} = request.body;
+		const { id_entrevista, cpf_egresso } = request.body;
 
-		await egresso_participou_entrevista.egresso_participou_entrevista({
-			where: {
-				id_entrevista,
-				cpf_egresso,
-			},
+		await EgressoParticiouEntrevista.destroy({
+			where: {id_entrevista, cpf_egresso },
 			raw: true
-		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso ^^'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
 
-		return response.status(200).json(request.body);
+		}).then((resultado) => {
+
+			return response.status(200).json({
+				resultado: request.body,
+				registros: resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				registros: 0,
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async update(request, response) {
-		const {
-			id_entrevista,
-			cpf_egresso,
-		} = request.body;
+		const { id_entrevista, cpf_egresso } = request.body;
 
-		await egresso_participou_entrevista.update({
+		await EgressoParticiouEntrevista.update({
 			id_entrevista,
 		}, {
-			where: {
-				cpf_egresso
-			}
-		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso *-*'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-			return [];
-		});
+			where: { cpf_egresso }
 
-		return response.status(200).json(request.body);
+		}).then((resultado) => {
+
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 };

@@ -1,56 +1,54 @@
-const {
-	view_moderador
-} = require('../models');
-const color = require('colors');
+const ViewModerador = require('../models').view_moderador;
+const Mensagem = require('./mensagem');
 const calcularIdade = require('../scripts/calcularIdade');
 
 module.exports = {
 
 	async index(request, response) {
 
-		let registrosBrutos = await view_moderador.findAll({
+		await ViewModerador.findAll({
 			raw: true
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso *-*'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-			return [];
-		});
 
-		let registros = registrosBrutos.map(registro => {
-			registro.idade = calcularIdade(registro.data_nascimento);
-			return registro;
-		});
+			let registros = resultado.map(registro => {
+				registro.idade = calcularIdade(registro.data_nascimento);
+				return registro;
+			});
+			return response.status(200).json({
+				resultado: registros,
+				registros: resultado.length,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
 
-		return response.status(200).json(registros);
+			return response.status(404).json({
+				resultado: [],
+				registros: 0,
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async show(request, response) {
-		const {
-			cpf
-		} = request.body;
+		const { cpf } = request.body;
 
-		let registroBruto = await view_moderador.findOne({
-			where: {
-				cpf
-			},
+		await ViewModerador.findOne({
+			where: { cpf },
 			raw: true
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso =D'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
 
-		let registro = registroBruto.map(registro => {
-			registro.idade = calcularIdade(registro.data_nascimento);
-			return registro;
-		});
+			resultado.idade = calcularIdade(resultado.data_nascimento);
 
-		return response.status(200).json(registro);
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 };

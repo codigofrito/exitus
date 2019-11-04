@@ -1,6 +1,4 @@
-const {
-	egresso, moderador
-} = require('../models');
+const { egresso, moderador } = require('../models');
 const bcrypt = require('bcryptjs');
 
 module.exports = {
@@ -16,9 +14,9 @@ module.exports = {
 			if (registro !== null) {
 				bcrypt.compare(senha, registro.senha).then((res)=>{
 					if(res){
-						return response.status(200).json(res);
+						return response.status(200).json({ res });
 					} else {
-						return response.status(404).json(res);
+						return response.status(403).json(res);
 					}
 				});
 				
@@ -29,10 +27,9 @@ module.exports = {
 		async moderador(request, response) {
 
 			const { cpf, senha } = request.body;
+
 			const registro = await moderador.findOne({
-				where: {
-					cpf
-				},
+				where: { cpf },
 				raw: true
 			});
 

@@ -1,116 +1,114 @@
-const {
-	entrevista
-} = require('../models');
-const color = require('colors');
+const Entrevista = require('../models').entrevista;
+const Mensagem = require('./mensagem');
 
 module.exports = {
 
 	async index(request, response) {
-		let registros = await entrevista.findAll({
-			raw: true
-		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso *-*'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-			return [];
-		});
+		await Entrevista.findAll({ raw: true })
+			.then((resultado) => {
 
-		return response.status(200).json(registros);
+				return response.status(200).json({
+					resultado,
+					registros: resultado.length,
+					mensagem: Mensagem.sucesso
+				});
+			}).catch(() => {
+
+				return response.status(404).json({
+					resultado: [],
+					registros: 0,
+					mensagem: Mensagem.falha
+				});
+			});
 	},
 
 	async show(request, response) {
-		const {
-			id
-		} = request.body;
+		const {     id } = request.body;
 
-		let registro = await entrevista.findOne({
-			where: {
-				id
-			},
+		await Entrevista.findOne({
+			where: { id },
 			raw: true
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso =D'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
 
-		return response.status(200).json(registro);
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async store(request, response) {
-		const {
-			cpf_moderador,
-			titulo,
-			descricao,
-		} = request.body;
+		const { cpf_moderador, titulo, descricao } = request.body;
 
-		let novoRegistro = await entrevista.create({
+		await Entrevista.create({
 			cpf_moderador,
 			titulo,
 			descricao,
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso =D'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
+
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
 		});
-		return response.status(200).json(novoRegistro);
 	},
 
 	async destroy(request, response) {
-		const {
-			id
-		} = request.body;
+		const { id } = request.body;
 
-		await entrevista.destroy({
-			where: {
-				id
-			},
+		await Entrevista.destroy({
+			where: { id },
 			raw: true
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso ^^'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
 
-		return response.status(200).json(request.body);
+			return response.status(200).json({
+				resultado: request.body,
+				registros: resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				registros: 0,
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async update(request, response) {
-		const {
-			id,
-			cpf_moderador,
-			titulo,
-			descricao,
-		} = request.body;
+		const { id, cpf_moderador, titulo, descricao } = request.body;
 
-		await entrevista.update({
+		await Entrevista.update({
 			cpf_moderador,
 			titulo,
 			descricao,
 		}, {
-			where: {
-				id
-			}
+			where: { id }
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso *-*'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-			return [];
-		});
 
-		return response.status(200).json(request.body);
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 };

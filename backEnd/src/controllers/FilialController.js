@@ -1,117 +1,114 @@
-const {
-	filial
-} = require('../models');
-const color = require('colors');
+const Filial = require('../models').filial;
+const Mensagem = require('./mensagem');
 
 module.exports = {
 
 	async index(request, response) {
-		let registros = await filial.findAll({
-			raw: true
-		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso *-*'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-			return [];
-		});
+		await Filial.findAll({ raw: true })
+			.then((resultado) => {
 
-		return response.status(200).json(registros);
+				return response.status(200).json({
+					resultado,
+					registros: resultado.length,
+					mensagem: Mensagem.sucesso
+				});
+			}).catch(() => {
+
+				return response.status(404).json({
+					resultado: [],
+					registros: 0,
+					mensagem: Mensagem.falha
+				});
+			});
 	},
 
 	async show(request, response) {
-		const {
-			id
-		} = request.body;
+		const { id } = request.body;
 
-		let registro = await filial.findOne({
-			where: {
-				id
-			},
+		await Filial.findOne({
+			where: { id },
 			raw: true
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso =D'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
 
-		return response.status(200).json(registro);
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async store(request, response) {
-		const {
-			nome_filial,
-			estado,
-			cidade,
-		} = request.body;
+		const { nome_filial, estado, cidade } = request.body;
 
-		let novoRegistro = await filial.create({
+		await Filial.create({
 			nome_filial,
 			estado,
 			cidade,
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso =D'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
 
-		return response.status(200).json(novoRegistro);
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async destroy(request, response) {
-		const {
-			id
-		} = request.body;
+		const { id } = request.body;
 
-		await filial.destroy({
-			where: {
-				id
-			},
+		await Filial.destroy({
+			where: { id },
 			raw: true
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso ^^'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =O'));
-			return [];
-		});
 
-		return response.status(200).json(request.body);
+			return response.status(200).json({
+				resultado: request.body,
+				registros: resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				registros: 0,
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 
 	async update(request, response) {
-		const {
-			id,
-			nome_filial,
-			estado,
-			cidade,
-		} = request.body;
+		const { id, nome_filial, estado, cidade } = request.body;
 
-		await filial.update({
+		await Filial.update({
 			nome_filial,
 			estado,
 			cidade,
 		}, {
-			where: {
-				id
-			}
+			where: { id }
 		}).then((resultado) => {
-			console.log(color.green('Operação executada com sucesso *-*'));
-			return resultado;
-		}).catch((err) => {
-			console.log(err);
-			console.log(color.red('Falha ao executar operação =/'));
-			return [];
-		});
 
-		return response.status(200).json(request.body);
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso
+			});
+		}).catch(() => {
+
+			return response.status(404).json({
+				resultado: [],
+				mensagem: Mensagem.falha
+			});
+		});
 	},
 };

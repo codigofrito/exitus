@@ -7,6 +7,7 @@ module.exports = {
 		return sequelize.query(`
     CREATE VIEW IF NOT EXISTS view_resposta_egresso AS 
     SELECT
+        ROW_NUMBER() OVER (ORDER BY egresso.cpf) as id,
         egresso.cpf AS cpf_egresso,
         entrevista.id AS id_entrevista,
         entrevista.titulo AS titulo_entrevista,

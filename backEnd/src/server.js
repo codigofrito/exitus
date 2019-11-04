@@ -8,7 +8,7 @@ const app = express();
 
 
 app.options('*', cors);
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: false
 }));
@@ -19,5 +19,6 @@ try{
 		console.log(color.yellow('SERVER ON-LINE'));
 	});
 }catch(err){
+	console.log(err);
 	console.log(color.red('SERVER OFF-LINE'));
 }
