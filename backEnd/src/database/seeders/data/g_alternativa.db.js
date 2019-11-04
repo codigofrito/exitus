@@ -1,5 +1,5 @@
 const faker = require('faker');
-const { queryInterface, Sequelize } = require('./db');
+const { queryInterface, Sequelize } = require('./_db');
 const registros = 300;
 let successes = 0;
 
@@ -9,7 +9,7 @@ module.exports.generate = async () => {
 		if(registros > 0) {
 			for (let i = 0; i < registros; i++) {
 				queryInterface.bulkInsert('alternativa', [{
-					id_pergunta: faker.random.number(300),
+					id_pergunta: faker.random.number(1000),
 					alternativa: faker.lorem.sentence(),
 					created_at: Sequelize.fn('NOW'),
 					updated_at: Sequelize.fn('NOW')

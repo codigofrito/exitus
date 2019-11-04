@@ -6,12 +6,18 @@ const color = require('colors');
 
 const app = express();
 
+
 app.options('*', cors);
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: false
 }));
 app.use(routes);
 
-app.listen(process.env.PORT || 8080) ?
-	console.log(color.yellow('SERVER ON-LINE')) 
-	: console.log(color.red('SERVER OFF-LINE'));
+try{
+	app.listen(process.env.PORT || 8080, () => {
+		console.log(color.yellow('SERVER ON-LINE'));
+	});
+}catch(err){
+	console.log(color.red('SERVER OFF-LINE'));
+}

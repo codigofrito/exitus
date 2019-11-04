@@ -1,5 +1,5 @@
 const faker = require('faker');
-const { queryInterface, Sequelize } = require('./db');
+const { queryInterface, Sequelize } = require('./_db');
 const registros = 300;
 let successes = 0;
 

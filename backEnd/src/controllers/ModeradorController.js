@@ -2,6 +2,7 @@ const {
 	moderador
 } = require('../models');
 const color = require('colors');
+const bcrypt = require('bcryptjs');
 
 module.exports = {
 
@@ -52,7 +53,7 @@ module.exports = {
 		let novoRegistro = await moderador.create({
 			cpf,
 			id_filial,
-			senha,
+			senha: bcrypt.hashSync(senha, 10),
 		}).then((resultado) => {
 			console.log(color.green('Operação executada com sucesso =D'));
 			return resultado;

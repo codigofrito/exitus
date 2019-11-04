@@ -7,7 +7,6 @@ const calcularIdade = require('../scripts/calcularIdade');
 module.exports = {
 
 	async index(request, response) {
-
 		let registrosBrutos = await pessoa.findAll({
 			raw: true
 		}).then((resultado) => {
@@ -32,7 +31,7 @@ module.exports = {
 			cpf
 		} = request.body;
 
-		let registroBruto = await pessoa.findOne({
+		let registro = await pessoa.findOne({
 			where: {
 				cpf
 			},
@@ -45,13 +44,13 @@ module.exports = {
 			console.log(color.red('Falha ao executar operação =O'));
 			return [];
 		});
-
-		let registro = registroBruto.map(registro => {
+		if(registro !== null) {
 			registro.idade = calcularIdade(registro.data_nascimento);
-			return registro;
-		});
-
-		return response.status(200).json(registro);
+			return response.status(200).json(registro);
+		} else {
+			return response.status(404).json(registro);
+		}
+		
 	},
 
 	async store(request, response) {
@@ -80,7 +79,11 @@ module.exports = {
 			return [];
 		});
 
-		return response.status(200).json(novoRegistro);
+		if( Object.keys(novoRegistro).length !== 0) {
+			return response.status(200).json(novoRegistro);
+		} else {
+			return response.status(401).json(novoRegistro);
+		}
 	},
 
 	async destroy(request, response) {
@@ -102,7 +105,12 @@ module.exports = {
 			return [];
 		});
 
-		return response.status(200).json(registroDeletado);
+		if(registroDeletado >= 1) {
+			return response.status(200).json(request.body);
+		} else {
+			return response.status(404).json(request.body);
+		}
+		
 	},
 
 	async update(request, response) {
@@ -133,7 +141,6 @@ module.exports = {
 			console.log(color.red('Falha ao executar operação =/'));
 			return [];
 		});
-
 		return response.status(200).json(request.body);
 	},
 };

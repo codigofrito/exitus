@@ -15,29 +15,30 @@ const RespostaEgressoController = require('./controllers/RespostaEgressoControll
 const ViewEgressoController = require('./controllers/ViewEgressoController');
 const ViewModeradorController = require('./controllers/ViewModeradorController');
 const ViewRespostaEgressoController = require('./controllers/ViewRespostaEgressoController');
+const AutenticacaoController = require('./controllers/AutenticacaoController');
 
 //=== === ===PessoaController.js Routes=== === ===//
-routes.post('/person', PessoaController.store);
+routes.post('/register/person', PessoaController.store);
 routes.get('/people', PessoaController.index);
-routes.get('/person', PessoaController.show);
-routes.delete('/person', PessoaController.destroy);
-routes.put('/person', PessoaController.update);
+routes.get('/find/person', PessoaController.show);
+routes.delete('/remove/person', PessoaController.destroy);
+routes.put('/update/person', PessoaController.update);
 //=== === ===--------------------------=== === ===//
 
 //=== === ===EgressoController.js Routes=== === ===//
 routes.post('/egress', EgressoController.store);
 routes.get('/graduates', EgressoController.index);
 routes.get('/egress', EgressoController.show);
-routes.delete('/egress', EgressoController.destroy);
+routes.delete('/remove/egress', EgressoController.destroy);
 routes.put('/egress', EgressoController.update);
 //=== === ===---------------------------=== === ===//
 
 //=== === ===EgressoPossuiCursoController.js Routes=== === ===//
-routes.post('/courseEgress', EgressoPossuiCursoController.store);
+routes.post('/register/courseEgress', EgressoPossuiCursoController.store);
 routes.get('/courseGraduates', EgressoPossuiCursoController.index);
-routes.get('/courseEgress', EgressoPossuiCursoController.show);
-routes.delete('/courseEgress', EgressoPossuiCursoController.destroy);
-routes.put('/courseEgress', EgressoPossuiCursoController.update);
+routes.get('/find/courseEgress', EgressoPossuiCursoController.show);
+routes.delete('/remove/courseEgress', EgressoPossuiCursoController.destroy);
+routes.put('/update/courseEgress', EgressoPossuiCursoController.update);
 //=== === ===--------------------------------------=== === ===//
 
 //=== === ===EgressoParticiouCursoController.js Routes=== === ===//
@@ -117,4 +118,10 @@ routes.get('/viewModerator', ViewModeradorController.show);
 routes.get('/viewEgressAnswers', ViewRespostaEgressoController.index);
 routes.get('/viewEgressAnswer', ViewRespostaEgressoController.show);
 //=== === ===-------------------------=== === ===//
+
+//=== === ===AutenticacaoController.js Routes=== === ===//
+routes.get('/auth/egress', AutenticacaoController.athenticate.egresso);
+routes.get('/auth/moderator', AutenticacaoController.athenticate.moderador);
+//=== === ===-------------------------=== === ===//
+
 module.exports = routes;

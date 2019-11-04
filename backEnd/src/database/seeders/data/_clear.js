@@ -1,4 +1,4 @@
-const db = require('./files');
+const db = require('./_files');
 const color = require('colors');
 const readline = require('readline');
 const read = readline.createInterface({

@@ -1,6 +1,6 @@
 /* eslint-disable require-atomic-updates */
 const color = require('colors');
-const db = require('./files');
+const db = require('./_files');
 const readline = require('readline');
 const read = readline.createInterface({
 	input: process.stdin,
