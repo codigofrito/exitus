@@ -26,11 +26,11 @@ routes.put('/update/person', PessoaController.update);
 //=== === ===--------------------------=== === ===//
 
 //=== === ===EgressoController.js Routes=== === ===//
-routes.post('/egress', EgressoController.store);
+routes.post('/register/egress', EgressoController.store);
 routes.get('/graduates', EgressoController.index);
-routes.get('/egress', EgressoController.show);
+routes.get('/find/egress', EgressoController.show);
 routes.delete('/remove/egress', EgressoController.destroy);
-routes.put('/egress', EgressoController.update);
+routes.put('/update/egress', EgressoController.update);
 //=== === ===---------------------------=== === ===//
 
 //=== === ===EgressoPossuiCursoController.js Routes=== === ===//
@@ -42,81 +42,81 @@ routes.put('/update/courseEgress', EgressoPossuiCursoController.update);
 //=== === ===--------------------------------------=== === ===//
 
 //=== === ===EgressoParticiouCursoController.js Routes=== === ===//
-routes.post('/egressInterviews', EgressoParticiouCursoController.store);
+routes.post('/register/egressInterviews', EgressoParticiouCursoController.store);
 routes.get('/graduatesInterviews', EgressoParticiouCursoController.index);
-routes.get('/egressInterviews', EgressoParticiouCursoController.show);
-routes.delete('/egressInterviews', EgressoParticiouCursoController.destroy);
-routes.put('/egressInterviews', EgressoParticiouCursoController.update);
+routes.get('/find/egressInterviews', EgressoParticiouCursoController.show);
+routes.delete('/remove/egressInterviews', EgressoParticiouCursoController.destroy);
+routes.put('/update/egressInterviews', EgressoParticiouCursoController.update);
 //=== === ===-----------------------------------------=== === ===//
 
 //=== === ===ModeradorController.js Routes=== === ===//
-routes.post('/moderator', ModeradorController.store);
+routes.post('/register/moderator', ModeradorController.store);
 routes.get('/moderators', ModeradorController.index);
-routes.get('/moderator', ModeradorController.show);
-routes.delete('/moderator', ModeradorController.destroy);
-routes.put('/moderator', ModeradorController.update);
+routes.get('/find/moderator', ModeradorController.show);
+routes.delete('/remove/moderator', ModeradorController.destroy);
+routes.put('/update/moderator', ModeradorController.update);
 //=== === ===-----------------------------=== === ===//
 
 //=== === ===EntrevistaController.js Routes=== === ===//
-routes.post('/interview', EntrevistaController.store);
+routes.post('/register/interview', EntrevistaController.store);
 routes.get('/interviews', EntrevistaController.index);
-routes.get('/interview', EntrevistaController.show);
-routes.delete('/interview', EntrevistaController.destroy);
-routes.put('/interview', EntrevistaController.update);
+routes.get('/find/interview', EntrevistaController.show);
+routes.delete('/remove/interview', EntrevistaController.destroy);
+routes.put('/update/interview', EntrevistaController.update);
 //=== === ===------------------------------=== === ===//
 
 //=== === ===PerguntaController.js Routes=== === ===//
-routes.post('/question', PerguntaController.store);
+routes.post('/register/question', PerguntaController.store);
 routes.get('/questions', PerguntaController.index);
-routes.get('/question', PerguntaController.show);
-routes.delete('/question', PerguntaController.destroy);
-routes.put('/question', PerguntaController.update);
+routes.get('/find/question', PerguntaController.show);
+routes.delete('/remove/question', PerguntaController.destroy);
+routes.put('/update/question', PerguntaController.update);
 //=== === ===----------------------------=== === ===//
 
 //=== === ===AlternativaController.js Routes=== === ===//
-routes.post('/alternative', AlternativaController.store);
+routes.post('/register/alternative', AlternativaController.store);
 routes.get('/alternatives', AlternativaController.index);
-routes.get('/alternative', AlternativaController.show);
-routes.delete('/alternative', AlternativaController.destroy);
-routes.put('/alternative', AlternativaController.update);
+routes.get('/find/alternative', AlternativaController.show);
+routes.delete('/remove/alternative', AlternativaController.destroy);
+routes.put('/update/alternative', AlternativaController.update);
 //=== === ===-------------------------------=== === ===//
 
 //=== === ===CursoController.js Routes=== === ===//
-routes.post('/course', CursoController.store);
+routes.post('/register/course', CursoController.store);
 routes.get('/courses', CursoController.index);
-routes.get('/course', CursoController.show);
-routes.delete('/course', CursoController.destroy);
-routes.put('/course', CursoController.update);
+routes.get('/find/course', CursoController.show);
+routes.delete('/remove/course', CursoController.destroy);
+routes.put('/update/course', CursoController.update);
 //=== === ===-------------------------=== === ===//
 
 //=== === ===RespostaEgressoController.js Routes=== === ===//
-routes.post('/egressAnswer', RespostaEgressoController.store);
+routes.post('/register/egressAnswer', RespostaEgressoController.store);
 routes.get('/egressAnswers', RespostaEgressoController.index);
-routes.delete('/egressAnswer', RespostaEgressoController.destroy);
-routes.put('/egressAnswer', RespostaEgressoController.update);
+routes.delete('/remove/egressAnswer', RespostaEgressoController.destroy);
+routes.put('/update/egressAnswer', RespostaEgressoController.update);
 //=== === ===-------------------------=== === ===//
 
 //=== === ===FilialController.js Routes=== === ===//
-routes.post('/branch', FilialController.store);
+routes.post('/register/branch', FilialController.store);
 routes.get('/branches', FilialController.index);
-routes.get('/branch', FilialController.show);
-routes.delete('/branch', FilialController.destroy);
-routes.put('/branch', FilialController.update);
+routes.get('/find/branch', FilialController.show);
+routes.delete('/remove/branch', FilialController.destroy);
+routes.put('/update/branch', FilialController.update);
 //=== === ===-------------------------=== === ===//
 
 //=== === ===ViewEgressoControllerController.js Routes=== === ===//
 routes.get('/viewGraduates', ViewEgressoController.index);
-routes.get('/viewEgress', ViewEgressoController.show);
+routes.get('/find/viewEgress', ViewEgressoController.show);
 //=== === ===-------------------------=== === ===//
 
 //=== === ===ViewEgressoControllerController.js Routes=== === ===//
 routes.get('/viewModerators', ViewModeradorController.index);
-routes.get('/viewModerator', ViewModeradorController.show);
+routes.get('/find/viewModerator', ViewModeradorController.show);
 //=== === ===-------------------------=== === ===//
 
 //=== === ===ViewRespostaEgressoController.js Routes=== === ===//
 routes.get('/viewEgressAnswers', ViewRespostaEgressoController.index);
-routes.get('/viewEgressAnswer', ViewRespostaEgressoController.show);
+routes.get('/find//////viewEgressAnswer', ViewRespostaEgressoController.show);
 //=== === ===-------------------------=== === ===//
 
 //=== === ===AutenticacaoController.js Routes=== === ===//
