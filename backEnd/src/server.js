@@ -8,7 +8,7 @@ const app = express();
 
 
 app.options('*', cors);
-//app.use(bodyParser.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: false
 }));

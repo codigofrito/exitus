@@ -10,14 +10,16 @@ module.exports = {
 				return response.status(200).json({
 					resultado,
 					registros: resultado.length,
-					mensagem: Mensagem.sucesso
+					mensagem: Mensagem.sucesso,
+					return: resultado.length != 0 ? true : false
 				});
 			}).catch(() => {
 
-				return response.status(404).json({
+				return response.status(400).json({
 					resultado: [],
 					registros: 0,
-					mensagem: Mensagem.falha
+					mensagem: Mensagem.falha,
+					return: false
 				});
 			});
 	},
@@ -32,13 +34,15 @@ module.exports = {
 
 			return response.status(200).json({
 				resultado,
-				mensagem: Mensagem.sucesso
+				mensagem: Mensagem.sucesso,
+				return: resultado !== null ? true : false
 			});
 		}).catch(() => {
 
-			return response.status(404).json({
+			return response.status(400).json({
 				resultado: [],
-				mensagem: Mensagem.falha
+				mensagem: Mensagem.falha,
+				return: false
 			});
 		});
 	},
@@ -54,13 +58,15 @@ module.exports = {
 
 			return response.status(200).json({
 				resultado,
-				mensagem: Mensagem.sucesso
+				mensagem: Mensagem.sucesso,
+				return: true
 			});
 		}).catch(() => {
 
-			return response.status(404).json({
+			return response.status(400).json({
 				resultado: [],
-				mensagem: Mensagem.falha
+				mensagem: Mensagem.falha,
+				return: false
 			});
 		});
 	},
@@ -76,14 +82,16 @@ module.exports = {
 			return response.status(200).json({
 				resultado: request.body,
 				registros: resultado,
-				mensagem: Mensagem.sucesso
+				mensagem: Mensagem.sucesso,
+				return: resultado >= 1 ? true : false
 			});
 		}).catch(() => {
 
-			return response.status(404).json({
+			return response.status(400).json({
 				resultado: [],
 				registros: 0,
-				mensagem: Mensagem.falha
+				mensagem: Mensagem.falha,
+				return: false
 			});
 		});
 	},
@@ -101,13 +109,15 @@ module.exports = {
 
 			return response.status(200).json({
 				resultado,
-				mensagem: Mensagem.sucesso
+				mensagem: Mensagem.sucesso,
+				return: resultado[0] >= 1 ? true : false
 			});
 		}).catch(() => {
 
-			return response.status(404).json({
+			return response.status(400).json({
 				resultado: [],
-				mensagem: Mensagem.falha
+				mensagem: Mensagem.falha,
+				return: false
 			});
 		});
 	},

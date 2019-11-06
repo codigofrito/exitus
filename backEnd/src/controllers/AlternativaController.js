@@ -11,19 +11,22 @@ module.exports = {
 				return response.status(200).json({
 					resultado,
 					registros: resultado.length,
-					mesagem: Mensagem.sucesso
+					mesagem: Mensagem.sucesso,
+					return: resultado.length != 0 ? true : false
 				});
 			}).catch(() => {
 
-				return response.status(404).json({
+				return response.status(400).json({
 					resultado: [],
-					mensagem: Mensagem.falha
+					registros: 0,
+					mensagem: Mensagem.falha,
+					return: false
 				});
 			});
 	},
 
 	async show(request, response) {
-		const { id } = request.body;
+		const {id} = request.body;
 
 		await Alternativa.findOne({
 			where: { id },
@@ -32,14 +35,16 @@ module.exports = {
 
 			return response.status(200).json({
 				resultado,
-				mesagem: Mensagem.sucesso
+				mesagem: Mensagem.sucesso,
+				return: resultado !== null ? true : false
 			});
 
 		}).catch(() => {
 
-			return response.status(404).json({
+			return response.status(400).json({
 				resultado: [],
-				mensagem: Mensagem.falha
+				mensagem: Mensagem.falha,
+				return: false
 			});
 		});
 	},
@@ -56,14 +61,16 @@ module.exports = {
 
 			return response.status(200).json({
 				resultado,
-				messagem: Mensagem.sucesso
+				messagem: Mensagem.sucesso,
+				return: true
 			});
 
 		}).catch(() => {
-
-			return response.status(404).json({
+			
+			return response.status(400).json({
 				resultado: [],
-				mensagem: Mensagem.falha
+				mensagem: Mensagem.falha,
+				return: false
 			});
 		});
 	},
@@ -80,14 +87,17 @@ module.exports = {
 			return response.status(200).json({
 				resultado: request.body,
 				registros: resultado,
-				mensagem: Mensagem.sucesso
+				mensagem: Mensagem.sucesso,
+				return: resultado >= 1 ? true : false
+				
 			});
 
 		}).catch(() => {
 
 			return response.status(417).json({
 				resultado: [],
-				mensagem: Mensagem.falha
+				mensagem: Mensagem.falha,
+				return: false
 			});
 		});
 	},
@@ -99,19 +109,22 @@ module.exports = {
 			id_pergunta,
 			alternativa,
 			objetiva,
-		}, { where: { id } }).then(() => {
+		}, { where: { id } })
+			.then((resultado) => {
 
-			return response.status(200).json({
-				resultado: request.body,
-				mensagem: Mensagem.sucesso
+				return response.status(200).json({
+					resultado: request.body,
+					mensagem: Mensagem.sucesso,
+					return: resultado[0] >= 1 ? true : false
+				});
+
+			}).catch(() => {
+
+				return response.status(400).json({
+					resultado: [],
+					mensagem: 'Erro ao tentar executara a operação.',
+					return: false
+				});
 			});
-
-		}).catch(() => {
-
-			return response.status(404).json({
-				resultado: [],
-				mensagem: 'Erro ao tentar executara a operação.'
-			});
-		});
 	},
 };

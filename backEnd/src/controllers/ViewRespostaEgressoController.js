@@ -11,14 +11,16 @@ module.exports = {
 				return response.status(200).json({
 					resultado,
 					registros: resultado.length,
-					mensagem: Mensagem.sucesso
+					mensagem: Mensagem.sucesso,
+					return: resultado.length != 0 ? true : false
 				});
 			}).catch(() => {
 
-				return response.status(404).json({
+				return response.status(400).json({
 					resultado: [],
 					registros: 0,
-					mensagem: Mensagem.falha
+					mensagem: Mensagem.falha,
+					return: false
 				});
 			});
 	},
@@ -40,9 +42,10 @@ module.exports = {
 			});
 		}).catch(() => {
 
-			return response.status(404).json({
+			return response.status(400).json({
 				resultado: [],
-				mensagem: Mensagem.falha
+				mensagem: Mensagem.falha,
+				return: false
 			});
 		});
 	},
