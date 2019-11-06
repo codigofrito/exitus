@@ -3,7 +3,7 @@ import React from 'react';
 import logo from '../assets/logo-exteded-v1.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import ModalLogin from './ModalLogin';
+import ModalLogin from './ModalLogin.jsx';
 
 const menuIcon = <FontAwesomeIcon icon={faBars} />
 
