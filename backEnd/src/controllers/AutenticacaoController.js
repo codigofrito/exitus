@@ -23,7 +23,7 @@ module.exports = {
 				bcrypt.compare(senha, registro.senha).then(async (auth) => {
 					if (auth) {
 
-						const token = jwt.sign({ cpf }, config.secret, {
+						const token = jwt.sign({ cpf }, config.secretEgress, {
 							expiresIn: 86400,
 						});
 
@@ -63,8 +63,8 @@ module.exports = {
 
 					if (auth) {
 
-						const token = jwt.sign({ cpf }, config.secret, {
-							expiresIn: 86400,
+						const token = jwt.sign({ cpf }, config.secretModerator, {
+							expiresIn: 86400, //1 DIA
 						});
 
 						const moderador = await view_moderador.findOne({
