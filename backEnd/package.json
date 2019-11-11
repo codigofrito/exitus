@@ -24,7 +24,7 @@
   },
   "scripts": {
     "go-server": "nodemon src/server.js",
-    "go": "yarn install && npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:all && yarn db:populate",
+    "go": "yarn install && npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:all",
     "reset-migrations": "npx sequelize db:migrate:undo:all",
     "start-migrations": "npx sequelize db:migrate",
     "reset-seeders": "npx sequelize db:seed:undo:all",

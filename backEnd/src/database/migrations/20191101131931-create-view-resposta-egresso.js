@@ -12,8 +12,7 @@ module.exports = {
         entrevista.id AS id_entrevista,
         entrevista.titulo AS titulo_entrevista,
         pergunta.pergunta AS pergunta_entrevista,
-        alternativa.alternativa AS resposta_objetiva,
-        resposta_egresso.resposta_subjetiva AS resposta_subjetiva,
+        resposta_egresso.observacao AS oservacao,
         resposta_egresso.created_at,
         resposta_egresso.updated_at
     FROM

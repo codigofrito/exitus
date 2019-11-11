@@ -9,6 +9,14 @@ module.exports = {
 				primaryKey: true,
 				type: Sequelize.INTEGER
 			},
+			cpf_egresso: {
+				allowNull: false,
+				references: {
+					model: 'egresso',
+					key: 'cpf'
+				},
+				type: Sequelize.BIGINT(11).ZEROFILL
+			},
 			id_pergunta: {
 				allowNull: false,
 				references: {
@@ -29,15 +37,7 @@ module.exports = {
 				onUpdate: 'CASCADE',
 				type: Sequelize.INTEGER
 			},
-			cpf_egresso: {
-				allowNull: false,
-				references: {
-					model: 'egresso',
-					key: 'cpf'
-				},
-				type: Sequelize.BIGINT(11).ZEROFILL
-			},
-			resposta_subjetiva: {
+			observacao: {
 				type: Sequelize.STRING
 			},
 			created_at: {
