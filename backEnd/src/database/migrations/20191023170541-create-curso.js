@@ -19,9 +19,11 @@ module.exports = {
 				type: Sequelize.INTEGER
 			},
 			nome_curso: {
+				allowNull: false,
 				type: Sequelize.STRING
 			},
 			area: {
+				allowNull: false,
 				type: Sequelize.ENUM(['EXATAS', 'HUMANAS', 'SAÚDE'])
 			},
 			created_at: {

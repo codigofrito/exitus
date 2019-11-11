@@ -23,11 +23,6 @@ module.exports = {
 				allowNull: false,
 				type: Sequelize.STRING
 			},
-			objetiva: {
-				allowNull: false,
-				type: Sequelize.BOOLEAN,
-				defaultValue: 1
-			},
 			created_at: {
 				allowNull: false,
 				type: Sequelize.DATE

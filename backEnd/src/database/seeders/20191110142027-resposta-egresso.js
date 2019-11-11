@@ -1,25 +1,25 @@
+/* eslint-disable linebreak-style */
 'use strict';
-//const bcrypt = require('bcryptjs');
 
 module.exports = {
 	up: (queryInterface, Sequelize) => {
-		return queryInterface.bulkInsert('moderador', [{
-			cpf: 79856412367,
-			id_filial: 1,
-			senha: '123',
+		return queryInterface.bulkInsert('resposta_egresso', [{
+			cpf_egresso: 12345678900,
+			id_pergunta: 1,
+			id_alternativa: 1,
 			created_at: Sequelize.literal('CURRENT_TIMESTAMP'),
 			updated_at: Sequelize.literal('CURRENT_TIMESTAMP'),
 		},
 		{
-			cpf: 79313049781,
-			id_filial: 1,
-			senha: '123',
+			cpf_egresso: 12345678900,
+			id_pergunta: 2,
+			id_alternativa: 2,
 			created_at: Sequelize.literal('CURRENT_TIMESTAMP'),
 			updated_at: Sequelize.literal('CURRENT_TIMESTAMP'),
 		}], {});
 	},
 
 	down: (queryInterface) => {
-		return queryInterface.bulkDelete('moderador', null, {});
+		return queryInterface.bulkDelete('resposta_egresso', null, {});
 	}
 };
