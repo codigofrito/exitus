@@ -1,5 +1,8 @@
 import React from 'react';
 import '../../styles/main.css';
+
+import MaskedInput from 'react-text-mask'
+
 import egressoIcon from '../../imgs/egressoIcon.png';
 
 
@@ -33,19 +36,39 @@ function CadastroEgresso() {
 
                         <div className="form-group">
                             <label className='simple_text'>Data de Conclusão</label>
-                            <input type="text" className="form-control form-control-lg" name="dataConclusao" id="dataConclusao" required />
+                            <MaskedInput
+                                className="form-group"
+                                mask={[/[0-9]/, /\d/, '/', /[0-9]/, /\d/, '/', /[0-9]/, /\d/, /\d/, /\d/]}
+                                placeholder="11/11/1995"
+                            />
                         </div>
                     </div>
 
                     <div className='box_column'>
                         <div className="form-group">
-                            <label className='simple_text'>Atuando na Area</label>
-                            <input type="text" className="form-control form-control-lg" name="nomeEgresso" id="nomeEgresso" required />
+                            <div >
+                                <label className='simple_text'>Atuando na Área</label>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="materialInline1" name="inlineMaterialRadiosExample" />
+                                        <label class="form-check-label" for="materialInline1">Sim</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="materialInline2" name="inlineMaterialRadiosExample" />
+                                        <label class="form-check-label" for="materialInline2">Não</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div className="form-group">
                             <label className='simple_text'>Telefone</label>
-                            <input type="text" className="form-control form-control-lg" name="cursoEgresso" id="cursoEgresso" required />
+                            <MaskedInput
+                                className="form-group"
+                                mask={['(',/[0-9]/, /\d/, ')',' ', /[0-9]/, /\d/, /\d/, /\d/, /\d/, '-', /[0-9]/, /\d/, /\d/, /\d/]}
+                                placeholder="(73) 98133-4385"
+                            />
                         </div>
 
                         <div className="form-group">
@@ -61,7 +84,12 @@ function CadastroEgresso() {
                         <div className="form-group">
                             <button type="button" class="btn btn-primary">Cadastrar</button>
                         </div>
+
+
                     </div>
+
+
+
 
 
                 </div>
