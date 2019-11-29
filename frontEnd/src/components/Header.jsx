@@ -31,7 +31,7 @@ function Header() {
                 <a className="nav-link" href="/">Sobre</a>
               </li>
             </ul>
-            <a href="#modalLogin" role="button" class="btn btn-primary btn-lg" data-toggle="modal">Login</a>
+            <a href="#modalLogin" role="button" className="btn btn-primary btn-lg" data-toggle="modal">Login</a>
           </div>
         </nav>
 
