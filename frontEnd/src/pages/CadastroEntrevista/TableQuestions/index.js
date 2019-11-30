@@ -1,10 +1,13 @@
 import React, { Fragment } from "react";
 
+import { Table } from "./styles";
+
+
 const TableQuestions = ({ dataTable }) => {
 
     return (
 
-        <table id="tableQuestions" className="table table-striped table-hover">
+        <Table>
             <thead className="thead-dark">
                 <tr>
                     <th className="">#</th>
@@ -26,7 +29,7 @@ const TableQuestions = ({ dataTable }) => {
                     );
                 })}
             </tbody>
-        </table>
+        </Table>
 
     );
 }

@@ -1,13 +1,16 @@
 import React from 'react';
 
+import { Switch } from "./styles"
+
+
 function SwitchButton() {
 
     return (
 
-        <label className="switch">
+        <Switch>
             <input type="checkbox" id="isPerguntaObjetiva" className="bloqueavel" autoComplete="off" />
-            <span className="slider round"></span>
-        </label>
+            <span></span>
+        </Switch>
     );
 }
 

@@ -3,8 +3,8 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
-import ModalCriarPergunta from '../../components/ModalCriarPergunta.jsx';
-import TableQuestions from './TableQuestions.jsx';
+import ModalCriarPergunta from '../../components/ModalCriarPergunta';
+import TableQuestions from './TableQuestions';
 
 const plusIcon = <FontAwesomeIcon icon={faPlusCircle} />
 
@@ -79,41 +79,36 @@ function CadastroEntrevista() {
     return (
 
 
-        <div id="conteudo">
-            <div className="container clearfix">
-                <form>
-                    <div className="form-group">
-                        <label htmlFor="exampleInputEmail1">Título Entrevista</label>
-                        <input type="text" className="form-control" id="tituloEntrevista" placeholder="Insira o título da entrevista" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="exampleInputPassword1">Descrição</label>
-                        <textarea className="form-control" id="descricaoEntrevista" placeholder="Insira uma breve descrição da entrevista" rows="2"></textarea>
-                    </div>
+        <div>
+            <form>
+                <div className="form-group">
+                    <label htmlFor="exampleInputEmail1">Título Entrevista</label>
+                    <input type="text" className="form-control" id="tituloEntrevista" placeholder="Insira o título da entrevista" />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="exampleInputPassword1">Descrição</label>
+                    <textarea className="form-control" id="descricaoEntrevista" placeholder="Insira uma breve descrição da entrevista" rows="2"></textarea>
+                </div>
 
-                    <br />
+                <br />
 
-                    <div className="form-group  text-center">
-                        <a onClick="" className="btn btn-success" data-toggle="modal" href="#modalCriarPergunta"> {plusIcon} Adicionar Nova Pergunta</a>
-                    </div>
+                <div className="form-group  text-center">
+                    <a onClick="" className="btn btn-success" data-toggle="modal" href="#modalCriarPergunta"> {plusIcon} Adicionar Nova Pergunta</a>
+                </div>
 
-                    <br />
+                <br />
 
-                    <TableQuestions dataTable={arrayQuestionsInterview} />
+                <TableQuestions dataTable={arrayQuestionsInterview} />
 
-                    <br />
-
-
-                    <div className="form-group  text-center">
-
-                        <button type="submit" className="btn btn-primary">Salvar Entrevista</button>
-
-                    </div>
-                </form>
+                <br />
 
 
-            </div>
+                <div className="form-group  text-center">
 
+                    <button type="submit" className="btn btn-primary">Salvar Entrevista</button>
+
+                </div>
+            </form>
 
             <ModalCriarPergunta dataQuestion={perguntaTeste} />
 

@@ -1,11 +1,13 @@
 import React from 'react';
-import '../styles/main.css';
+
+import { Modal } from "./styles";
+
 
 
 function ModalLogin() {
     return (
 
-        <div id="modalLogin" className="modal fade " tabIndex="-1" role="dialog" aria-hidden="true">
+        <Modal aria-hidden="true">
             <div className="modal-dialog modal-sm">
                 <div className="modal-content">
                     <div className="modal-header">
@@ -38,7 +40,7 @@ function ModalLogin() {
 
                 </div>
             </div>
-        </div>
+        </Modal>
 
     );
 }

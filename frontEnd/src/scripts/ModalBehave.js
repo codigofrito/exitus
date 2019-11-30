@@ -1,5 +1,0 @@
-function showModal(idModal){
-
-
-
-}

@@ -1,5 +1,8 @@
 import React from 'react';
-import '../styles/main.css';
+
+import { Container } from "../../styles/global-styled-components";
+
+import { AppFooter } from "./styles";
 
 const fundationYear = 2019;
 const currentYear = new Date().getFullYear();
@@ -9,15 +12,13 @@ let copyRightPeriod = currentYear <= fundationYear ? fundationYear : fundationYe
 function Footer() {
     return (
 
-        <footer id="app-footer">
-            <div className="container">
-
+        <AppFooter>
+            <Container>
                 <div id="copyright">
                     © Exitus - {copyRightPeriod}
                 </div>
-
-            </div>
-        </footer>
+            </Container>
+        </AppFooter>
 
     );
 }

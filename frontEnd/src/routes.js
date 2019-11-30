@@ -1,27 +1,23 @@
 import React from 'react';
 
-import Home from './pages/Home/index.jsx';
-import CadastroEgresso from './pages/CadastroEgresso/index.jsx';
-import CadastroEntrevista from './pages/CadastroEntrevista/index.jsx';
-import CadastroPergunta from './pages/CadastroPergunta/index.jsx';
-import NotFound from './pages/NotFound/index.jsx';
+import Home from './pages/Home';
+import CadastroEgresso from './pages/CadastroEgresso';
+import CadastroEntrevista from './pages/CadastroEntrevista';
+import CadastroPergunta from './pages/CadastroPergunta';
+import NotFound from './pages/NotFound';
 
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
-import { PrivateRoute } from './components/PrivateRoute.jsx';
+import { PrivateRoute } from './components/PrivateRouter';
 
 const Routes = () => (
-    <BrowserRouter>
         <Switch>
             <Route exact path={["/", "/home"]} component={Home} />
             <PrivateRoute exact path="/CadastroEgresso" component={CadastroEgresso} />
             <PrivateRoute exact path="/CadastroEntrevista" component={CadastroEntrevista} />
             <PrivateRoute exact path="/CadastroPergunta" component={CadastroPergunta} />
-
             <Route path="*" component={NotFound} />
-            
         </Switch>
-    </BrowserRouter>
 );
 
 export default Routes;
