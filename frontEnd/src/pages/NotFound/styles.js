@@ -3,17 +3,11 @@ import styled from 'styled-components';
 
 export const NotFoundParent = styled.div`
 
-position: relative;
-height: 60vh;
+  position: relative;
+  height: 60vh;
 
-.notfound {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-  }
+  margin: auto;
+  width: 50%;
 
   .notfound {
     max-width: 520px;

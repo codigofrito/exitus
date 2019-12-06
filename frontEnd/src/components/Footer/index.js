@@ -1,26 +1,24 @@
 import React from 'react';
 
-import { Container } from "../../styles/global-styled-components";
+import { Container } from "../../styles/BootstrapStyled";
 
 import { AppFooter } from "./styles";
 
 const fundationYear = 2019;
 const currentYear = new Date().getFullYear();
 
-let copyRightPeriod = currentYear <= fundationYear ? fundationYear : fundationYear + " - " + currentYear;
+let copyRightYears = currentYear <= fundationYear ? fundationYear : fundationYear + " - " + currentYear;
 
-function Footer() {
-    return (
-
-        <AppFooter>
-            <Container>
-                <div id="copyright">
-                    © Exitus - {copyRightPeriod}
-                </div>
-            </Container>
-        </AppFooter>
-
-    );
+class Footer extends React.Component {
+    render() {
+        return (
+            <AppFooter>
+                <Container>
+                    © Exitus - {copyRightYears}
+                </Container>
+            </AppFooter>
+        );
+    }
 }
 
 export default Footer;

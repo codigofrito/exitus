@@ -8,7 +8,6 @@ import TableQuestions from './TableQuestions';
 
 const plusIcon = <FontAwesomeIcon icon={faPlusCircle} />
 
-let arrayNewQuestions = [];
 
 let perguntaTeste = {
 
@@ -78,21 +77,20 @@ function CadastroEntrevista() {
 
     return (
 
-
-        <div>
+        <div id="perguntas-entrevista">
             <form>
                 <div className="form-group">
-                    <label htmlFor="exampleInputEmail1">Título Entrevista</label>
-                    <input type="text" className="form-control" id="tituloEntrevista" placeholder="Insira o título da entrevista" />
+                    <label htmlFor="exampleInputEmail1">Título da Entrevista:</label>
+                    <input type="text" className="form-control" id="tituloEntrevista" placeholder="Digite um título para a entrevista" />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="exampleInputPassword1">Descrição</label>
-                    <textarea className="form-control" id="descricaoEntrevista" placeholder="Insira uma breve descrição da entrevista" rows="2"></textarea>
+                    <label htmlFor="exampleInputPassword1">Descrição da Entrivista:</label>
+                    <textarea className="form-control" id="descricaoEntrevista" placeholder="Digite uma breve descrição para a entrevista" rows="2"></textarea>
                 </div>
 
                 <br />
 
-                <div className="form-group  text-center">
+                <div className="form-group text-center">
                     <a onClick="" className="btn btn-success" data-toggle="modal" href="#modalCriarPergunta"> {plusIcon} Adicionar Nova Pergunta</a>
                 </div>
 

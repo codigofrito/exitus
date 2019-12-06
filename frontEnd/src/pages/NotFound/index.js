@@ -1,12 +1,10 @@
 import React from 'react';
 
-
 import { NotFoundParent } from "./styles";
-
 
 function NotFound() {
     return (
-        <NotFoundParent>
+        <NotFoundParent>            
             <div class="notfound">
                 <div class="notfound-404">
                     <h3>Oops! Página não  encontrada</h3>

@@ -1,48 +1,94 @@
 import React from 'react';
 
-import { Modal } from "./styles";
+import {
+    Modal,
+    ModalDialogSmall,
+    ModalContent,
+    ModalHeader,
+    ModalTitle,
+    ModalBody,
+    ModalFooter,
+    ButtonCloseModal,
+    Input,
+    CustomInput,
+    Form,
+    FormGroup,
+    CustomLabel,
+    CustomDivCheckbox,
+    ButtonPrimary,
+    ButtonSecondary
 
+} from "../../styles/BootstrapStyled";
 
+class ModalLogin extends React.Component {
 
-function ModalLogin() {
-    return (
+    constructor(props) {
+        super(props);
+        this.state = {
+            cpf: '',
+            password: '',
+            rememberMe: false
+        };
 
-        <Modal aria-hidden="true">
-            <div className="modal-dialog modal-sm">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title w-100 text-center">Fazer Login</h5>
-                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div className="modal-body">
-                        <form className="form" autoComplete="off" id="modalLoginForm" >
-                            <div className="form-group">
-                                <label>CPF</label>
-                                <input type="text" className="form-control form-control-lg" name="cpfLogin" id="cpfLogin" required />
-                            </div>
-                            <div className="form-group">
-                                <label>Senha</label>
-                                <input type="password" className="form-control form-control-lg" id="senhaLogin" required />
-                            </div>
-                            <div className="custom-control custom-checkbox">
-                                <input type="checkbox" className="custom-control-input" id="rememberMe" />
-                                <label className="custom-control-label" htmlFor="rememberMe">Lembrar</label>
-                            </div>
-                        </form>
-                    </div>
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
 
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" className="btn btn-primary">Entrar</button>
-                    </div>
+    handleChange(event) {
+        const elementName = event.target.id;
+        const elementvalue = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
 
-                </div>
-            </div>
-        </Modal>
+        this.setState({
+            [elementName]: elementvalue
+        });
+    }
 
-    );
+    handleSubmit(event) {
+        event.preventDefault();
+        alert(' - CPF: ' + this.state.cpf +
+            ' - password: ' + this.state.password +
+            ' - rememberMe: ' + this.state.rememberMe);
+    }
+
+    render() {
+        return (
+            <Modal id="modalLogin">
+                <ModalDialogSmall>
+                    <ModalContent>
+                        <Form id="modalLoginForm" onSubmit={this.handleSubmit} >
+                            <ModalHeader>
+                                <ModalTitle>Fazer Login</ModalTitle>
+                                <ButtonCloseModal data-dismiss="modal">
+                                    <span>&times;</span>
+                                </ButtonCloseModal>
+                            </ModalHeader>
+
+                            <ModalBody>
+                                <FormGroup>
+                                    <label>CPF</label>
+                                    <Input onChange={this.handleChange} id="cpf" type="text" required />
+                                </FormGroup>
+                                <FormGroup>
+                                    <label>Senha</label>
+                                    <Input onChange={this.handleChange} id="password" type="password" required />
+                                </FormGroup>
+                                <CustomDivCheckbox>
+                                    <CustomInput onChange={this.handleChange} type="checkbox" id="rememberMe" />
+                                    <CustomLabel htmlFor="rememberMe">Lembrar</CustomLabel>
+                                </CustomDivCheckbox>
+                            </ModalBody>
+
+                            <ModalFooter>
+                                <ButtonSecondary data-dismiss="modal">Cancelar</ButtonSecondary>
+                                <ButtonPrimary type="submit" >Entrar</ButtonPrimary>
+                            </ModalFooter>
+                        </Form>
+
+                    </ModalContent>
+                </ModalDialogSmall>
+            </Modal>
+        );
+    }
 }
 
 export default ModalLogin;

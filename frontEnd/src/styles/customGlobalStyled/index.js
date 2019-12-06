@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-export const Container = styled.div.attrs(props => ({className: "container clearfix"}))``;
-
 export const Content = styled.div`
 
     padding-top: 30px;

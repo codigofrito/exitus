@@ -5,8 +5,7 @@ import { isAuthenticated } from '../../auth';
 export const PrivateRoute = ({ component: Component, ...rest }) => (
 
     <Route {...rest} render={
-        props => isAuthenticated() ? (
-            <Component {...props} />) : <Redirect to={{ pathname: '/', state: { from: props.localtion } }} />
+        props => isAuthenticated() ? ( <Component {...props} />) : <Redirect to={{ pathname: '/', state: { from: props.localtion } }} />
     } />
 
 )
