@@ -28,7 +28,7 @@ routes.put('/update/person', autenticacao.moderador, PessoaController.update);
 //=== === ===--------------------------=== === ===//
 
 //=== === ===EgressoController.js Routes=== === ===//
-routes.post('/register/egress', autenticacao.moderador, EgressoController.store);
+routes.post('/register/egress', EgressoController.store);
 routes.get('/graduates', autenticacao.moderador, EgressoController.index);
 routes.get('/find/egress', autenticacao.moderador, EgressoController.show);
 routes.delete('/remove/egress', autenticacao.moderador, EgressoController.destroy);
@@ -122,8 +122,7 @@ routes.get('/find/viewEgressAnswer', ViewRespostaEgressoController.show);
 //=== === ===-------------------------=== === ===//
 
 //=== === ===AutenticacaoController.js Routes=== === ===//
-routes.get('/auth/egress', AutenticacaoController.athenticate.egresso);
-routes.get('/auth/moderator', AutenticacaoController.athenticate.moderador);
+routes.post('/auth', AutenticacaoController.authenticate);
 //=== === ===-------------------------=== === ===//
 
 

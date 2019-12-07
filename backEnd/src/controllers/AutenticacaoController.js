@@ -8,84 +8,58 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
 
-	athenticate: {
-		async egresso(request, response) {
+	authenticate: async (request, response) => {
+		const { cpf, password: senha } = request.body;
 
-			const { cpf, senha } = request.body;
-
-			const registro = await egresso.findOne({
+		const registro = { 
+			user: await moderador.findOne({
 				where: { cpf },
 				raw: true
-			});
+			}).then(async result => {
+				if (!result) {
+					console.log('FALSE');
+					return await egresso.findOne({
+						where: { cpf },
+						raw: true
+					});
+				} else {
+					return result;
+				}
+			})
+		};
 
-			if (registro !== null) {
+		if (registro.user !== null) {
+			console.log(registro);
 
-				bcrypt.compare(senha, registro.senha).then(async (auth) => {
-					if (auth) {
+			bcrypt.compare(senha, registro.user.senha).then(async (auth) => {
+				if (auth) {
 
-						const token = jwt.sign({ cpf }, config.secretEgress, {
-							expiresIn: 86400,
-						});
+					const token = jwt.sign({ cpf }, config.secret, {
+						expiresIn: 86400,
+					});
 
-						const egresso = await view_egresso.findOne({
+					const user = registro.type == 'moderator'
+						? await view_moderador.findOne({
+							where:{cpf},
+							raw:true
+						}) 
+						: await view_egresso.findOne({
 							where:{cpf},
 							raw:true
 						});
 
-						return response.status(200).json({ egresso, token, return : auth});
+					return response.status(200).json({ user, token, return : auth});
 
-					} else {
+				} else {
 
-						return response.status(403).json({ return : auth });
-					}
-				});
-
-			} else {
-
-				return response.status(400).json(request.body);
-
-			}
-		},
-
-
-		async moderador(request, response) {
-
-			const { cpf, senha } = request.body;
-
-			const registro = await moderador.findOne({
-				where: { cpf },
-				raw: true
+					return response.status(403).json({ return : auth });
+				}
 			});
 
-			if (registro !== null) {
+		} else {
 
-				bcrypt.compare(senha, registro.senha).then(async (auth) => {
+			return response.status(400).json(request.body);
 
-					if (auth) {
-
-						const token = jwt.sign({ cpf }, config.secretModerator, {
-							expiresIn: 86400, //1 DIA
-						});
-
-						const moderador = await view_moderador.findOne({
-							where:{cpf},
-							raw:true
-						});
-
-						return response.status(200).json({moderador, token, return : auth});
-						
-					} else {
-
-						return response.status(403).json({return : auth});
-
-					}
-				});
-
-			} else {
-
-				return response.status(400).json(request.body);
-
-			}
 		}
-	}
+	},
 };

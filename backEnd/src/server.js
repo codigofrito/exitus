@@ -8,7 +8,7 @@ const color = require('colors');
 const app = express();
 
 
-app.options('*', cors);
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: false
@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({
 app.use(routes);
 
 try{
-	app.listen(process.env.PORT || 8080, () => {
+	app.listen(3001, () => {
 		console.log(color.yellow('SERVER ON-LINE'));
 	});
 }catch(err){
