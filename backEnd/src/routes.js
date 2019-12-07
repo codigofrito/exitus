@@ -125,5 +125,9 @@ routes.get('/find/viewEgressAnswer', ViewRespostaEgressoController.show);
 routes.post('/auth', AutenticacaoController.authenticate);
 //=== === ===-------------------------=== === ===//
 
+routes.post('/token', autenticacao.egresso, (request, response) => {
+	response.status(200).json({token: true});
+});
+
 
 module.exports = routes;
