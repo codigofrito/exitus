@@ -1,6 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 import localStorage from 'local-storage';
+import Authentication from '../../auth';
 
 import {
 	Modal,
@@ -51,6 +52,7 @@ class ModalLogin extends React.Component {
 			.then((result) => {
 				alert('LOGADO COM SUCESSO!');
 				localStorage('@exitus-token', result.data.token);
+				this.props.authentication(true, result.data.user);
 			})
 			.catch(err => {
 				alert('CPF OU SENHA INVÁLIDO!');
