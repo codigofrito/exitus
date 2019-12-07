@@ -1,12 +1,11 @@
 import React from 'react';
 
+import { isAuthenticated } from '../../auth';
 
 import logo from '../../assets/logo-exteded-v1.svg';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
 import ModalLogin from '../ModalLogin';
 
-import { Container, NavBar } from '../../styles/BootstrapStyled';
+import { Container, Navbar, NavbarBrand } from '../../styles/BootstrapStyled';
 
 import { Link } from 'react-router-dom';
 
@@ -15,11 +14,7 @@ import { AppHeader } from './styles';
 import AuthenticatedMenu from './AuthenticatedMenu';
 import UnauthenticatedMenu from './UnauthenticatedMenu';
 
-
-const menuIcon = <FontAwesomeIcon icon={faBars} />;
-const Menu = (props) => {return props.authenticated ? (
-	<AuthenticatedMenu user={props.user} logoff={props.logoff}/>) : (<UnauthenticatedMenu />
-);};
+const Menu = () => {return isAuthenticated() ? (<AuthenticatedMenu/>) : (<UnauthenticatedMenu/>);};
 
 class Header extends React.Component {
 	constructor(props) {
@@ -30,29 +25,28 @@ class Header extends React.Component {
 		};
 		this.handleAuthentication = this.handleAuthentication.bind(this);
 		this.handleLogoff = this.handleLogoff.bind(this);
-	} 
-  
-	handleAuthentication (authentication, user) {
-		this.setState({isAuthenticated: authentication, user: user});
 	}
-  
-	handleLogoff(){
-		this.setState({isAuthenticated: false, user: {}});
+
+	handleAuthentication(authentication, user) {
+		this.setState({ isAuthenticated: authentication, user: user });
 	}
-  
-	render(){
+
+	handleLogoff() {
+		this.setState({ isAuthenticated: false, user: {} });
+	}
+
+	render() {
 		return (
 			<AppHeader>
 				<Container>
-					<NavBar>
-						<Link className="navbar-brand" to="/"><img src={logo} height="45" alt="Exitus" id="logo" draggable="false" /></Link>
-						<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-							{menuIcon}
-						</button>
-						<Menu authenticated={this.state.isAuthenticated} user={this.state.user} logoff={this.handleLogoff}/>
-					</NavBar>
+					<Navbar>
+						<NavbarBrand>
+							<Link to="/"><img src={logo} height="45" alt="Exitus" id="logo" draggable="false" /></Link>
+						</NavbarBrand>
+						<Menu/>
+					</Navbar>
 				</Container>
-				<ModalLogin authentication={this.handleAuthentication}/>
+				<ModalLogin authentication={this.handleAuthentication} />
 			</AppHeader>
 		);
 	}

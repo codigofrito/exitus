@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 
-
 export const AppHeader = styled.div`
 
     background: ${props => props.theme.backgroundColor};
     border-bottom: 1px solid #eee;
-    height: 70px;
 
     li {
         margin-top: 11px;

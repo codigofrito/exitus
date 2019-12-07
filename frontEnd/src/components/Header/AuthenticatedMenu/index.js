@@ -1,7 +1,9 @@
 import React from 'react';
 
+import { logout } from '../../../auth';
+
 import { Link } from 'react-router-dom';
-function AuthenticatedMenu(props) {
+function AuthenticatedMenu() {
 
 	return (
 		<div className="collapse navbar-collapse navbar-light" id="navbarCollapse">
@@ -16,14 +18,13 @@ function AuthenticatedMenu(props) {
 					<Link className="nav-link" to="/sobre">Sobre</Link>
 				</li>
 				<li className="nav-item">
-					<Link className="nav-link" to="/sair" onClick={props.logoff}>Sair</Link>
+					<Link className="nav-link" onClick={() => logout()}>Sair</Link>
 				</li>
 			</ul>
 			<div>
-				{`${props.user.nome} ${props.user.sobrenome}`}
+				INFORMAÇÕES DO USUÁRIO
 			</div>
 		</div>
-
 	);
 }
 
