@@ -16,6 +16,7 @@ const Routes = () => (
             <PrivateRoute exact path="/CadastroEgresso" component={CadastroEgresso} />
             <PrivateRoute exact path="/CadastroEntrevista" component={CadastroEntrevista} />
             <PrivateRoute exact path="/CadastroPergunta" component={CadastroPergunta} />
+            <PrivateRoute exact path="/sair" component={CadastroPergunta} />
             <Route path="*" component={NotFound} />
         </Switch>
 );

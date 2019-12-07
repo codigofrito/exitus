@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
-
 function AuthenticatedMenu(props) {
 
 	return (
@@ -17,7 +16,7 @@ function AuthenticatedMenu(props) {
 					<Link className="nav-link" to="/sobre">Sobre</Link>
 				</li>
 				<li className="nav-item">
-					<Link className="nav-link" to="/sair">Sair</Link>
+					<Link className="nav-link" to="/sair" onClick={props.logoff}>Sair</Link>
 				</li>
 			</ul>
 			<div>

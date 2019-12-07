@@ -17,7 +17,9 @@ import UnauthenticatedMenu from './UnauthenticatedMenu';
 
 
 const menuIcon = <FontAwesomeIcon icon={faBars} />;
-const Menu = (props) => {return props.authenticated ? (<AuthenticatedMenu user={props.user}/>) : (<UnauthenticatedMenu />);};
+const Menu = (props) => {return props.authenticated ? (
+	<AuthenticatedMenu user={props.user} logoff={props.logoff}/>) : (<UnauthenticatedMenu />
+);};
 
 class Header extends React.Component {
 	constructor(props) {
@@ -25,13 +27,17 @@ class Header extends React.Component {
 		this.state = {
 			isAuthenticated: '',
 			user: '',
-			Menu: '',
 		};
 		this.handleAuthentication = this.handleAuthentication.bind(this);
+		this.handleLogoff = this.handleLogoff.bind(this);
 	} 
   
 	handleAuthentication (authentication, user) {
 		this.setState({isAuthenticated: authentication, user: user});
+	}
+  
+	handleLogoff(){
+		this.setState({isAuthenticated: false, user: {}});
 	}
   
 	render(){
@@ -43,7 +49,7 @@ class Header extends React.Component {
 						<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 							{menuIcon}
 						</button>
-						<Menu authenticated={this.state.isAuthenticated} user={this.state.user}/>
+						<Menu authenticated={this.state.isAuthenticated} user={this.state.user} logoff={this.handleLogoff}/>
 					</NavBar>
 				</Container>
 				<ModalLogin authentication={this.handleAuthentication}/>
