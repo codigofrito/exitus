@@ -18,7 +18,7 @@ export const NavbarToggler = styled.div.attrs(props => ({
 `;
 
 export const NavbarCollapse = styled.div.attrs(props => ({
-  className: "navbar-collapse"
+  className: "navbar-collapse collapse"
 }))``;
 
 export const NavbarNavigation = styled.div.attrs(props => ({

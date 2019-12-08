@@ -9,8 +9,7 @@ export const AppHeader = styled.div`
         margin-top: 11px;
         font-weight: bold;
         font-size: 20px;
-        border-bottom: 5px solid rgba(255,255,255,0); ;
-
+        border-bottom: 5px solid rgba(255,255,255,0);
     }
 
     li:hover {

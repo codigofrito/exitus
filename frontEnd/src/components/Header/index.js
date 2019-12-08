@@ -17,9 +17,13 @@ import UnauthenticatedMenu from './UnauthenticatedMenu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 
+import BannerRotativo from "./BannerRotativo";
+
+
 const MenuIcon = <FontAwesomeIcon icon={faBars} />
 
 const Menu = () => { return isAuthenticated() ? (<AuthenticatedMenu />) : (<UnauthenticatedMenu />); };
+
 
 class Header extends React.Component {
 	constructor(props) {
@@ -28,6 +32,7 @@ class Header extends React.Component {
 	}
 	render() {
 		return (
+			<div>
 			<AppHeader>
 				<Container>
 					<Navbar>
@@ -42,6 +47,8 @@ class Header extends React.Component {
 				</Container>
 				<ModalLogin/>
 			</AppHeader>
+			<BannerRotativo paginaInicial={this.props.paginaInicial}/>
+			</div>
 		);
 	}
 }
