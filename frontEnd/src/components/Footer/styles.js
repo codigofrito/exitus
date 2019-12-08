@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-
-
 export const AppFooter = styled.div`
     position: absolute;
     background: ${props => props.theme.primaryColor};

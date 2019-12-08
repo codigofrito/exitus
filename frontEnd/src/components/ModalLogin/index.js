@@ -1,7 +1,8 @@
 import React from 'react';
 import Axios from 'axios';
 import localStorage from 'local-storage';
-import {login} from '../../auth';
+import { login, setCurrentUser } from '../../auth';
+
 
 import {
 	Modal,
@@ -50,12 +51,12 @@ class ModalLogin extends React.Component {
 		event.preventDefault();
 		Axios.post('http://localhost:3001/auth', this.state)
 			.then((result) => {
-				localStorage('@exitus-token', result.data.token);
-				login(result);
+				console.log(result.data.user);
+				login(result.data.token);
+				setCurrentUser(result.data.user);
 			})
 			.catch(err => {
-				alert('CPF OU SENHA INVÁLIDO!');
-				console.log(err);
+				
 			});
 	}
 
@@ -74,11 +75,11 @@ class ModalLogin extends React.Component {
 
 							<ModalBody>
 								<FormGroup>
-									<label>CPF</label>
+									<label>CPF:</label>
 									<Input onChange={this.handleChange} id="cpf" type="text" required />
 								</FormGroup>
 								<FormGroup>
-									<label>password</label>
+									<label>Senha:</label>
 									<Input onChange={this.handleChange} id="password" type="password" required />
 								</FormGroup>
 								<CustomDivCheckbox>
@@ -89,7 +90,7 @@ class ModalLogin extends React.Component {
 
 							<ModalFooter>
 								<ButtonSecondary data-dismiss="modal">Cancelar</ButtonSecondary>
-								<ButtonPrimary type="submit" >Entrar</ButtonPrimary>
+								<ButtonPrimary type="submit">Entrar</ButtonPrimary>
 							</ModalFooter>
 						</Form>
 

@@ -1,61 +1,74 @@
 import React from 'react';
 
+import {
+    Modal,
+    ModalDialogMedium,
+    ModalContent,
+    ModalHeader,
+    ModalTitle,
+    ModalBody,
+    ModalFooter,
+    ButtonCloseModal,
+    Form,
+    FormGroup,
+    ButtonPrimary,
+    ButtonSecondary,
+    Textarea
+
+} from '../../styles/BootstrapStyled';
+
 let quantidadeAlternativas = 0;
 
 const ModalCriarPergunta = ({ dataQuestion }) => {
 
     return (
 
-        <div id="modalCriarPergunta" className="modal fade " tabIndex="-1" role="dialog" aria-hidden="true">
-            <div className="modal-dialog modal-lg">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title w-100 text-center">Criar Nova Pergunta</h5>
-                        <button type="button" className="close" data-dismiss="modal" aria-label="Fechar">
+        <Modal id="modalCriarPergunta">
+            <ModalDialogMedium>
+                <ModalContent>
+                    <ModalHeader>
+                        <ModalTitle>Criar Nova Pergunta</ModalTitle>
+                        <ButtonCloseModal type="button" data-dismiss="modal">
                             <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div className="modal-body">
-                        <form className="form" autoComplete="off" id="modalLoginForm" >
-
-
-                            <div className="form-group">
+                        </ButtonCloseModal>
+                    </ModalHeader>
+                    <ModalBody>
+                        <Form id="modalLoginForm" >
+                            <FormGroup>
                                 <label htmlFor="pergunta">Pergunta</label>
-                                <textarea value={dataQuestion.pergunta} className="form-control subjetiva" id="pergunta" placeholder="Insira o texto da pergunta." rows="2"></textarea>
-                            </div>
+                                <Textarea value={dataQuestion.pergunta} placeholder="Insira o texto da pergunta." rows="2"></Textarea>
+                            </FormGroup>
 
-                            <div className="form-group">
-                                <textarea className="form-control subjetiva" id={"alternativa-" + (++quantidadeAlternativas)} placeholder="Insira o texto da alternativa" rows="1" disabled></textarea>
-                            </div>
+                            <FormGroup>
+                                <Textarea id={"alternativa-" + (++quantidadeAlternativas)} placeholder="Insira o texto da alternativa" rows="1" disabled></Textarea>
+                            </FormGroup>
 
-                            <div className="form-group">
+                            <FormGroup>
+                                <Textarea id={"alternativa-" + (++quantidadeAlternativas)} placeholder="Insira o texto da alternativa" rows="1" disabled></Textarea>
+                            </FormGroup>
+
+                            <FormGroup>
+                                <Textarea id={"alternativa-" + (++quantidadeAlternativas)} placeholder="Insira o texto da alternativa" rows="1" disabled></Textarea>
+                            </FormGroup>
+
+                            <FormGroup>
+                                <Textarea id={"alternativa-" + (++quantidadeAlternativas)} placeholder="Insira o texto da alternativa" rows="1" disabled></Textarea>
+                            </FormGroup>
+
+                            <FormGroup>
                                 <textarea className="form-control objetiva" id={"alternativa-" + (++quantidadeAlternativas)} placeholder="Insira o texto da alternativa" rows="1" disabled></textarea>
-                            </div>
+                            </FormGroup>
+                        </Form>
+                    </ModalBody>
 
-                            <div className="form-group">
-                                <textarea className="form-control objetiva" id={"alternativa-" + (++quantidadeAlternativas)} placeholder="Insira o texto da alternativa" rows="1" disabled></textarea>
-                            </div>
+                    <ModalFooter>
+                        <ButtonPrimary type="button" data-dismiss="modal">Cancelar</ButtonPrimary>
+                        <ButtonSecondary type="button">Salvar Pergunta</ButtonSecondary>
+                    </ModalFooter>
 
-                            <div className="form-group">
-                                <textarea className="form-control objetiva" id={"alternativa-" + (++quantidadeAlternativas)} placeholder="Insira o texto da alternativa" rows="1" disabled></textarea>
-                            </div>
-
-                            <div className="form-group">
-                                <textarea className="form-control objetiva" id={"alternativa-" + (++quantidadeAlternativas)} placeholder="Insira o texto da alternativa" rows="1" disabled></textarea>
-                            </div>
-
-
-                        </form>
-                    </div>
-
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                        <button type="button" className="btn btn-primary">Salvar Pergunta</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
+                </ModalContent>
+            </ModalDialogMedium>
+        </Modal>
 
     );
 }

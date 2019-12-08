@@ -1,30 +1,30 @@
 import React from 'react';
 
-import { logout } from '../../../auth';
+import { logout, getUser } from '../../../auth';
+
+import { NavbarCollapse, NavbarItem, NavbarNavigation } from '../../../styles/BootstrapStyled'
 
 import { Link } from 'react-router-dom';
 function AuthenticatedMenu() {
 
 	return (
-		<div className="collapse navbar-collapse navbar-light" id="navbarCollapse">
-			<ul className="navbar-nav mr-auto">
-				<li className="nav-item">
+		<NavbarCollapse id="navbarCollapse">
+			<NavbarNavigation>
+				<NavbarItem>					
 					<Link className="nav-link" to="/">Inicio</Link>
-				</li>
-				<li className="nav-item">
+				</NavbarItem>
+				<NavbarItem>
 					<Link className="nav-link" to="/contato">Contato</Link>
-				</li>
-				<li className="nav-item">
+				</NavbarItem>
+				<NavbarItem className="nav-item">
 					<Link className="nav-link" to="/sobre">Sobre</Link>
-				</li>
-				<li className="nav-item">
-					<Link className="nav-link" onClick={() => logout()}>Sair</Link>
-				</li>
-			</ul>
-			<div>
-				INFORMAÇÕES DO USUÁRIO
-			</div>
-		</div>
+				</NavbarItem>
+				<NavbarItem className="nav-item">
+					<a className="nav-link" onClick={() => logout()}>Sair</a>
+				</NavbarItem>
+			</NavbarNavigation>
+				<label> {JSON.parse(getUser()).nome.toUpperCase() + " " + JSON.parse(getUser()).sobrenome.toUpperCase()} </label>
+		</NavbarCollapse>
 	);
 }
 
