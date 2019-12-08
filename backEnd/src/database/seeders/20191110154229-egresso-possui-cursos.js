@@ -31,6 +31,6 @@ module.exports = {
 	},
 
 	down: (queryInterface) => {
-		return queryInterface.bulkDelete('egresso_possui_cursos)', null, {});
+		return queryInterface.bulkDelete('egresso_possui_cursos', null, {});
 	}
 };
