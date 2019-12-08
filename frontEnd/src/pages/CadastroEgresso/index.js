@@ -34,14 +34,14 @@ class CadastroEgresso extends React.Component {
             cursos:
                 [
                     {
-                        idCurso: '1',
+                        id: '1',
                         nomeCurso: 'SISTEMAS DE INFORMAÇÂO',
                         concluiu: true,
                         anoInicio: '2010',
                         anoTermino: '2014'
                     },
                     {
-                        idCurso: '3',
+                        id: '3',
                         nomeCurso: 'ENGENHARIA CIVIL',
                         concluiu: true,
                         anoInicio: '2015',
@@ -112,7 +112,7 @@ class CadastroEgresso extends React.Component {
 
                     <FormRow>
 
-                        <FormGroup columnGrid={"col-lg-6"}>
+                        <FormGroup columnGrid={"col-lg-10"}>
                             <label htmlFor="cpf">Email:</label>
                             <Input onChange={this.handleChange} id="email" type="text" placeholder="" />
                         </FormGroup>
@@ -135,8 +135,9 @@ class CadastroEgresso extends React.Component {
                     <ButtonPrimary>Salvar</ButtonPrimary>
 
                 </Form>
+                
+                <ModalAdicionarCurso/>
 
-                <ModalAdicionarCurso />
             </div>
         );
     }

@@ -161,18 +161,39 @@ export const ButtonSecondary = styled.button.attrs(props => ({
 }))``;
 
 export const Table = styled.table.attrs(props => ({
-  className: props.columnGrid + " table table-striped"
+  className: props.columnGrid + " table"
 }))``;
 
 export const TableColumn = styled.td.attrs(props => ({
   className: props.columnGrid
 }))``;
 
+export const TableColumnCentered = styled.td.attrs(props => ({
+  className: props.columnGrid + " text-center"
+}))``;
+
 export const TableRow = styled.tr.attrs(props => ({
   className: "d-flex"
 }))``;
+
+export const TableRowClicable = styled.tr.attrs(props => ({
+  className: "d-flex tr"
+}))`
+    cursor: pointer;  
+    &:hover {
+      background-color: #d8d8d8;
+    }
+`;
+
 export const TableColumnHeader = styled.th.attrs(props => ({
-  className: props.columnGrid + " "
+  className: props.columnGrid
+}))`
+    color: #fff;
+    background: ${props => props.theme.primaryColor};   
+`;
+
+export const TableColumnHeaderCentered = styled.th.attrs(props => ({
+  className: props.columnGrid + " text-center" 
 }))`
     color: #fff;
     background: ${props => props.theme.primaryColor};   
@@ -186,12 +207,9 @@ export const TableBody = styled.tbody.attrs(props => ({
   className: "tbody"
 }))``;
 
-
 export const Textarea = styled.textarea.attrs(props => ({
   className: "form-control"
-}))` 
-    
-`;
+}))``;
 
 
 

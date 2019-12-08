@@ -19,7 +19,7 @@ import {
 
 let quantidadeAlternativas = 0;
 
-const ModalCriarPergunta = ({ dataQuestion }) => {
+const ModalCriarPergunta = ({ perguntas }) => {
 
     return (
 
@@ -36,7 +36,7 @@ const ModalCriarPergunta = ({ dataQuestion }) => {
                         <Form id="modalLoginForm" >
                             <FormGroup>
                                 <label htmlFor="pergunta">Pergunta</label>
-                                <Textarea value={dataQuestion.pergunta} placeholder="Insira o texto da pergunta." rows="2"></Textarea>
+                                <Textarea value={perguntas.pergunta} placeholder="Insira o texto da pergunta." rows="2"></Textarea>
                             </FormGroup>
 
                             <FormGroup>
