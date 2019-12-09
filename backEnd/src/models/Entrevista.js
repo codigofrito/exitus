@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
 	}, {});
 	entrevista.associate = function (models) {
 		entrevista.belongsTo(models.moderador, {
-			foreignKey: 'cpf',
+			foreignKey: 'cpf_moderador',
 			onDelete: 'CASCADE',
 			onUpdate: 'CASCADE',
 		});

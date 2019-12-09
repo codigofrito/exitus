@@ -28,7 +28,7 @@ module.exports = {
 	async show(request, response) {
 		const { id } = request.body;
 
-		await Pergunta.findOne({
+		await Pergunta.findAll({
 			where: { id },
 			raw: true
 		}).then((resultado) => {

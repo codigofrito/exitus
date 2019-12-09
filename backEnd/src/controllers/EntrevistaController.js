@@ -14,7 +14,6 @@ module.exports = {
 					return: resultado.length != 0 ? true : false
 				});
 			}).catch(() => {
-
 				return response.status(400).json({
 					resultado: [],
 					registros: 0,
@@ -25,20 +24,19 @@ module.exports = {
 	},
 
 	async show(request, response) {
-		const {     id } = request.body;
-
+		const { id } = request.body;
+		console.log(request.body);
 		await Entrevista.findOne({
 			where: { id },
 			raw: true
 		}).then((resultado) => {
-
 			return response.status(200).json({
 				resultado,
 				mensagem: Mensagem.sucesso,
 				return: resultado !== null ? true : false
 			});
-		}).catch(() => {
-
+		}).catch((err) => {
+			console.log(err);
 			return response.status(400).json({
 				resultado: [],
 				mensagem: Mensagem.falha,

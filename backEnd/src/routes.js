@@ -62,14 +62,14 @@ routes.put('/update/moderator', ModeradorController.update);
 //=== === ===EntrevistaController.js Routes=== === ===//
 routes.post('/register/interview', autenticacao.moderador, EntrevistaController.store);
 routes.get('/interviews', EntrevistaController.index);
-routes.get('/find/interview', EntrevistaController.show);
+routes.post('/find/interview', EntrevistaController.show);
 routes.delete('/remove/interview', autenticacao.moderador, EntrevistaController.destroy);
 routes.put('/update/interview', autenticacao.moderador, EntrevistaController.update);
 //=== === ===------------------------------=== === ===//
 
 //=== === ===PerguntaController.js Routes=== === ===//
 routes.post('/register/question', autenticacao.moderador, PerguntaController.store);
-routes.get('/questions', PerguntaController.index);
+routes.post('/questions', PerguntaController.index);
 routes.get('/find/question', PerguntaController.show);
 routes.delete('/remove/question', autenticacao.moderador, PerguntaController.destroy);
 routes.put('/update/question', autenticacao.moderador, PerguntaController.update);
