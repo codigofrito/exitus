@@ -1,22 +1,20 @@
-import React from 'react';
-import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
 
-function Home() {
-    return (
+import { isAuthenticated } from '../../auth';
 
-        <div>
-            <Helmet>
-                <title> Exitus - Sistema de Egressos </title>
-                <meta name="description" content="Página Inicial do Sistema de Egressos Exitus" />
-            </Helmet>
+import HomePublico from "./HomePublico"
+import HomeModerador from "./HomeModerador"
 
-            <h1>Links de teste</h1>
-            <Link to="/CadastroEgresso"> Cadastro Egresso </Link><br />
-            <Link to="/CadastroEntrevista"> Cadastro Entrevista </Link><br />
-            <Link to="/CadastroPergunta"> Cadastro Pergunta </Link><br />
-        </div>
-    );
+const HomeAtual = () => { return isAuthenticated() ? (<HomeModerador/>) : (<HomePublico/>); };
+
+
+class Home extends Component {
+
+    render(){
+        return (
+            <HomeAtual/>
+        );
+    }
 }
 
 export default Home;

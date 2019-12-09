@@ -1,6 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
-import localStorage from 'local-storage';
+
 import { login, setCurrentUser } from '../../auth';
 
 

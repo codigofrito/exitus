@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { logout, getUser } from '../../../auth';
+import { logout, getCurrentUser } from '../../../auth';
 
 import { NavbarCollapse, NavbarItem, NavbarNavigation } from '../../../styles/BootstrapStyled';
 
 import { Link } from 'react-router-dom';
+
 function AuthenticatedMenu() {
 
 	return (
@@ -20,10 +21,10 @@ function AuthenticatedMenu() {
 					<Link className="nav-link" to="/sobre">Sobre</Link>
 				</NavbarItem>
 				<NavbarItem className="nav-item">
-					<a className="nav-link" onClick={() => logout()}>Sair</a>
+					<Link className="nav-link" onClick={() => logout()}>Sair</Link>
 				</NavbarItem>
 			</NavbarNavigation>
-			<label> {JSON.parse(getUser()).nome.toUpperCase() + ' ' + JSON.parse(getUser()).sobrenome.toUpperCase()} </label>
+			<label> {JSON.parse(getCurrentUser()).nome.toUpperCase() + ' ' + JSON.parse(getCurrentUser()).sobrenome.toUpperCase()} </label>
 		</NavbarCollapse>
 	);
 }

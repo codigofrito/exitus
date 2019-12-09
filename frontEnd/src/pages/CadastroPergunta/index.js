@@ -1,10 +1,15 @@
 import React from 'react';
 
+import { Container } from "../../styles/BootstrapStyled";
+import { Content } from "../../styles/customGlobalStyled";
+
 function CadastroEntrevista() {
     return (
-        <div>
-            <h1>Esse componente é a página cadastro de perguntas, juntamente com as respostas</h1>
-        </div>
+        <Container>
+            <Content>
+                <h1>Esse componente é a página cadastro de perguntas, juntamente com as respostas</h1>
+            </Content>
+        </Container>
     );
 }
 
