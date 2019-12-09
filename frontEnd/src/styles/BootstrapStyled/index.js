@@ -190,14 +190,14 @@ export const TableColumnHeader = styled.th.attrs(props => ({
   className: props.columnGrid
 }))`
     color: #fff;
-    background: ${props => props.theme.primaryColor};   
+    background: ${props => props.theme.primaryColor};
 `;
 
 export const TableColumnHeaderCentered = styled.th.attrs(props => ({
-  className: props.columnGrid + " text-center" 
+  className: props.columnGrid + " text-center"
 }))`
     color: #fff;
-    background: ${props => props.theme.primaryColor};   
+    background: ${props => props.theme.primaryColor};     
 `;
 
 export const TableHead = styled.thead.attrs(props => ({

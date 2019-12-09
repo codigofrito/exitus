@@ -24,7 +24,7 @@ class TitleBar extends Component {
                             <Descricao>{this.props.descricao}</Descricao>
                         </Content>
                     </Container>
-                    <Ondas src={fundo} />
+                    <Ondas draggable="false" src={fundo} />
 
                 </BgImageBox>
 

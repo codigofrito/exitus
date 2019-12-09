@@ -11,14 +11,17 @@ function AuthenticatedMenu() {
 	return (
 		<NavbarCollapse id="navbarCollapse">
 			<NavbarNavigation>
-				<NavbarItem>					
+				<NavbarItem>
 					<Link className="nav-link" to="/">Inicio</Link>
 				</NavbarItem>
 				<NavbarItem>
-					<Link className="nav-link" to="/contato">Contato</Link>
+					<Link className="nav-link" to="/egressos">Egressos</Link>
 				</NavbarItem>
 				<NavbarItem className="nav-item">
-					<Link className="nav-link" to="/sobre">Sobre</Link>
+					<Link className="nav-link" to="/entrevistas">Entrevistas</Link>
+				</NavbarItem>
+				<NavbarItem className="nav-item">
+					<Link className="nav-link" to="/relatorios">Relatórios</Link>
 				</NavbarItem>
 				<NavbarItem className="nav-item">
 					<Link className="nav-link" onClick={() => logout()}>Sair</Link>
