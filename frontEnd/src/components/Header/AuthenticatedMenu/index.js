@@ -2,7 +2,7 @@ import React from 'react';
 
 import { logout, getUser } from '../../../auth';
 
-import { NavbarCollapse, NavbarItem, NavbarNavigation } from '../../../styles/BootstrapStyled'
+import { NavbarCollapse, NavbarItem, NavbarNavigation } from '../../../styles/BootstrapStyled';
 
 import { Link } from 'react-router-dom';
 function AuthenticatedMenu() {
@@ -23,7 +23,7 @@ function AuthenticatedMenu() {
 					<a className="nav-link" onClick={() => logout()}>Sair</a>
 				</NavbarItem>
 			</NavbarNavigation>
-				<label> {JSON.parse(getUser()).nome.toUpperCase() + " " + JSON.parse(getUser()).sobrenome.toUpperCase()} </label>
+			<label> {JSON.parse(getUser()).nome.toUpperCase() + ' ' + JSON.parse(getUser()).sobrenome.toUpperCase()} </label>
 		</NavbarCollapse>
 	);
 }

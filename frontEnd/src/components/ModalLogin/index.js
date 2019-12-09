@@ -51,7 +51,6 @@ class ModalLogin extends React.Component {
 		event.preventDefault();
 		Axios.post('http://localhost:3001/auth', this.state)
 			.then((result) => {
-				console.log(result.data.user);
 				login(result.data.token);
 				setCurrentUser(result.data.user);
 			})

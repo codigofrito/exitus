@@ -11,13 +11,13 @@ import { Route, Switch } from 'react-router-dom';
 import { PrivateRoute } from './components/PrivateRouter';
 
 const Routes = () => (
-        <Switch>
-            <Route exact path={["/", "/home"]} component={Home} />
-            <PrivateRoute exact path="/CadastroEgresso" component={CadastroEgresso} />
-            <PrivateRoute exact path="/CadastroEntrevista" component={CadastroEntrevista} />
-            <PrivateRoute exact path="/CadastroPergunta" component={CadastroPergunta} />
-            <Route path="*" component={NotFound} />
-        </Switch>
+	<Switch>
+		<Route exact path={['/', '/home']} component={Home} />
+		<PrivateRoute exact path="/CadastroEgresso" component={CadastroEgresso} />
+		<PrivateRoute exact path="/CadastroEntrevista" component={CadastroEntrevista} />
+		<PrivateRoute exact path="/CadastroPergunta" component={CadastroPergunta} />
+		<Route path="*" component={NotFound} />
+	</Switch>
 );
 
 export default Routes;

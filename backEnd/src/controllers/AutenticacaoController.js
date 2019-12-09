@@ -10,28 +10,29 @@ module.exports = {
 
 	authenticate: async (request, response) => {
 		const { cpf, password: senha } = request.body;
-
+		console.log(request.body);
+		let userType;
 		const registro = { 
 			user: await moderador.findOne({
 				where: { cpf },
 				raw: true
 			}).then(async result => {
 				if (!result) {
-					console.log('FALSE');
+					userType = 'egress';
 					return await egresso.findOne({
 						where: { cpf },
 						raw: true
 					});
 				} else {
+					userType = 'moderator';
 					return result;
 				}
-			})
+			}),
+			type: userType,
 		};
-
 		if (registro.user !== null) {
-			console.log(registro);
-
-			bcrypt.compare(senha, registro.user.senha).then(async (auth) => {
+			console.log(senha);
+			bcrypt.compare(senha.toString(), registro.user.senha).then(async (auth) => {
 				if (auth) {
 
 					const token = jwt.sign({ cpf }, config.secret, {
@@ -47,6 +48,7 @@ module.exports = {
 							where:{cpf},
 							raw:true
 						});
+					console.log(user);
 
 					return response.status(200).json({ user, token, return : auth});
 

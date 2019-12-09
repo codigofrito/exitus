@@ -10,6 +10,7 @@ export const login = (token) => {
 export const setCurrentUser = user => {
 	localStorage.setItem('user', JSON.stringify(user));
 };
+
 export const logout = () => {
 	localStorage.removeItem(TOKEN_KEY);
 	window.location.reload();
