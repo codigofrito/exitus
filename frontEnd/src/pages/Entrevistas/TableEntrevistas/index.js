@@ -24,8 +24,8 @@ class TableCourses extends Component {
                     <TableRow>
                         <TableColumnHeader columnGrid="col-sm-1">#</TableColumnHeader>
                         <TableColumnHeader columnGrid="col-sm-4">Título da Entrevista</TableColumnHeader>
-                        <TableColumnHeader columnGrid="col-sm-6">Descrição da Entrevista</TableColumnHeader>
-                        <TableColumnHeader columnGrid="col-sm-1">Criação</TableColumnHeader>
+                        <TableColumnHeader columnGrid="col-sm-5">Descrição da Entrevista</TableColumnHeader>
+                        <TableColumnHeader columnGrid="col-sm-2">Criação</TableColumnHeader>
                     </TableRow>
                 </TableHead>
 
@@ -36,8 +36,8 @@ class TableCourses extends Component {
                                 <TableRowClicable key={index} onClick={() => this.editarCurso(entrevista.id)}>
                                     <TableColumn columnGrid="col-sm-1">{index + 1}</TableColumn>
                                     <TableColumn columnGrid="col-sm-4">{entrevista.titulo}</TableColumn>
-                                    <TableColumn columnGrid="col-sm-6">{entrevista.descricao}</TableColumn>
-                                    <TableColumn columnGrid="col-sm-1">{entrevista.createdAt}</TableColumn>
+                                    <TableColumn columnGrid="col-sm-5">{entrevista.descricao}</TableColumn>
+                                    <TableColumn columnGrid="col-sm-2">{entrevista.createdAt}</TableColumn>
                                 </TableRowClicable>
                             </Fragment>
                         );
