@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div.attrs(props => ({
   className: "container clearfix"
@@ -138,7 +139,7 @@ export const ButtonPrimary = styled.button.attrs(props => ({
   }
 `;
 
-export const ButtonSuccess = styled.button.attrs(props => ({
+export const ButtonSuccess = styled(Link).attrs(props => ({
   className: "btn btn-success",
 }))`
    background: ${props => props.theme.successColor};
@@ -209,6 +210,14 @@ export const TableBody = styled.tbody.attrs(props => ({
 
 export const Textarea = styled.textarea.attrs(props => ({
   className: "form-control"
+}))``;
+
+export const CardBody = styled.div.attrs(props => ({
+  className: "card-body d-flex align-items-end flex-column text-right"
+}))``;
+
+export const Row = styled.div.attrs(props => ({
+  className: "row"
 }))``;
 
 

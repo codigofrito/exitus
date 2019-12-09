@@ -15,7 +15,7 @@ import {
 	ButtonSecondary,
 	Textarea
 
-} from '../../styles/BootstrapStyled';
+} from '../../../styles/BootstrapStyled';
 
 let quantidadeAlternativas = 0;
 

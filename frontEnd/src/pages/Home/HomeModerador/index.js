@@ -1,30 +1,61 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom';
-import BannerRotativo from "../BannerRotativo";
 
-import { Container } from "../../../styles/BootstrapStyled";
+import { Container, Row, CardBody } from "../../../styles/BootstrapStyled";
 import { Content } from "../../../styles/customGlobalStyled";
+import { ColumnCard, CardEgressos, CardEntrevistas, CardRelatorios } from "./styles";
+
+import TitleBar from "../../../components/TitleBar";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUserGraduate } from '@fortawesome/free-solid-svg-icons'
+
+
+const egressoIcon = <FontAwesomeIcon icon={faUserGraduate} />
 
 
 class HomeModerador extends Component {
 
-    render(){
+    render() {
         return (
-            <Fragment>
-                <BannerRotativo />
-                <Container>
-                    <Content>
-                        <Helmet>
-                            <title> Início - Moderador </title>
-                            <meta name="description" content="Página Inicial do Sistema de Egressos Exitus" />
-                        </Helmet>
-                        <h1>Links de teste</h1>
-                        <Link to="/CadastroEgresso"> Cadastro Egresso </Link><br />
-                        <Link to="/CadastroEntrevista"> Cadastro Entrevista </Link><br />
-                        <Link to="/CadastroPergunta"> Cadastro Pergunta </Link><br />
-                    </Content>
-                </Container>
+           <Fragment>
+            <TitleBar titulo="Página Inicial - Moderador" descricao="Essa página é o ponto de partida para ter acesso às principais funções do nosso Sistema."/>
+            <Container>
+                <Content>
+                    <Helmet>
+                        <title> Início - Moderador </title>
+                        <meta name="description" content="Página Inicial do Sistema de Egressos Exitus" />
+                    </Helmet>
+
+                    <Row>
+                        <ColumnCard>
+                            <CardEgressos to="/Egressos">
+                                <CardBody>
+                                    <h4>Egressos</h4>
+                                    <p >Insira, edite e monitore informações dos egressos</p>
+                                </CardBody>
+                            </CardEgressos>
+                        </ColumnCard>
+                        <ColumnCard>
+                            <CardEntrevistas to="/Entrevistas" class="after-loop-item card border-0 card-snippets shadow-lg">
+                                <CardBody>
+                                    <h4>Entrevistas</h4>
+                                    <p >Crie Entrevistas, insira novas perguntas e envie para os egressos.</p>
+                                </CardBody>
+                            </CardEntrevistas>
+                        </ColumnCard>
+                        <ColumnCard>
+                            <CardRelatorios to="/Relatorios" class="after-loop-item card border-0 card-guides shadow-lg">
+                                <CardBody>
+                                    <h4>Relatorios</h4>
+                                    <p class="w-75">Gere relatorio a partir dos dados coletados dos egresso</p>
+                                </CardBody>
+                            </CardRelatorios>
+                        </ColumnCard>
+                    </Row>
+                </Content>
+            </Container>
+
             </Fragment>
         );
     }

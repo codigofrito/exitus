@@ -5,6 +5,7 @@ import { isAuthenticated } from '../../auth';
 import HomePublico from "./HomePublico"
 import HomeModerador from "./HomeModerador"
 
+
 const HomeAtual = () => { return isAuthenticated() ? (<HomeModerador/>) : (<HomePublico/>); };
 
 

@@ -5,7 +5,7 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 import { FormGroup, Form } from '../../styles/BootstrapStyled';
 
-import ModalCriarPergunta from '../../components/ModalCriarPergunta';
+import ModalCriarPergunta from './ModalCriarPergunta';
 import TableQuestions from './TableQuestions';
 import Axios from 'axios';
 
