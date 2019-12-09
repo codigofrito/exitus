@@ -11,6 +11,7 @@ export const Ondas = styled.img.attrs(props => ({
     -moz-user-select: none;
     -o-user-select: none;
     user-select: none;
+    pointer-events: none;
 `;
 
 export const BgImageBox = styled.div`
