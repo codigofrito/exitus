@@ -20,13 +20,13 @@ class TitleBar extends Component {
                 <BgImageBox>
                     <Container>
                         <Content>
-                        <Titulo>{this.props.titulo.toUpperCase()}</Titulo>
-                        <Descricao>{this.props.descricao}</Descricao>
+                            <Titulo>{this.props.titulo.toUpperCase()}</Titulo>
+                            <Descricao>{this.props.descricao}</Descricao>
                         </Content>
                     </Container>
-                </BgImageBox>
-                <Ondas src={fundo}/>
+                    <Ondas draggable="false" src={fundo} />
 
+                </BgImageBox>
 
             </Fragment>
 

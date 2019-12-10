@@ -1,10 +1,13 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
+import React, { Fragment } from 'react';
+import { Helmet } from "react-helmet";
+
+import TitleBar from "../../components/TitleBar";
 
 import {
 	FormRow,
 	ButtonSuccess
 } from '../../styles/BootstrapStyled';
+
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
@@ -17,8 +20,7 @@ import { Content } from '../../styles/customGlobalStyled';
 
 const PlusIcon = <FontAwesomeIcon icon={faPlusCircle} />;
 
-
-class ListaEntrevistas extends React.Component {
+class Entrevistas extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -65,31 +67,35 @@ class ListaEntrevistas extends React.Component {
 	}
 
 
-	render() {
-		return (
-			<Container>
-				<Content>
-					<Helmet>
-						<title> Listar Entrevistas </title>
-						<meta name="description" content="" />
-					</Helmet>
+    render() {
+        return (
 
-					<h2>Listar Entrevistas</h2>
+            <Fragment>
+
+                <TitleBar titulo="Minhas Entrevistas" descricao="Gerencie todas as entrevistas que você criou ou crie outras se necessário." />
+               
+                <Helmet>
+                    <title>Entrevistas</title>
+                    <meta name="description" content="" />
+                </Helmet>
+
+                <Container>
+                    <Content>
 
 
-					<FormRow>
-						<ButtonSuccess to="/CadastroEntrevista"> {PlusIcon} Cadastrar Nova Entrevista </ButtonSuccess>
-					</FormRow>
+                        <TableEntrevistas dataTable={this.state.entrevistas} />
+                        <hr />
+                        <FormRow>
+                            <ButtonSuccess to="/CadastroEntrevista"> {PlusIcon} Cadastrar Nova Entrevista </ButtonSuccess>
+                        </FormRow>
 
-					<hr />
+                    </Content>
+                </Container>
+            </Fragment>
 
-					<TableEntrevistas dataTable={this.state.entrevistas} />
-
-				</Content>
-			</Container>
-		);
-	}
+        );
+    }
 }
 
-export default ListaEntrevistas;
+export default Entrevistas;
 

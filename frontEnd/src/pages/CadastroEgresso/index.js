@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Helmet } from "react-helmet";
+
+import TitleBar from "../../components/TitleBar";
 
 import {
     Input,
@@ -20,8 +22,8 @@ import ModalAdicionarCurso from './ModalAdicionarCurso';
 import { Container } from "../../styles/BootstrapStyled";
 import { Content } from "../../styles/customGlobalStyled";
 
+const PlusIcon = <FontAwesomeIcon icon={faPlusCircle} />
 
-const plusIcon = <FontAwesomeIcon icon={faPlusCircle} />
 
 
 class CadastroEgresso extends React.Component {
@@ -80,70 +82,76 @@ class CadastroEgresso extends React.Component {
 
     render() {
         return (
-            <Container>
-                <Content>
-                    <Helmet>
-                        <title> Cadastrar Egresso</title>
-                        <meta name="description" content="" />
-                    </Helmet>
+            <Fragment>
 
-                    <h2>Cadastrar Egresso</h2>
+                <TitleBar titulo="Cadastrar/Editar Egresso" descricao="Cadastre ou edite o Egresso" />
+                <Helmet>
+                    <title> Egressos </title>
+                    <meta name="description" content="Cadastre ou edite o Egresso" />
+                </Helmet>
 
-                    <Form onSubmit={this.handleSubmit}>
+                <Container>
+                    <Content>
 
-                        <FormRow>
+                        <h2>Cadastrar Egresso</h2>
 
-                            <FormGroup columnGrid={"col-xl-3 col-lg-3 col-md-5"}>
-                                <label htmlFor="cpf">Nome:</label>
-                                <Input onChange={this.handleChange} id="nome" type="text" placeholder="" />
-                            </FormGroup>
+                        <Form onSubmit={this.handleSubmit}>
 
-                            <FormGroup columnGrid={"col-xl-4 col-lg-4 col-md-7"}>
-                                <label htmlFor="cpf">Sobrenome:</label>
-                                <Input onChange={this.handleChange} id="sobrenome" type="text" placeholder="" />
-                            </FormGroup>
+                            <FormRow>
 
-                            <FormGroup columnGrid={"col-xl-2 col-lg-2 col-md-6"}>
-                                <label htmlFor="cpf">Data Nasc.:</label>
-                                <Input onChange={this.handleChange} id="dataNascimento" type="text" placeholder="" />
-                            </FormGroup>
+                                <FormGroup columnGrid={"col-xl-3 col-lg-3 col-md-5"}>
+                                    <label htmlFor="cpf">Nome:</label>
+                                    <Input onChange={this.handleChange} id="nome" type="text" placeholder="" />
+                                </FormGroup>
 
-                            <FormGroup columnGrid={"col-xl-3 col-lg-3 col-md-6"}>
-                                <label htmlFor="cpf">CPF:</label>
-                                <Input onChange={this.handleChange} id="cpf" type="text" placeholder="" />
-                            </FormGroup>
+                                <FormGroup columnGrid={"col-xl-4 col-lg-4 col-md-7"}>
+                                    <label htmlFor="cpf">Sobrenome:</label>
+                                    <Input onChange={this.handleChange} id="sobrenome" type="text" placeholder="" />
+                                </FormGroup>
 
-                        </FormRow>
+                                <FormGroup columnGrid={"col-xl-2 col-lg-2 col-md-6"}>
+                                    <label htmlFor="cpf">Data Nasc.:</label>
+                                    <Input onChange={this.handleChange} id="dataNascimento" type="text" placeholder="" />
+                                </FormGroup>
 
-                        <FormRow>
+                                <FormGroup columnGrid={"col-xl-3 col-lg-3 col-md-6"}>
+                                    <label htmlFor="cpf">CPF:</label>
+                                    <Input onChange={this.handleChange} id="cpf" type="text" placeholder="" />
+                                </FormGroup>
 
-                            <FormGroup columnGrid={"col-lg-10"}>
-                                <label htmlFor="cpf">Email:</label>
-                                <Input onChange={this.handleChange} id="email" type="text" placeholder="" />
-                            </FormGroup>
+                            </FormRow>
 
-                            <FormGroup columnGrid={"col-lg-2"}>
-                                <label htmlFor="cpf">Tel. Contato:</label>
-                                <Input onChange={this.handleChange} id="celular" type="text" placeholder="" />
-                            </FormGroup>
+                            <FormRow>
 
-                        </FormRow>
-                        <hr />
-                        <FormRow>
-                            <ButtonSuccess href="#modalAdicionarCurso" role="button" data-toggle="modal" > {plusIcon} Inserir Curso</ButtonSuccess>
+                                <FormGroup columnGrid={"col-lg-10"}>
+                                    <label htmlFor="cpf">Email:</label>
+                                    <Input onChange={this.handleChange} id="email" type="text" placeholder="" />
+                                </FormGroup>
 
-                        </FormRow>
-                        <hr />
+                                <FormGroup columnGrid={"col-lg-2"}>
+                                    <label htmlFor="cpf">Tel. Contato:</label>
+                                    <Input onChange={this.handleChange} id="celular" type="text" placeholder="" />
+                                </FormGroup>
 
-                        <TableCourses dataTable={this.state, this.state.cursos} />
+                            </FormRow>
+                            <hr />
+                            <FormRow>
+                                <ButtonSuccess href="#modalAdicionarCurso" role="button" data-toggle="modal" > {PlusIcon} Inserir Curso</ButtonSuccess>
 
-                        <ButtonPrimary>Salvar</ButtonPrimary>
+                            </FormRow>
+                            <hr />
 
-                    </Form>
+                            <TableCourses dataTable={this.state, this.state.cursos} />
 
-                    <ModalAdicionarCurso />
-                </Content>
-            </Container>
+                            <ButtonPrimary>Salvar</ButtonPrimary>
+
+                        </Form>
+
+                        <ModalAdicionarCurso />
+                    </Content>
+                </Container>
+
+            </Fragment>
         );
     }
 }
