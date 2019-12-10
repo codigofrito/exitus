@@ -12,6 +12,7 @@ import { FormGroup, Form } from '../../styles/BootstrapStyled';
 import ModalCriarPergunta from './ModalCriarPergunta';
 import TableQuestions from './TableQuestions';
 import Axios from 'axios';
+import localStorage from 'local-storage';
 
 import { Container } from '../../styles/BootstrapStyled';
 import { Content } from '../../styles/customGlobalStyled';
@@ -19,89 +20,75 @@ import { Content } from '../../styles/customGlobalStyled';
 const plusIcon = <FontAwesomeIcon icon={faPlusCircle} />;
 
 class CadastroEntrevista extends Component {
-
 	constructor(props) {
+		
 		super(props);
 		this.state = {
 			questionSelected: '',
 			modalDisplay: false,
-			perguntas: [
-				{
-					id: 1,
-					id_entrevista: 1,
-					pergunta: 'Teste Pergunta 01',
-					tipo_aternativas: 'Objetiva',
-					created_at: '2019-11-05 00:40:36',
-					updated_at: '2019-11-05 00:40:36',
-					alternativas: [
-						{ id: 1, id_pergunta: 1, alternativa: 'Estou Trabalhando na área', created_at: '2019-11-05 00:40:36', updated_at: '2019-11-05 00:40:36' },
-						{ id: 2, id_pergunta: 1, alternativa: 'Estou desempregado', created_at: '2019-11-05 00:40:36', updated_at: '2019-11-05 00:40:36' },
-						{ id: 3, id_pergunta: 1, alternativa: 'Estou vendendo o meu corpo', created_at: '2019-11-05 00:40:36', updated_at: '2019-11-05 00:40:36' },
-					]
-				},
-				{
-					id: 2,
-					id_entrevista: 1,
-					pergunta: 'Teste Pergunta 02',
-					tipo_aternativas: 'Objetiva/Subjetiva',
-					created_at: '2019-11-05 00:40:36',
-					updated_at: '2019-11-05 00:40:36',
-					alternativas: [
-						{ id: 4, id_pergunta: 1, alternativa: 'Estou Trabalhando na área', created_at: '2019-11-05 00:40:36', updated_at: '2019-11-05 00:40:36' },
-						{ id: 5, id_pergunta: 1, alternativa: 'Estou desempregado', created_at: '2019-11-05 00:40:36', updated_at: '2019-11-05 00:40:36' },
-						{ id: 6, id_pergunta: 1, alternativa: 'Estou vendendo o meu corpo', created_at: '2019-11-05 00:40:36', updated_at: '2019-11-05 00:40:36' },
-						{ id: 7, id_pergunta: 1, alternativa: 'Estou vendendo o meu corpo', created_at: '2019-11-05 00:40:36', updated_at: '2019-11-05 00:40:36' },
-					]
-				},
-				{
-					id: 3,
-					id_entrevista: 1,
-					pergunta: 'Teste Pergunta 03',
-					tipo_aternativas: 'Objetiva/Subjetiva',
-					created_at: '2019-11-05 00:40:36',
-					updated_at: '2019-11-05 00:40:36',
-					alternativas: [
-						{ id: 8, id_pergunta: 1, alternativa: 'Estou Trabalhando na área', created_at: '2019-11-05 00:40:36', updated_at: '2019-11-05 00:40:36' },
-						{ id: 9, id_pergunta: 1, alternativa: 'Estou desempregado', created_at: '2019-11-05 00:40:36', updated_at: '2019-11-05 00:40:36' },
-					]
-				},
-				{
-					id: 4,
-					id_entrevista: 1,
-					pergunta: 'Teste Pergunta 04',
-					tipo_aternativas: 'Subjetiva',
-					created_at: '2019-11-05 00:40:36',
-					updated_at: '2019-11-05 00:40:36',
-					alternativas: [
-						{ id: 10, id_pergunta: 1, alternativa: 'Estou Trabalhando na área', created_at: '2019-11-05 00:40:36', updated_at: '2019-11-05 00:40:36' },
-					]
-				},
-			]
+			perguntas: []
 		};
 
 		this.handleQuestionSelected = this.handleQuestionSelected.bind(this);
 		this.handleFieldChange = this.handleFieldChange.bind(this);
-		this.handleModalDisplayingChange = this.handleModalDisplayingChange.bind(this);
+		this.handleModalDisplayingChange = this.handleModalDisplayingChange.bind(
+			this
+		);
+		this.handleNewQuestion = this.handleNewQuestion.bind(this);
+		this.handleSaveInterview = this.handleSaveInterview.bind(this);
+	}
+
+	async handleSaveInterview(event) {
+		event.preventDefault();
+		await Axios.post(
+			'http://localhost:3001/register/interview',
+			{
+				cpf_moderador: localStorage.get('user').cpf,
+				titulo: this.state.interviewTitle,
+				descricao: this.state.interviewDescription,
+				perguntas: this.state.perguntas.map(pergunta => {
+					return pergunta.pergunta;
+				}),
+				alternativas: this.state.perguntas.map(pergunta => {
+					return pergunta.alternativas;
+				})
+			},
+			{ headers: { token: `bearer ${localStorage.get('TOKEN_KEY')}` } }
+		);
+	}
+
+	handleNewQuestion(newQuestion) {
+		const Question = {
+			pergunta: '',
+			alternativas: []
+		};
+		newQuestion.forEach((element, index) => {
+			if (index == 0) {
+				Question.pergunta = element.value;
+			} else {
+				if (element.value && element.value !== '') {
+					Question.alternativas.push(element.value);
+				}
+			}
+		});
+
+		this.state.perguntas.push(Question);
+		this.setState({ perguntas: this.state.perguntas });
 	}
 
 	handleQuestionSelected(id) {
-		Axios.post('http://localhost:3001/find/question', { id: id }).then(result => {
-			if (result.data.resultado) {
-				this.setState({ questionSelected: result.data.resultado });
-				this.setState({ editingQuestion: true });
-				this.setState({ modalDisplay: true});
-			}
-		});
+		this.setState({ questionSelected: this.state.perguntas[id] });
+		this.setState({ modalDisplay: true });
 	}
 
 	handleFieldChange(event) {
 		this.setState(JSON.parse(`{"${event.target.id}":"${event.target.value}"}`));
 	}
 
-	handleModalDisplayingChange (displayStatus) {
-		this.setState({modalDisplay: displayStatus});
-		if(!displayStatus) {
-			this.setState({questionSelected: ''});
+	handleModalDisplayingChange(displayStatus) {
+		this.setState({ modalDisplay: displayStatus });
+		if (!displayStatus) {
+			this.setState({ questionSelected: '' });
 		}
 	}
 
@@ -143,7 +130,7 @@ class CadastroEntrevista extends Component {
 									onChange={this.handleFieldChange}
 									value={this.state.interviewDescription}
 									className="form-control"
-									id="descricaoEntrevista"
+									id="interviewDescription"
 									placeholder="Digite uma breve descrição para a entrevista"
 									rows="2"
 								></textarea>
@@ -153,7 +140,7 @@ class CadastroEntrevista extends Component {
 
 							<FormGroup>
 								<a
-									onClick={()=> {
+									onClick={() => {
 										this.handleModalDisplayingChange(true);
 									}}
 									className="btn btn-success"
@@ -175,7 +162,11 @@ class CadastroEntrevista extends Component {
 							<br />
 
 							<FormGroup>
-								<button type="submit" className="btn btn-primary">
+								<button
+									type="button"
+									className="btn btn-primary"
+									onClick={this.handleSaveInterview}
+								>
                   Salvar Entrevista
 								</button>
 							</FormGroup>
@@ -183,6 +174,7 @@ class CadastroEntrevista extends Component {
 
 						<ModalCriarPergunta
 							question={this.state.questionSelected}
+							createQuestion={this.handleNewQuestion}
 							setModalDisplaying={this.handleModalDisplayingChange}
 							display={this.state.modalDisplay}
 						/>

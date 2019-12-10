@@ -50,29 +50,32 @@ module.exports = {
 	},
 
 	async store(request, response) {
-		const { id_pergunta, alternativa, objetiva } = request.body;
+		const { id_pergunta, alternativas, objetiva } = request.body;
 
-		await Alternativa.create({
-			id_pergunta,
-			alternativa,
-			objetiva,
+		alternativas.forEach(async alternativa => {
+			await Alternativa.create({
+				id_pergunta,
+				alternativa,
+				objetiva,
 
-		}).then((resultado) => {
+			}).then((resultado) => {
 
-			return response.status(200).json({
-				resultado,
-				messagem: Mensagem.sucesso,
-				return: true
-			});
+				return response.status(200).json({
+					resultado,
+					messagem: Mensagem.sucesso,
+					return: true
+				});
 
-		}).catch(() => {
+			}).catch(() => {
 			
-			return response.status(400).json({
-				resultado: [],
-				mensagem: Mensagem.falha,
-				return: false
+				return response.status(400).json({
+					resultado: [],
+					mensagem: Mensagem.falha,
+					return: false
+				});
 			});
 		});
+		
 	},
 
 	async destroy(request, response) {

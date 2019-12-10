@@ -43,9 +43,10 @@ class TableQuestions extends Component {
 								<Fragment>
 									<TableRowClicable 
 										key={index} 
-										onClick={() => {this.props.setQuestionSelected(question.id);}}
+										onClick={() => {this.props.setQuestionSelected(index);}}
 										data-toggle="modal"
 										href="#modalCriarPergunta"
+										alternativas={question.alternativas}
 									>
 										<TableColumnCentered 
 											columnGrid="col-sm-1">{index + 1}

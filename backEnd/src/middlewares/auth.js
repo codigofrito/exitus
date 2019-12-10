@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const {secretEgress, secretModerator} = require('../config/auth.json');
+const {secret} = require('../config/auth.json');
 module.exports = {
     
 	egresso : (request, response, next) => {
@@ -17,7 +17,7 @@ module.exports = {
 		if(!/^Bearer$/i.test(scheme))
 			return response.status(401).json({mensagem_autenticacao: 'Token mal formatado', return: false});
         
-		jwt.verify(token, secretEgress, (err, decoded) => {
+		jwt.verify(token, secret, (err, decoded) => {
 			if (err) return response.status(401).json({mensagem_autenticacao: 'Token inválido', return: false});
             
 			request.id = decoded.cpf;
@@ -40,7 +40,7 @@ module.exports = {
 		if(!/^Bearer$/i.test(scheme))
 			return response.status(401).json({mensagem_autenticacao: 'Token mal formatado', return: false});
         
-		jwt.verify(token, secretModerator, (err, decoded) => {
+		jwt.verify(token, secret, (err, decoded) => {
 			if (err) return response.status(401).json({mensagem_autenticacao: 'Token inválido', return: false});
             
 			request.id = decoded.cpf;

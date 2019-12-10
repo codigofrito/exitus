@@ -47,26 +47,29 @@ module.exports = {
 	},
 
 	async store(request, response) {
-		const { id_entrevista, pergunta } = request.body;
+		const { id_entrevista, perguntas } = request.body;
+		
+		perguntas.forEach(async pergunta => {
+			await Pergunta.create({
+				id_entrevista,
+				pergunta,
+			}).then((resultado) => {
 
-		await Pergunta.create({
-			id_entrevista,
-			pergunta,
-		}).then((resultado) => {
+				return response.status(200).json({
+					resultado,
+					mensagem: Mensagem.sucesso,
+					return: true
+				});
+			}).catch(() => {
 
-			return response.status(200).json({
-				resultado,
-				mensagem: Mensagem.sucesso,
-				return: true
-			});
-		}).catch(() => {
-
-			return response.status(403).json({
-				resultado: [],
-				mensagem: Mensagem.falha,
-				return: false
+				return response.status(403).json({
+					resultado: [],
+					mensagem: Mensagem.falha,
+					return: false
+				});
 			});
 		});
+		
 	},
 
 	async destroy(request, response) {

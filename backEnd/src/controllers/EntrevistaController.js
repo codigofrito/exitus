@@ -1,4 +1,7 @@
 const Entrevista = require('../models').entrevista;
+const Alternativa = require('../models').alternativa;
+const Pergunta = require('../models').pergunta;
+
 const Mensagem = require('./mensagem');
 
 module.exports = {
@@ -25,7 +28,6 @@ module.exports = {
 
 	async show(request, response) {
 		const { id } = request.body;
-		console.log(request.body);
 		await Entrevista.findOne({
 			where: { id },
 			raw: true
@@ -36,7 +38,6 @@ module.exports = {
 				return: resultado !== null ? true : false
 			});
 		}).catch((err) => {
-			console.log(err);
 			return response.status(400).json({
 				resultado: [],
 				mensagem: Mensagem.falha,
@@ -46,21 +47,37 @@ module.exports = {
 	},
 
 	async store(request, response) {
-		const { cpf_moderador, titulo, descricao } = request.body;
+		const { 
+			cpf_moderador,
+			titulo,
+			descricao,
+			perguntas,
+			alternativas } = request.body;
 
 		await Entrevista.create({
 			cpf_moderador,
 			titulo,
 			descricao,
 		}).then((resultado) => {
-
-			return response.status(200).json({
-				resultado,
-				mensagem: Mensagem.sucesso,
-				return: true
+			perguntas.forEach(async (pergunta, index) => {
+				await Pergunta.create({
+					id_entrevista: resultado.id,
+					pergunta
+				}).then(async resultado => {
+					await alternativas[index].forEach(async alternativa => {
+						await Alternativa.create({
+							id_pergunta: resultado.id,
+							alternativa
+						});
+					});
+					return response.status(200).json({
+						mensagem: Mensagem.sucesso,
+						return: true
+					});
+				});
 			});
+			
 		}).catch(() => {
-
 			return response.status(400).json({
 				resultado: [],
 				mensagem: Mensagem.falha,

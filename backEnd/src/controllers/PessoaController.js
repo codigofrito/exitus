@@ -73,7 +73,6 @@ module.exports = {
 			email,
 			celular
 		}).then((resultado) => {
-
 			return response.status(200).json({
 				resultado,
 				mensagem: Mensagem.sucesso,

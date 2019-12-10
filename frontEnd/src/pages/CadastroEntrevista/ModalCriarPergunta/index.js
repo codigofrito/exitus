@@ -24,10 +24,10 @@ class ModalCriarPergunta extends React.Component {
 		super(props);
 		this.state = {
 			pergunta: '',
-			alternativas: [],
 			display: false
 		};
 		this.handleTitleChange = this.handleTitleChange.bind(this);
+		this.handleCreateQuestion = this.handleCreateQuestion.bind(this);
 
 	}
 
@@ -35,6 +35,11 @@ class ModalCriarPergunta extends React.Component {
 		this.setState({ pergunta: event.target.value });
 	}
 
+	handleCreateQuestion() { 
+		this.props.createQuestion(
+			document.querySelectorAll('.create-question-field')
+		);
+	}
 
 	componentDidUpdate() {
 		if(this.state.display !== this.props.display) {
@@ -47,7 +52,6 @@ class ModalCriarPergunta extends React.Component {
 				console.log('CLOSING');
 				this.setState({
 					pergunta: '',
-					alternativas: []
 				});
 			} else {
 				this.setState({
@@ -79,12 +83,13 @@ class ModalCriarPergunta extends React.Component {
 							</ButtonCloseModal>
 						</ModalHeader>
 						<ModalBody>
-							<Form id="modalLoginForm">
+							<Form id="modalCriarPergunta">
 								<FormGroup>
 									<label htmlFor="pergunta">Pergunta</label>
 									<Textarea
+										id="question-field"
 										value={this.state.pergunta}
-										className="questions-modal-field"
+										className="questions-modal-field create-question-field"
 										placeholder="Insira o texto da pergunta."
 										rows="2"
 										onChange={this.handleTitleChange}
@@ -93,47 +98,46 @@ class ModalCriarPergunta extends React.Component {
 
 								<FormGroup>
 									<Textarea
-										id={'alternativa-' + ++quantidadeAlternativas}
+										id="alternative-field-0"
+										className="create-question-field"
 										placeholder="Insira o texto da alternativa"
 										rows="1"
-										disabled
 									></Textarea>
 								</FormGroup>
 
 								<FormGroup>
 									<Textarea
-										id={'alternativa-' + ++quantidadeAlternativas}
+										id="alternative-field-1"
+										className="create-question-field"
 										placeholder="Insira o texto da alternativa"
 										rows="1"
-										disabled
 									></Textarea>
 								</FormGroup>
 
 								<FormGroup>
 									<Textarea
-										id={'alternativa-' + ++quantidadeAlternativas}
+										id="alternative-field-2"
+										className="create-question-field"
 										placeholder="Insira o texto da alternativa"
 										rows="1"
-										disabled
 									></Textarea>
 								</FormGroup>
 
 								<FormGroup>
 									<Textarea
-										id={'alternativa-' + ++quantidadeAlternativas}
+										id="alternative-field-3"
+										className="create-question-field"
 										placeholder="Insira o texto da alternativa"
 										rows="1"
-										disabled
 									></Textarea>
 								</FormGroup>
 
 								<FormGroup>
 									<Textarea
-										className="form-control objetiva"
-										id={'alternativa-' + ++quantidadeAlternativas}
+										className="create-question-field"
+										id="alternative-field-4"
 										placeholder="Insira o texto da alternativa"
 										rows="1"
-										disabled
 									></Textarea>
 								</FormGroup>
 							</Form>
@@ -149,7 +153,13 @@ class ModalCriarPergunta extends React.Component {
 							>
                 Cancelar
 							</ButtonPrimary>
-							<ButtonSecondary type="button">Salvar Pergunta</ButtonSecondary>
+
+							<ButtonSecondary
+								type="button"
+								onClick={this.handleCreateQuestion}
+							>
+                Criar pergunta
+							</ButtonSecondary>
 						</ModalFooter>
 					</ModalContent>
 				</ModalDialogMedium>
