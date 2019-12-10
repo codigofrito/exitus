@@ -13,10 +13,7 @@ import {
 } from '../../../styles/BootstrapStyled';
 
 class TableQuestions extends Component {
-	constructor (props) {
-		super(props);
-	}
-
+	
 	render() {
 		return (
 			<div>

@@ -4,8 +4,6 @@ import Authenticate from '../../../auth';
 
 import { NavbarCollapse, NavbarItem, NavbarNavigation, NavLink, Row } from '../../../styles/BootstrapStyled';
 
-import { Link } from 'react-router-dom';
-
 function AuthenticatedMenu() {
 
 	return (

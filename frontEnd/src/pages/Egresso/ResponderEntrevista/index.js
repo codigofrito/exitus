@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Helmet } from "react-helmet";
 
-
-import { Container, Row } from "../../../styles/BootstrapStyled";
+import { Container } from "../../../styles/BootstrapStyled";
 import { Content } from "../../../styles/customGlobalStyled";
 
 
