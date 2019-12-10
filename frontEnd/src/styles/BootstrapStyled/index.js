@@ -20,7 +20,9 @@ export const NavbarToggler = styled.div.attrs(props => ({
 
 export const NavbarCollapse = styled.div.attrs(props => ({
   className: "navbar-collapse collapse"
-}))``;
+}))`
+  align-items: center;
+`;
 
 export const NavbarNavigation = styled.ul.attrs(props => ({
   className: "navbar-nav mr-auto"

@@ -43,7 +43,7 @@ class HomeEgresso extends Component {
                                 fontColor="#fff"
                                 backgroundColor="#2092ed"
                                 backgroundImage={EntrevistaImg}
-                                location="/Entrevistas"
+                                location="/ResponderEntrevista"
                             />
 
                             <NavigationCard
@@ -52,7 +52,7 @@ class HomeEgresso extends Component {
                                 fontColor="#fff"
                                 backgroundColor="#6f95b4"
                                 backgroundImage={HistoricoImg}
-                                location="/Historico"
+                                location="/MeuHistorico"
                             />
 
                         </Row>
