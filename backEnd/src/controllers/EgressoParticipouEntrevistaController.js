@@ -15,8 +15,8 @@ module.exports = {
 				return: resultado.length != 0 ? true : false
 			});
 
-		}).catch(() => {
-
+		}).catch((err) => {
+			console.log("sdsd" + err)
 			return response.status(400).json({
 				resultado: [],
 				mensagem: Mensagem.falha,
