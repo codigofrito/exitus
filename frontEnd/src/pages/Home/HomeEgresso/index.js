@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Helmet } from "react-helmet";
+import Authenticate from '../../../auth';
+
 
 import { Container, Row } from "../../../styles/BootstrapStyled";
 import { Content } from "../../../styles/customGlobalStyled";
@@ -17,8 +19,8 @@ class HomeEgresso extends Component {
         super(props);
         this.state = {
             tituloAba : "Início - Egresso",
-            tituloBarra : "Bem-vindo(a), Egresso!",
-            descricaoPagina : "Página Inicial do Sistema de Egressos Exitus"
+            tituloBarra : "Bem-vindo(a), " + JSON.parse(Authenticate.User()).nome.toUpperCase(),
+            descricaoPagina : "Aqui você terá acesso às principais funcionalidades do nosso sistema."
         }
     }
 

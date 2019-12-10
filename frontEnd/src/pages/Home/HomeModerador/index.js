@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Helmet } from "react-helmet";
+import Authenticate from '../../../auth';
+
 
 import { Container, Row } from "../../../styles/BootstrapStyled";
 import { Content } from "../../../styles/customGlobalStyled";
@@ -18,7 +20,7 @@ class HomeModerador extends Component {
         super(props);
         this.state = {
             tituloAba : "Início - Moderador",
-            tituloBarra : "Bem-vindo(a), Moderador!",
+            tituloBarra : "Bem-vindo(a), " + JSON.parse(Authenticate.User()).nome.toUpperCase(),
             descricaoPagina : "Aqui você terá acesso às principais funcionalidades do nosso sistema"
         }
     }
@@ -38,7 +40,7 @@ class HomeModerador extends Component {
                     <Content>
                         <Row>
                             <NavigationCard
-                                tituloCard="Egressos"
+                                tituloCard="Gerencie Egressos"
                                 descricaoCard="Insira, edite e monitore informações dos egressos"
                                 fontColor="#fff"
                                 backgroundColor="#0d6cb8"
@@ -47,7 +49,7 @@ class HomeModerador extends Component {
                             />
 
                             <NavigationCard
-                                tituloCard="Entrevistas"
+                                tituloCard="Gerencie Entrevistas"
                                 descricaoCard="Crie Entrevistas, insira novas perguntas e envie para os egressos."
                                 fontColor="#fff"
                                 backgroundColor="#2092ed"
