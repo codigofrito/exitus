@@ -22,11 +22,11 @@ export const NavbarCollapse = styled.div.attrs(props => ({
   className: "navbar-collapse collapse"
 }))``;
 
-export const NavbarNavigation = styled.div.attrs(props => ({
+export const NavbarNavigation = styled.ul.attrs(props => ({
   className: "navbar-nav mr-auto"
 }))``;
 
-export const NavbarItem = styled.div.attrs(props => ({
+export const NavbarItem = styled.li.attrs(props => ({
   className: "nav-item"
 }))`
     margin-top: 11px;
@@ -44,9 +44,11 @@ export const NavbarItem = styled.div.attrs(props => ({
     }
 `;
 
-export const NavLink = styled.div.attrs(props => ({
+export const NavLink = styled(Link).attrs(props => ({
   className: "nav-link"
-}))``;
+}))`
+
+`;
 
 
 

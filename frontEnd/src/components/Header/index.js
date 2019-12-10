@@ -9,10 +9,11 @@ import { Container, Navbar, NavbarBrand, NavbarToggler } from '../../styles/Boot
 
 import { Link } from 'react-router-dom';
 
-import { AppHeader } from './styles';
+import { AppHeader, Logo } from './styles';
 
-import AuthenticatedMenu from './AuthenticatedMenu';
-import UnauthenticatedMenu from './UnauthenticatedMenu';
+import MenuModerador from './MenuModerador';
+import MenuEgresso from './MenuEgresso';
+import MenuPublico from './MenuPublico';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
@@ -20,8 +21,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 const MenuIcon = <FontAwesomeIcon icon={faBars} />
 
-const Menu = () => { return isAuthenticated() ? (<AuthenticatedMenu />) : (<UnauthenticatedMenu />); };
-
+const Menu = () => { return isAuthenticated() ? (<MenuEgresso />) : (<MenuPublico />); };
 
 class Header extends React.Component {
 	constructor(props) {
@@ -47,7 +47,7 @@ class Header extends React.Component {
 				<Container>
 					<Navbar>
 						<NavbarBrand>
-							<Link to="/"><img src={logo} height="45" alt="Exitus" id="logo" draggable="false" /></Link>
+							<Link to="/"><Logo src={logo} height="45" alt="Exitus" id="logo" draggable="false" /></Link>
 						</NavbarBrand>
 						<NavbarToggler type="button" data-toggle="collapse" data-target="#navbarCollapse">
 							{MenuIcon}

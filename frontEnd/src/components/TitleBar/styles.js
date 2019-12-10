@@ -5,7 +5,7 @@ export const Ondas = styled.img.attrs(props => ({
 }))`
     position: absolute;
     bottom: 0px;
-    width: 100%
+    width: 100%;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;

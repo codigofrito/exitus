@@ -12,6 +12,7 @@
     "jquery": "^3.4.1",
     "local-storage": "^2.0.0",
     "mdbreact": "^4.23.0",
+    "polished": "^3.4.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-gesture-gallery": "^1.1.0",
