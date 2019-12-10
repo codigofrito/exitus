@@ -55,7 +55,7 @@ class ModalLogin extends React.Component {
 				setCurrentUser(result.data.user);
 			})
 			.catch(err => {
-				
+				console.log(err);
 			});
 	}
 

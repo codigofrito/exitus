@@ -52,7 +52,7 @@ class HomeModerador extends Component {
                                 fontColor="#fff"
                                 backgroundColor="#2092ed"
                                 backgroundImage={EntrevistaImg}
-                                location="/Historico"
+                                location="/Entrevistas"
                             />
 
                             <NavigationCard

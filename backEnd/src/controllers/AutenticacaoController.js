@@ -10,7 +10,7 @@ module.exports = {
 
 	authenticate: async (request, response) => {
 		const { cpf, password: senha } = request.body;
-		console.log(request.body);
+
 		let userType;
 		const registro = { 
 			user: await moderador.findOne({
@@ -31,7 +31,7 @@ module.exports = {
 			type: userType,
 		};
 		if (registro.user !== null) {
-			console.log(senha);
+
 			bcrypt.compare(senha.toString(), registro.user.senha).then(async (auth) => {
 				if (auth) {
 
@@ -48,7 +48,7 @@ module.exports = {
 							where:{cpf},
 							raw:true
 						});
-					console.log(user);
+					user.type = registro.type;
 
 					return response.status(200).json({ user, token, return : auth});
 
@@ -59,7 +59,6 @@ module.exports = {
 			});
 
 		} else {
-
 			return response.status(400).json(request.body);
 
 		}
