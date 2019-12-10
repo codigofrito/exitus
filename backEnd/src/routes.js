@@ -70,7 +70,7 @@ routes.put('/update/interview', autenticacao.moderador, EntrevistaController.upd
 //=== === ===PerguntaController.js Routes=== === ===//
 routes.post('/register/question', autenticacao.moderador, PerguntaController.store);
 routes.post('/questions', PerguntaController.index);
-routes.get('/find/question', PerguntaController.show);
+routes.post('/find/question', PerguntaController.show);
 routes.delete('/remove/question', autenticacao.moderador, PerguntaController.destroy);
 routes.put('/update/question', autenticacao.moderador, PerguntaController.update);
 //=== === ===----------------------------=== === ===//

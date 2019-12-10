@@ -28,18 +28,16 @@ module.exports = {
 	async show(request, response) {
 		const { id } = request.body;
 
-		await Pergunta.findAll({
+		await Pergunta.findOne({
 			where: { id },
 			raw: true
 		}).then((resultado) => {
-
 			return response.status(200).json({
 				resultado,
 				mensagem: Mensagem.sucesso,
 				return: resultado !== null ? true : false
 			});
 		}).catch(() => {
-
 			return response.status(400).json({
 				resultado: [],
 				mensagem: Mensagem.falha,
