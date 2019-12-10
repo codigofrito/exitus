@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import { Container, Row } from "../../../styles/BootstrapStyled";
 import { Content } from "../../../styles/customGlobalStyled";
 
-import NavigationCard from "../../../components/NavegationCard"
+import NavigationCard from "../../../components/NavigationCard"
 
 import EntrevistaImg from "../../../assets/icones/entrevista.png"
 import EgressoImg from "../../../assets/icones/egresso.png"
@@ -19,7 +19,7 @@ class HomeModerador extends Component {
         this.state = {
             tituloAba : "Início - Moderador",
             tituloBarra : "Bem-vindo(a), Moderador!",
-            descricaoPagina : "Página Inicial do Sistema de Egressos Exitus"
+            descricaoPagina : "Aqui você terá acesso às principais funcionalidades do nosso sistema"
         }
     }
 

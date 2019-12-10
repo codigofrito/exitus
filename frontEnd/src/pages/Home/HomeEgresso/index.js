@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import { Container, Row } from "../../../styles/BootstrapStyled";
 import { Content } from "../../../styles/customGlobalStyled";
 
-import NavigationCard from "../../../components/NavegationCard"
+import NavigationCard from "../../../components/NavigationCard"
 
 import EntrevistaImg from "../../../assets/icones/entrevista.png"
 import HistoricoImg from "../../../assets/icones/historico.png"

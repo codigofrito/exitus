@@ -202,6 +202,10 @@ export const TableColumnHeaderCentered = styled.th.attrs(props => ({
     background: ${props => props.theme.primaryColor};     
 `;
 
+export const Div = styled.div.attrs(props => ({
+  className: props.columnGrid
+}))``;
+
 export const TableHead = styled.thead.attrs(props => ({
   className: "thead"
 }))``;
@@ -214,13 +218,52 @@ export const Textarea = styled.textarea.attrs(props => ({
   className: "form-control"
 }))``;
 
-export const CardBody = styled.div.attrs(props => ({
+export const CardBodyRight = styled.div.attrs(props => ({
   className: "card-body d-flex align-items-end flex-column text-right"
 }))``;
+
+export const Card = styled.div.attrs(props => ({
+  className: "card h-100"
+}))``;
+
+export const CardBody = styled.div.attrs(props => ({
+  className: "card-body"
+}))``;
+
+export const CardTitle = styled.h2.attrs(props => ({
+  className: "card-title"
+}))``;
+
+export const CardFooter = styled.div.attrs(props => ({
+  className: "card-footer"
+}))``;
+
+
+export const PrimaryColorCard = styled.div.attrs(props => ({
+  className: "card text-white my-5 py-4 text-center"
+}))`
+    background: ${props => props.theme.primaryColor};  
+`;
 
 export const Row = styled.div.attrs(props => ({
   className: "row"
 }))``;
+
+export const CenteredRow = styled.div.attrs(props => ({
+  className: "row align-items-center my-5"
+}))``;
+
+export const Paragraph = styled.p.attrs(props => ({
+  className: "lead",
+  align: "justify"
+}))``;
+
+export const H1Light = styled.h1.attrs(props => ({
+  className: "font-weight-light",
+}))``;
+
+
+
 
 
 
