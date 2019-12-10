@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 
-import { isAuthenticated } from '../../auth';
+import Authenticate from '../../auth';
 
-import HomePublico from "./HomePublico"
-import HomeModerador from "./HomeModerador"
-import HomeEgresso from "./HomeEgresso"
+import HomePublico from './HomePublico';
+import HomeModerador from './HomeModerador';
+import HomeEgresso from './HomeEgresso';
 
 
-const HomeAtual = () => { return isAuthenticated() ? (<HomeModerador/>) : (<HomePublico/>); };
+const HomeAtual = () => { return Authenticate.isAuthenticated() 
+	? (Authenticate.UserType() == 'moderator'? (<HomeModerador/>) : (<HomePublico/>)) 
+	: (<HomePublico/>);
+};
 
 class Home extends Component {
 
-    render(){
-        return (
-            <HomeAtual/>
-        );
-    }
+	render(){
+		return (
+			<HomeAtual/>
+		);
+	}
 }
 
 export default Home;

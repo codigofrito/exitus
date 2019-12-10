@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { logout, getCurrentUser } from '../../../auth';
+import 	Authenticate from '../../../auth';
 
 import { NavbarCollapse, NavbarItem, NavbarNavigation, NavLink } from '../../../styles/BootstrapStyled';
 
@@ -24,10 +24,10 @@ function AuthenticatedMenu() {
 					<NavLink to="/relatorios">Relatórios</NavLink>
 				</NavbarItem>
 				<NavbarItem>
-					<NavLink onClick={() => logout()}>Sair</NavLink>
+					<NavLink onClick={() => Authenticate.Logout()}>Sair</NavLink>
 				</NavbarItem>
 			</NavbarNavigation>
-			<label> {JSON.parse(getCurrentUser()).nome.toUpperCase() + ' ' + JSON.parse(getCurrentUser()).sobrenome.toUpperCase()} </label>
+			<label> {JSON.parse(Authenticate.User()).nome.toUpperCase() + ' ' + JSON.parse(Authenticate.User()).sobrenome.toUpperCase()} </label>
 		</NavbarCollapse>
 	);
 }

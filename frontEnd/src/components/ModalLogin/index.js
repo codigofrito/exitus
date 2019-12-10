@@ -1,7 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 
-import { login, setCurrentUser } from '../../auth';
+import Authenticate from '../../auth';
 
 
 import {
@@ -51,8 +51,8 @@ class ModalLogin extends React.Component {
 		event.preventDefault();
 		Axios.post('http://localhost:3001/auth', this.state)
 			.then((result) => {
-				login(result.data.token);
-				setCurrentUser(result.data.user);
+				Authenticate.Login(result.data.token);
+				Authenticate.setCurrentUser(result.data.user);
 			})
 			.catch(err => {
 				console.log(err);

@@ -1,11 +1,19 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { isAuthenticated } from '../../auth';
+import Authenticate from '../../auth';
 
 export const PrivateRoute = ({ component: Component, ...rest }) => (
-
-    <Route {...rest} render={
-        props => isAuthenticated() ? ( <Component {...props} />) : <Redirect to={{ pathname: '/', state: { from: props.localtion } }} />
-    } />
-
-)
+	<Route
+		{...rest}
+		render={props =>
+			Authenticate.isAuthenticated() 
+				? (
+					Authenticate.UserType() == 'moderator' 
+						? <Component {...props} />
+				        :<Redirect to={{ pathname: '/', state: { from: props.localtion } }} />
+				) : (
+					<Redirect to={{ pathname: '/', state: { from: props.localtion } }} />
+				)
+		}
+	/>
+);

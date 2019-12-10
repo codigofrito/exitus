@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { isAuthenticated } from '../../auth';
+import Authenticate from '../../auth';
 
 import logo from '../../assets/logo-exteded-v1.svg';
 import ModalLogin from '../ModalLogin';
@@ -21,7 +21,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 const MenuIcon = <FontAwesomeIcon icon={faBars} />
 
-const Menu = () => { return isAuthenticated() ? (<MenuEgresso />) : (<MenuPublico />); };
+const Menu = () => { return Authenticate.isAuthenticated() ? (<MenuEgresso />) : (<MenuPublico />); };
 
 class Header extends React.Component {
 	constructor(props) {
