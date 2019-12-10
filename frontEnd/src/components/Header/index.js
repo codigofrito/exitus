@@ -18,7 +18,6 @@ import MenuPublico from './MenuPublico';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 
-
 const MenuIcon = <FontAwesomeIcon icon={faBars} />
 
 const Menu = () => { return Authenticate.isAuthenticated() ? (<MenuEgresso />) : (<MenuPublico />); };

@@ -8,7 +8,7 @@ import HomeEgresso from './HomeEgresso';
 
 
 const HomeAtual = () => { return Authenticate.isAuthenticated() 
-	? (Authenticate.UserType() == 'moderator'? (<HomeModerador/>) : (<HomePublico/>)) 
+	? (Authenticate.UserType() == 'moderator'? (<HomeModerador/>) : (<HomeEgresso/>))
 	: (<HomePublico/>);
 };
 

@@ -11,9 +11,6 @@ import { BgImageBox, Ondas, Titulo, Descricao } from "./styles";
 
 class TitleBar extends Component {
 
-    constructor(props) {
-        super(props);
-    }
     render() {
         return (
             <Fragment>

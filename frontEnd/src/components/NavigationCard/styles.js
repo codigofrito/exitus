@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { darken, lighten } from 'polished';
+import { darken } from 'polished';
 import { Link } from 'react-router-dom';
 
 export const ColumnCard = styled.div.attrs(props => ({
-    className: "col-lg-4 col-md-8 mb-5 mb-lg-12 mx-auto"
+    className: "col-lg-4 col-md-12 mb-5 mb-lg-12 mx-auto"
 }))``;
 
 

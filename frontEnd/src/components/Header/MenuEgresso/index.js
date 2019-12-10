@@ -2,9 +2,7 @@ import React from 'react';
 
 import Authenticate from '../../../auth';
 
-import { NavbarCollapse, NavbarItem, NavbarNavigation, NavLink } from '../../../styles/BootstrapStyled';
-
-import { Link } from 'react-router-dom';
+import { NavbarCollapse, NavbarItem, NavbarNavigation, NavLink, Row } from '../../../styles/BootstrapStyled';
 
 function AuthenticatedMenu() {
 
@@ -13,15 +11,22 @@ function AuthenticatedMenu() {
 			<NavbarNavigation>
 				<NavbarItem>
 					<NavLink to="/">Inicio</NavLink>
-				</NavbarItem>			
+				</NavbarItem>
 				<NavbarItem>
 					<NavLink to="/responderEntrevistas">Entrevistas</NavLink>
-				</NavbarItem>				
+				</NavbarItem>
 				<NavbarItem>
 					<NavLink onClick={() => Authenticate.Logout()}>Sair</NavLink>
 				</NavbarItem>
 			</NavbarNavigation>
-			<label> {JSON.parse(Authenticate.User()).nome.toUpperCase() + ' ' + JSON.parse(Authenticate.User()).sobrenome.toUpperCase()} </label>
+			<div>
+				<Row>
+				<label className="hidden-lg-only">
+					{JSON.parse(Authenticate.User()).nome.toUpperCase() + ' ' + JSON.parse(Authenticate.User()).sobrenome.toUpperCase()}
+				</label>
+				</Row>			
+				
+			</div>
 		</NavbarCollapse>
 	);
 }

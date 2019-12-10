@@ -7,8 +7,6 @@ import TitleBar from "../../components/TitleBar";
 import { Container } from "../../styles/BootstrapStyled";
 import { Content } from "../../styles/customGlobalStyled";
 
-
-
 class Egressos extends Component {
 
     render() {

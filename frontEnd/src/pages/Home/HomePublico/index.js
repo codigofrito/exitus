@@ -4,7 +4,6 @@ import BannerRotativo from "../BannerRotativo";
 
 import {
     Container,
-    Paragraph,
     Div,
     CenteredRow,
     PrimaryColorCard,
