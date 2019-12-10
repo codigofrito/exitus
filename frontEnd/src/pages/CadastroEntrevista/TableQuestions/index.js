@@ -15,11 +15,6 @@ import {
 class TableQuestions extends Component {
 	constructor (props) {
 		super(props);
-		this.handleSelectQuestion = this.handleSelectQuestion.bind(this);
-	}
-
-	handleSelectQuestion (idQuestion) {
-		this.props.setQuestionSelected(idQuestion);
 	}
 
 	render() {
@@ -48,7 +43,7 @@ class TableQuestions extends Component {
 								<Fragment>
 									<TableRowClicable 
 										key={index} 
-										onClick={() => {this.handleSelectQuestion(question.id);}}
+										onClick={() => {this.props.setQuestionSelected(question.id);}}
 										data-toggle="modal"
 										href="#modalCriarPergunta"
 									>

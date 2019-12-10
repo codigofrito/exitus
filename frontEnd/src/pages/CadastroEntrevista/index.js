@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet';
 
 
-import TitleBar from "../../components/TitleBar";
+import TitleBar from '../../components/TitleBar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
@@ -23,8 +23,6 @@ class CadastroEntrevista extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			interviewTitle: '',
-			interviewDescription: '',
 			questionSelected: '',
 			modalDisplay: false,
 			perguntas: [
@@ -102,18 +100,21 @@ class CadastroEntrevista extends Component {
 
 	handleModalDisplayingChange (displayStatus) {
 		this.setState({modalDisplay: displayStatus});
+		if(!displayStatus) {
+			this.setState({questionSelected: ''});
+		}
 	}
 
 	render() {
 		return (
-
 			<Fragment>
-
-				<TitleBar titulo="Cadastrar/Editar Entrevista" descricao="Crie ou edite entrevista." />
+				<TitleBar
+					titulo="Cadastrar/Editar Entrevista"
+					descricao="Crie ou edite entrevista."
+				/>
 
 				<Container>
 					<Content>
-						
 						<Helmet>
 							<title>Cadastrar/Editar Entrevista</title>
 							<meta name="Crie ou edite entrevista" content="" />
@@ -121,40 +122,73 @@ class CadastroEntrevista extends Component {
 
 						<Form>
 							<FormGroup>
-								<label htmlFor="exampleInputEmail1">Título da Entrevista:</label>
-								<input onChange={this.handleFieldChange} value={this.state.interviewTitle} type="text" className="form-control" id="interviewTitle" placeholder="Digite um título para a entrevista" />
+								<label htmlFor="exampleInputEmail1">
+                  Título da Entrevista:
+								</label>
+								<input
+									onChange={this.handleFieldChange}
+									value={this.state.interviewTitle}
+									type="text"
+									className="form-control"
+									id="interviewTitle"
+									placeholder="Digite um título para a entrevista"
+								/>
 							</FormGroup>
 
 							<FormGroup>
-								<label htmlFor="exampleInputPassword1">Descrição da Entrivista:</label>
-								<textarea onChange={this.handleFieldChange} value={this.state.interviewDescription} className="form-control" id="descricaoEntrevista" placeholder="Digite uma breve descrição para a entrevista" rows="2"></textarea>
+								<label htmlFor="exampleInputPassword1">
+                  Descrição da Entrivista:
+								</label>
+								<textarea
+									onChange={this.handleFieldChange}
+									value={this.state.interviewDescription}
+									className="form-control"
+									id="descricaoEntrevista"
+									placeholder="Digite uma breve descrição para a entrevista"
+									rows="2"
+								></textarea>
 							</FormGroup>
 
 							<br />
 
 							<FormGroup>
-								<a onClick="" className="btn btn-success" data-toggle="modal" href="#modalCriarPergunta"> {plusIcon} Adicionar Nova Pergunta</a>
+								<a
+									onClick={()=> {
+										this.handleModalDisplayingChange(true);
+									}}
+									className="btn btn-success"
+									data-toggle="modal"
+									href="#modalCriarPergunta"
+								>
+									{' '}
+									{plusIcon} Adicionar Nova Pergunta
+								</a>
 							</FormGroup>
 
 							<br />
 
-							<TableQuestions dataTable={this.state.perguntas} setInterviewSelected={this.handleQuestionSelected} />
+							<TableQuestions
+								dataTable={this.state.perguntas}
+								setQuestionSelected={this.handleQuestionSelected}
+							/>
 
 							<br />
 
 							<FormGroup>
-								<button type="submit" className="btn btn-primary">Salvar Entrevista</button>
+								<button type="submit" className="btn btn-primary">
+                  Salvar Entrevista
+								</button>
 							</FormGroup>
-
 						</Form>
 
-						<ModalCriarPergunta />
-
+						<ModalCriarPergunta
+							question={this.state.questionSelected}
+							setModalDisplaying={this.handleModalDisplayingChange}
+							display={this.state.modalDisplay}
+						/>
 					</Content>
 				</Container>
 			</Fragment>
-
-
 		);
 	}
 }
