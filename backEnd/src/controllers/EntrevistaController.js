@@ -27,9 +27,9 @@ module.exports = {
 	},
 
 	async show(request, response) {
-		const { id } = request.body;
-		await Entrevista.findOne({
-			where: { id },
+		const { cpf_moderador } = request.body;
+		await Entrevista.findAll({
+			where: { cpf_moderador },
 			raw: true
 		}).then((resultado) => {
 			return response.status(200).json({
@@ -37,7 +37,7 @@ module.exports = {
 				mensagem: Mensagem.sucesso,
 				return: resultado !== null ? true : false
 			});
-		}).catch((err) => {
+		}).catch(() => {
 			return response.status(400).json({
 				resultado: [],
 				mensagem: Mensagem.falha,

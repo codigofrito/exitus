@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet';
 
-import TitleBar from "../../components/TitleBar";
+import TitleBar from '../../components/TitleBar';
 
 import {
 	FormRow,
@@ -67,34 +67,31 @@ class Entrevistas extends React.Component {
 	}
 
 
-    render() {
-        return (
+	render() {
+		return (
 
-            <Fragment>
+			<Fragment>
 
-                <TitleBar titulo="Minhas Entrevistas" descricao="Gerencie todas as entrevistas que você criou ou crie outras se necessário." />
+				<TitleBar titulo="Minhas Entrevistas" descricao="Gerencie todas as entrevistas que você criou ou crie outras se necessário." />
                
-                <Helmet>
-                    <title>Entrevistas</title>
-                    <meta name="description" content="" />
-                </Helmet>
+				<Helmet>
+					<title>Entrevistas</title>
+					<meta name="description" content="" />
+				</Helmet>
 
-                <Container>
-                    <Content>
+				<Container>
+					<Content>
+						<FormRow>
+							<ButtonSuccess to="/CadastroEntrevista"> {PlusIcon} Cadastrar Nova Entrevista </ButtonSuccess>
+						</FormRow>
+						<hr />
+						<TableEntrevistas dataTable={this.state.entrevistas} />
+					</Content>
+				</Container>
+			</Fragment>
 
-
-                        <TableEntrevistas dataTable={this.state.entrevistas} />
-                        <hr />
-                        <FormRow>
-                            <ButtonSuccess to="/CadastroEntrevista"> {PlusIcon} Cadastrar Nova Entrevista </ButtonSuccess>
-                        </FormRow>
-
-                    </Content>
-                </Container>
-            </Fragment>
-
-        );
-    }
+		);
+	}
 }
 
 export default Entrevistas;

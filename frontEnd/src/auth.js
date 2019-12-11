@@ -17,7 +17,8 @@ const Authenticate = {
 	},
 
 	UserType: () => {
-		return JSON.parse(localStorage.getItem('user')).type;
+		const user = JSON.parse(localStorage.getItem('user'));
+		return user ? user.type : null;
 	},
 	Token: () => localStorage.getItem('TOKEN_KEY'),
 	User: () => localStorage.getItem('user')
