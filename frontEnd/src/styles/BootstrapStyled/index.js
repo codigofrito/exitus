@@ -265,6 +265,24 @@ export const H1Light = styled.h1.attrs(props => ({
 }))``;
 
 
+export const AlertWarning = styled.div.attrs(props => ({
+  className: "alert alert-warning",
+}))``;
+
+export const AlertDanger = styled.div.attrs(props => ({
+  className: "alert alert-danger",
+}))``;
+
+export const AlertInfo = styled.div.attrs(props => ({
+  className: "alert alert-info",
+  role: "alert"
+}))``;
+
+export const Collapse = styled.div.attrs(props => ({
+  className: "collapse"
+}))``;
+
+
 
 
 

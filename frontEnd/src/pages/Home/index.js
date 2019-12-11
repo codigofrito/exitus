@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 import Authenticate from '../../auth';
 
-import HomePublico from './HomePublico';
-import HomeModerador from './HomeModerador';
-import HomeEgresso from './HomeEgresso';
+import HomePublico from '../Public/HomePublic';
+import HomeModerador from '../Moderator/HomeModerator';
+import HomeEgresso from '../Egress/HomeEgress';
 
 
 const HomeAtual = () => { return Authenticate.isAuthenticated() 

@@ -1,18 +1,18 @@
 import React from 'react';
 
 import Home from './pages/Home';
-import Egressos from './pages/Egressos';
-import CadastroEgresso from './pages/CadastroEgresso';
-import Entrevistas from './pages/Entrevistas';
-import CadastroEntrevista from './pages/CadastroEntrevista';
-import Relatorios from './pages/Relatorios';
-import MeuHistorico from './pages/Egresso/MeuHistorico';
-import ResponderEntrevista from './pages/Egresso/ResponderEntrevista';
-import NotFound from './pages/NotFound';
+import Egressos from './pages/Moderator/ManageEgress';
+import CadastroEgresso from './pages/Moderator/CadastroEgresso';
+import Entrevistas from './pages/Moderator/ManageInterviews';
+import CadastroEntrevista from './pages/Moderator/InterviewRegister';
+import Relatorios from './pages/Moderator/Reports';
+import MeuHistorico from './pages/Egress/AcademicRecord';
+import ResponderEntrevista from './pages/Egress/AnswerInterview';
+import NotFound from './pages/Public/NotFound';
 
 import { Route, Switch } from 'react-router-dom';
 
-import { RouterGuard } from './RouterGuard';
+import { RouterGuard } from './routeGuard';
 
 const Routes = () => (
 	<Switch>
