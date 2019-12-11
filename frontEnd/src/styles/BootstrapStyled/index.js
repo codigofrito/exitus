@@ -143,7 +143,16 @@ export const ButtonPrimary = styled.button.attrs(props => ({
   }
 `;
 
-export const ButtonSuccess = styled(Link).attrs(props => ({
+export const ButtonSuccessLink = styled(Link).attrs(props => ({
+  className: "btn btn-success",
+}))`
+   background: ${props => props.theme.successColor};
+   &:hover {
+   background: ${props => props.theme.successColorHover};
+  }
+`;
+
+export const ButtonSuccess = styled.button.attrs(props => ({
   className: "btn btn-success",
 }))`
    background: ${props => props.theme.successColor};
@@ -264,7 +273,6 @@ export const H1Light = styled.h1.attrs(props => ({
   className: "font-weight-light",
 }))``;
 
-
 export const AlertWarning = styled.div.attrs(props => ({
   className: "alert alert-warning",
 }))``;
@@ -281,6 +289,7 @@ export const AlertInfo = styled.div.attrs(props => ({
 export const Collapse = styled.div.attrs(props => ({
   className: "collapse"
 }))``;
+
 
 
 

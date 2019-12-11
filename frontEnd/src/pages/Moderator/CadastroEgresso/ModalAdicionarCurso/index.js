@@ -15,7 +15,7 @@ import {
 	PlainTextInput,
 	FormRow,
 	Select,
-	ButtonSuccess
+	ButtonSuccessLink
 
 } from '../../../../styles/BootstrapStyled';
 
@@ -101,7 +101,7 @@ export default class extends Component {
 							</ModalBody>
 
 							<ModalFooter>
-								<ButtonSuccess onclick={this.addCourse}>Salvar Alterações</ButtonSuccess>
+								<ButtonSuccessLink onclick={this.addCourse}>Salvar Alterações</ButtonSuccessLink>
 							</ModalFooter>
 						</Form>
 

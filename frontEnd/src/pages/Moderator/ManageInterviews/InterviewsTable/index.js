@@ -36,7 +36,6 @@ export default class extends Component {
 
 	render() {
 
-
 		if (this.state.interviews.length <= 0) {
 
 			return (

@@ -5,14 +5,15 @@ import TitleBar from '../../../components/TitleBar';
 
 import {
 	FormRow,
-	ButtonSuccess
+	ButtonSuccessLink
 } from '../../../styles/BootstrapStyled';
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
-import TableEntrevistas from './TableInterviews';
+import InterviewsTable from './InterviewsTable';
+import InterviewRegister from './InterviewRegister';
 
 import { Container } from '../../../styles/BootstrapStyled';
 import { Content } from '../../../styles/customGlobalStyled';
@@ -25,28 +26,10 @@ export default class extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			entrevistas:
-                [
-                	{
-                		id: '1',
-                		cpfModerador: '79856412367',
-                		titulo: 'Primeira entrevista',
-                		descricao: 'Entrevista de teste',
-                		createdAt: '2019-12-09 00:14:31',
-                		updatedAt: '2019-12-09 00:14:31'
-                	},
-
-                	{
-                		id: '2',
-                		cpfModerador: '79856412367',
-                		titulo: 'Segunda entrevista',
-                		descricao: 'Entrevista de teste 2',
-                		createdAt: '2019-12-09 00:14:31',
-                		updatedAt: '2019-12-09 00:14:31'
-                	},
-
-                ]
-		};	
+			tituloAba: "Gerenciar Entrevistas",
+			tituloBarra: "Gerenciar Entrevistas",
+			descricaoPagina: "Crie, edite e distribua suas entrevistas para os egressos."
+		};
 	}
 
 
@@ -56,20 +39,21 @@ export default class extends Component {
 
 			<Fragment>
 
-				<TitleBar titulo="Minhas Entrevistas" descricao="Gerencie todas as entrevistas que você criou ou crie outras se necessário." />
-               
-				<Helmet>
-					<title>Entrevistas</title>
-					<meta name="description" content="" />
-				</Helmet>
+				<TitleBar titulo={this.state.tituloBarra} descricao={this.state.descricaoPagina} />
 
+				<Helmet>
+					<title>{this.state.tituloAba}</title>
+					<meta name="description" content={this.state.descricao} />
+				</Helmet>
 				<Container>
-					<Content>
+					<Content>	
+						<h2>Minhas Entrevistas:</h2>				
+						<InterviewsTable dataTable={this.state.entrevistas} />
 						<FormRow>
-							<ButtonSuccess to="/CadastroEntrevista"> {PlusIcon} Cadastrar Nova Entrevista </ButtonSuccess>
+							<ButtonSuccessLink data-toggle="collapse" data-target="#new-interview"> {PlusIcon} NOVA ENTREVISTA </ButtonSuccessLink>
 						</FormRow>
-						<hr />
-						<TableEntrevistas dataTable={this.state.entrevistas} />
+						<InterviewRegister />
+
 					</Content>
 				</Container>
 			</Fragment>

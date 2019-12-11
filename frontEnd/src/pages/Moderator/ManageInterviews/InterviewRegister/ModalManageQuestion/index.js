@@ -13,9 +13,10 @@ import {
 	FormGroup,
 	ButtonPrimary,
 	ButtonSecondary,
-	Textarea
+	Textarea,
+	ButtonDanger
 
-} from '../../../../styles/BootstrapStyled';
+} from '../../../../../styles/BootstrapStyled';
 
 let quantidadeAlternativas = 0;
 
@@ -144,22 +145,19 @@ export default class extends Component {
 						</ModalBody>
 
 						<ModalFooter>
-							<ButtonPrimary
-								type="button"
-								onClick={() => {
-									this.props.setModalDisplaying(false);
-								}}
-								data-dismiss="modal"
-							>
-								Cancelar
-							</ButtonPrimary>
 
-							<ButtonSecondary
-								type="button"
-								onClick={this.handleCreateQuestion}
-							>
-								Criar pergunta
+							<ButtonDanger type="button" onClick={this.handleCreateQuestion}>
+								Deletar Pergunta
+							</ButtonDanger>
+
+							<ButtonSecondary type="button"
+								onClick={() => { this.props.setModalDisplaying(false); }}
+								data-dismiss="modal">Cancelar
 							</ButtonSecondary>
+
+							<ButtonPrimary type="button" onClick={this.handleCreateQuestion}>
+								Criar pergunta
+							</ButtonPrimary>
 						</ModalFooter>
 					</ModalContent>
 				</ModalDialogMedium>

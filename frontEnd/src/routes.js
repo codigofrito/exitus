@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import Egressos from './pages/Moderator/ManageEgress';
 import CadastroEgresso from './pages/Moderator/CadastroEgresso';
 import Entrevistas from './pages/Moderator/ManageInterviews';
-import CadastroEntrevista from './pages/Moderator/InterviewRegister';
+import CadastroEntrevista from './pages/Moderator/ManageInterviews/InterviewRegister';
 import Relatorios from './pages/Moderator/Reports';
 import MeuHistorico from './pages/Egress/AcademicRecord';
 import ResponderEntrevista from './pages/Egress/AnswerInterview';

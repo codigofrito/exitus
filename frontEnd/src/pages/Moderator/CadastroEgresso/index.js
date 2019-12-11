@@ -9,7 +9,7 @@ import {
 	FormGroup,
 	FormRow,
 	ButtonPrimary,
-	ButtonSuccess
+	ButtonSuccessLink
 } from '../../../styles/BootstrapStyled';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -136,7 +136,7 @@ class CadastroEgresso extends React.Component {
 							</FormRow>
 							<hr />
 							<FormRow>
-								<ButtonSuccess href="#modalAdicionarCurso" role="button" data-toggle="modal" > {PlusIcon} Inserir Curso</ButtonSuccess>
+								<ButtonSuccessLink href="#modalAdicionarCurso" role="button" data-toggle="modal" > {PlusIcon} Inserir Curso</ButtonSuccessLink>
 
 							</FormRow>
 							<hr />
