@@ -1,6 +1,8 @@
 import React, { Fragment, Component } from 'react';
 import Axios from 'axios';
 import localStorage from 'local-storage';
+import moment from 'moment'
+
 import {
 	Table,
 	TableColumnHeader,
@@ -65,7 +67,7 @@ export default class extends Component {
 										<TableColumn columnGrid="col-sm-1">{index + 1}</TableColumn>
 										<TableColumn columnGrid="col-sm-4">{entrevista.titulo}</TableColumn>
 										<TableColumn columnGrid="col-sm-5">{entrevista.descricao}</TableColumn>
-										<TableColumn columnGrid="col-sm-2">{entrevista.createdAt}</TableColumn>
+										<TableColumn columnGrid="col-sm-2">{moment(entrevista.createdAt).format("DD/MM/YYYY")}</TableColumn>
 									</TableRowClicable>
 								</Fragment>
 							);
