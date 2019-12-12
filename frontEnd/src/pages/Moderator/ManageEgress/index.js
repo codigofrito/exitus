@@ -1,35 +1,52 @@
 import React, { Fragment, Component } from 'react';
 import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom';
+
+import ModalManagerEgress from "./"
 
 import TitleBar from "../../../components/TitleBar";
 
-import { Container } from "../../../styles/BootstrapStyled";
+import EgressesTable from "./EgressesTable"
+
+import { Container, FormRow, ButtonSuccessLink } from "../../../styles/BootstrapStyled";
 import { Content } from "../../../styles/customGlobalStyled";
 
-class Egressos extends Component {
+export default class extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            tituloAba: "Gerenciar Egressos",
+            tituloBarra: "Gerenciar Egressos",
+            descricaoPagina: "Cadastre e gerencie os egressos do sistema."
+        };
+    }
 
     render() {
         return (
 
             <Fragment>
+                
+                <TitleBar titulo={this.state.tituloBarra} descricao={this.state.descricaoPagina} />
 
-                <TitleBar titulo="Egressos" descricao="Cadastre e gerencie os egressos do sistema" />
                 <Helmet>
-                    <title> Egressos </title>
-                    <meta name="description" content="Cadastre e gerencie os egressos do sistema" />
+                    <title>{this.state.tituloAba}</title>
+                    <meta name="description" content={this.state.descricao} />
                 </Helmet>
-
                 <Container>
                     <Content>
-
-                        <Link to="/CadastroEgresso">Cadastro Egresso</Link>
-
+                        <h2>Egressos:</h2>
+                        <EgressesTable />
+                        <FormRow>
+                            <ButtonSuccessLink data-toggle="collapse" data-target="#modal-manager-esgress">NOVA ENTREVISTA</ButtonSuccessLink>
+                        </FormRow>
                     </Content>
                 </Container>
+
+                <ModalManagerEgress/>
+
+
             </Fragment>
+
         );
     }
 }
-
-export default Egressos;
