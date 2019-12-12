@@ -1,82 +1,151 @@
-const {
-    pessoa
-} = require('../models/');
-const color = require('colors')
+const Pessoa = require('../models/').pessoa;
+const Mensagem = require('./mensagem');
+const calcularIdade = require('../scripts/calcularIdade');
+
 module.exports = {
 
-    async index(requisition, response) {
-        return pessoa.findAll({
-            raw: true
-        }).then((resultado) => {
-            console.log(color.green(`Operação executada com sucesso *-*`))
-            return resultado
-        }).catch((err) => {
-            console.log(err)
-            console.log(color.red(`Falha ao executar operação =/`))
-            return []
-        })
-    },
+	async index(request, response) {
+		await Pessoa.findAll({ raw: true })
+			.then((resultado) => {
 
-    async show(requisition, response) {
-        const {
-            cpf
-        } = requisition
-        return pessoa.findOne({
-            where: cpf,
-            raw: true
-        }).then((resultado) => {
-            console.log(color.green(`Operação executada com sucesso =D`))
-            return response.JSON(resultado)
-        }).catch((err) => {
-            console.log(err)
-            console.log(color.red(`Falha ao executar operação =O`))
-            return response.JSON([])
-        })
-    },
+				let registros = resultado.map(registro => {
+					registro.idade = calcularIdade(registro.data_nascimento);
+					return registro;
+				});
 
-    async store(requisition, response) {
-        const {
-            cpf,
-            nome,
-            sobrenome,
-            data_nascimento,
-            email,
-            celular
-        } = requisition
-        pessoa.create({
-            cpf,
-            nome,
-            sobrenome,
-            data_nascimento,
-            email,
-            celular
-        }).then((resultado) => {
-            console.log(color.green(`Operação executada com sucesso =D`))
-            return response.JSON(resultado)
-        }).catch((err) => {
-            console.log(err)
-            console.log(color.red(`Falha ao executar operação =O`))
-            return response.JSON([])
-        })
-    },
+				return response.status(200).json({
+					resultado: registros,
+					registros: resultado.length,
+					mensagem: Mensagem.sucesso,
+					return: resultado.length != 0 ? true : false
+				});
+			}).catch(() => {
 
-    async destroy(requisition, response) {
-        const {
-            cpf
-        } = requisition
-        return pessoa.destroy({
-            where: cpf,
-            raw: true
-        }).then((resultado) => {
-            console.log(color.green(`Operação executada com sucesso ^^`))
-            return response.JSON(resultado)
-        }).catch((err) => {
-            console.log(err)
-            console.log(color.red(`Falha ao executar operação =O`))
-            return response.JSON([])
-        })
+				return response.status(400).json({
+					resultado: [],
+					registros: 0,
+					mensagem: Mensagem.falha,
+					return: false
+				});
+			});
+	},
 
-    },
+	async show(request, response) {
+		const { cpf } = request.body;
 
-    async update(requisition, response) {}
-}
+		let registro = await Pessoa.findOne({
+			where: { cpf },
+			raw: true
+		}).then((resultado) => {
+
+			resultado.idade = calcularIdade(registro.data_nascimento);
+			
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso,
+				return: resultado !== null ? true : false
+			});
+		}).catch(() => {
+
+			return response.status(400).json({
+				resultado: [],
+				mensagem: Mensagem.falha,
+				return: false
+			});
+		});	
+	},
+
+	async store(request, response) {
+		const {
+			cpf,
+			nome,
+			sobrenome,
+			data_nascimento,
+			email,
+			celular
+		} = request.body;
+
+		await Pessoa.create({
+			cpf,
+			nome,
+			sobrenome,
+			data_nascimento,
+			email,
+			celular
+		}).then((resultado) => {
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso,
+				return: true
+			});
+		}).catch(() => {
+
+			return response.status(400).json({
+				resultado: [],
+				mensagem: Mensagem.falha,
+				return: false
+			});
+		});
+	},
+
+	async destroy(request, response) {
+		const { cpf } = request.body;
+
+		await Pessoa.destroy({
+			where: { cpf },
+			raw: true
+		}).then((resultado) => {
+
+			return response.status(200).json({
+				resultado: request.body,
+				registros: resultado,
+				mensagem: Mensagem.sucesso,
+				return: resultado >= 1 ? true : false
+			});
+		}).catch(() => {
+
+			return response.status(400).json({
+				resultado: [],
+				registros: 0,
+				mensagem: Mensagem.falha,
+				return: false
+			});
+		});
+		
+	},
+
+	async update(request, response) {
+		const {
+			cpf,
+			nome,
+			sobrenome,
+			data_nascimento,
+			email,
+			celular
+		} = request.body;
+
+		await Pessoa.update({
+			nome,
+			sobrenome,
+			data_nascimento,
+			email,
+			celular
+		}, {
+			where: { cpf }
+		}).then((resultado) => {
+
+			return response.status(200).json({
+				resultado,
+				mensagem: Mensagem.sucesso,
+				return: resultado[0] >= 1 ? true : false
+			});
+		}).catch(() => {
+
+			return response.status(400).json({
+				resultado: [],
+				mensagem: Mensagem.falha,
+				return: false
+			});
+		});
+	},
+};

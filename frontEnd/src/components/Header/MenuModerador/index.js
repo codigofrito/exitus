@@ -1,0 +1,33 @@
+import React from 'react';
+
+import 	Authenticate from '../../../auth';
+
+import { NavbarCollapse, NavbarItem, NavbarNavigation, NavLink } from '../../../styles/BootstrapStyled';
+
+function AuthenticatedMenu() {
+
+	return (
+		<NavbarCollapse id="navbarCollapse">
+			<NavbarNavigation>
+				<NavbarItem>
+					<NavLink to="/">Inicio</NavLink>
+				</NavbarItem>
+				<NavbarItem>
+					<NavLink to="/egressos">Egressos</NavLink>
+				</NavbarItem>
+				<NavbarItem>
+					<NavLink to="/entrevistas">Entrevistas</NavLink>
+				</NavbarItem>
+				<NavbarItem>
+					<NavLink to="/relatorios">Relatórios</NavLink>
+				</NavbarItem>
+				<NavbarItem>
+					<NavLink onClick={() => Authenticate.Logout()}>Sair</NavLink>
+				</NavbarItem>
+			</NavbarNavigation>
+			<label> {JSON.parse(Authenticate.User()).nome.toUpperCase() + ' ' + JSON.parse(Authenticate.User()).sobrenome.toUpperCase()} </label>
+		</NavbarCollapse>
+	);
+}
+
+export default AuthenticatedMenu;

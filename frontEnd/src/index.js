@@ -1,12 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import App from './components/App'
 
 
-ReactDOM.render(<Header/>, document.getElementById('header'));
-ReactDOM.render(<Footer/>, document.getElementById('footer'));
-
+ReactDOM.render(<App />, document.getElementById('root'));

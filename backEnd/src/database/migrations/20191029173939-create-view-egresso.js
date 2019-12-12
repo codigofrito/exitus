@@ -1,28 +1,29 @@
 'use strict';
-const config = require('../../config/database.js')
+const config = require('../../config/database.js');
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    const sequelize = new Sequelize(config)
-    return sequelize.query(`
-    CREATE VIEW view_egresso AS
+	up: (queryInterface, Sequelize) => {
+		const sequelize = new Sequelize(config);
+		return sequelize.query(`
+    CREATE VIEW IF NOT EXISTS view_egresso AS
     SELECT 
-        p.cpf AS cpf,
-        p.nome AS nome,
-        p.sobrenome AS sobrenome,
-        p.data_nascimento AS data_nascimento,
-        p.idade AS idade,
-        p.email AS email,
-        p.celular AS celular,
-        e.createdAt AS createdAt,
-        e.updatedAt AS updatedAt
+        ROW_NUMBER() OVER (ORDER BY pessoa.cpf) as id,
+        pessoa.cpf,
+        pessoa.nome ,
+        pessoa.sobrenome,
+        pessoa.data_nascimento,
+        pessoa.email,
+        pessoa.celular ,
+        egresso.created_at,
+        egresso.updated_at
     FROM
-        (egresso as e
-        JOIN pessoa as p)
-    WHERE
-        p.cpf = e.cpf`);
-  },
-  down: (queryInterface, Sequelize) => {
-    const sequelize = new Sequelize(config)
-    return sequelize.query('DROP VIEW view_egresso')
-  }
+        egresso
+    JOIN
+        pessoa
+    ON
+        pessoa.cpf = egresso.cpf`);
+	},
+	down: (queryInterface, Sequelize) => {
+		const sequelize = new Sequelize(config);
+		return sequelize.query('DROP VIEW IF EXISTS view_egresso');
+	}
 };

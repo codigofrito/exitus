@@ -10,9 +10,22 @@
     "bootstrap": "^4.3.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
+    "local-storage": "^2.0.0",
+    "mdbreact": "^4.23.0",
+    "moment": "^2.24.0",
+    "polished": "^3.4.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-scripts": "3.2.0"
+    "react-gesture-gallery": "^1.1.0",
+    "react-gesture-responder": "^2.1.0",
+    "react-helmet": "^5.2.1",
+    "react-radio-buttons": "^1.2.2",
+    "react-radios": "^1.1.0",
+    "react-ripples": "^2.2.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.2.0",
+    "react-text-mask": "^5.4.3",
+    "styled-components": "^4.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -34,5 +47,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0"
   }
 }
