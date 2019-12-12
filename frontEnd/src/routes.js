@@ -10,7 +10,7 @@ import MeuHistorico from './pages/Egress/AcademicRecord';
 import EntrevistasDisponiveis from './pages/Egress/AvaliableInterviews';
 import ResponderEntrevista from './pages/Egress/AnswerInterview';
 import NotFound from './pages/Public/NotFound';
-
+import Sobre from "./pages/Public/Sobre/index";
 import { Route, Switch } from 'react-router-dom';
 
 import { RouterGuard } from './routeGuard';
@@ -27,6 +27,7 @@ const Routes = () => (
 		<RouterGuard exact path="/MeuHistorico" userTypeAllowed={['egress']} component={MeuHistorico} />
 		<Route path="/ReponderEntrevista/:id" component={ResponderEntrevista} />
 		<Route path="/ReponderEntrevista" component={ResponderEntrevista} />
+		<Route path="/Sobre" component={Sobre}/>
 		<Route path="*" component={NotFound} />
 	</Switch>
 );
