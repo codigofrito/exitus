@@ -3,7 +3,6 @@ import Axios from 'axios';
 
 import Authenticate from '../../auth';
 
-
 import {
 	Modal,
 	ModalDialogSmall,
@@ -36,20 +35,24 @@ class ModalLogin extends React.Component {
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+
 	}
 
 	handleChange(event) {
 		const elementName = event.target.id;
 		const elementvalue = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
-
 		this.setState({
 			[elementName]: elementvalue
 		});
 	}
 
+
 	handleSubmit(event) {
 		event.preventDefault();
-		Axios.post('http://localhost:3001/auth', this.state)
+		Axios.post('http://localhost:3001/auth', {
+			cpf: this.state.cpf.split('.').join('').split('-').join(''),
+			password: this.state.password
+		})
 			.then((result) => {
 				Authenticate.Login(result.data.token);
 				Authenticate.setCurrentUser(result.data.user);
@@ -73,24 +76,29 @@ class ModalLogin extends React.Component {
 							</ModalHeader>
 
 							<ModalBody>
+
 								<FormGroup>
 									<label>CPF:</label>
-									<Input onChange={this.handleChange} id="cpf" type="text" required />
+									<Input mask="999.999.999-99" onChange={this.handleChange} id="cpf" type="text" required />
 								</FormGroup>
+
 								<FormGroup>
 									<label>Senha:</label>
 									<Input onChange={this.handleChange} id="password" type="password" required />
 								</FormGroup>
+
 								<CustomDivCheckbox>
 									<CustomInput onChange={this.handleChange} type="checkbox" id="rememberMe" />
 									<CustomLabel htmlFor="rememberMe">Lembrar</CustomLabel>
 								</CustomDivCheckbox>
+
 							</ModalBody>
 
 							<ModalFooter>
 								<ButtonSecondary data-dismiss="modal">Cancelar</ButtonSecondary>
 								<ButtonPrimary type="submit">Entrar</ButtonPrimary>
 							</ModalFooter>
+
 						</Form>
 
 					</ModalContent>

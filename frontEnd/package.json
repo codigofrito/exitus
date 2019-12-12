@@ -19,6 +19,7 @@
     "react-gesture-gallery": "^1.1.0",
     "react-gesture-responder": "^2.1.0",
     "react-helmet": "^5.2.1",
+    "react-input-mask": "^2.0.4",
     "react-radio-buttons": "^1.2.2",
     "react-radios": "^1.1.0",
     "react-ripples": "^2.2.1",

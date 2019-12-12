@@ -42,7 +42,7 @@ export default class extends Component {
                                 fontColor="#fff"
                                 backgroundColor="#2092ed"
                                 backgroundImage={EntrevistaImg}
-                                location="/ResponderEntrevista"
+                                location="/EntrevistasDisponiveis"
                             />
 
                             <NavigationCard
