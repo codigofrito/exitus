@@ -102,7 +102,9 @@ class CadastroEntrevista extends Component {
 						<Input onChange={this.handleFieldChange}
 							value={this.state.interviewTitle} type="text"
 							id="interviewTitle"
-							placeholder="Digite um título para a entrevista" required />
+							placeholder="Digite um título para a entrevista" 
+							required 
+						/>
 					</FormGroup>
 
 					<FormGroup>
@@ -113,6 +115,7 @@ class CadastroEntrevista extends Component {
 							id="interviewDescription"
 							placeholder="Digite uma breve descrição para a entrevista"
 							rows="2"
+							required
 						></Textarea>
 					</FormGroup>
 
@@ -121,7 +124,7 @@ class CadastroEntrevista extends Component {
 					<FormGroup>
 						<ButtonSuccess type="button" data-toggle="modal" href="#modalCriarPergunta">
 							{plusIcon} ADICIONAR NOVA PERGUNTA
-							</ButtonSuccess>
+						</ButtonSuccess>
 					</FormGroup>
 
 					<br />

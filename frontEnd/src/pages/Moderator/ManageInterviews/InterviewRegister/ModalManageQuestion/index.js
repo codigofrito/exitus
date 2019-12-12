@@ -37,9 +37,18 @@ export default class extends Component {
 	}
 
 	handleCreateQuestion() {
-		this.props.createQuestion(
-			document.querySelectorAll('.create-question-field')
-		);
+		const fields = document.querySelectorAll('.create-question-field');
+		const alternatives = [];
+		fields.forEach((field, index) => {
+			if (index > 0) {
+				if(field.value && field.value !== '') {
+					alternatives.push(field);
+				}
+			}
+		});
+		if(fields[0].value && fields[0].value !== '' && alternatives.length>= 2) {
+			this.props.createQuestion(fields);
+		}
 	}
 
 	componentDidUpdate() {
