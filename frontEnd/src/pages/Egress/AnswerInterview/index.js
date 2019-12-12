@@ -1,8 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { Helmet } from "react-helmet";
 
-import { Container } from "../../../styles/BootstrapStyled";
+import { Container, } from "../../../styles/BootstrapStyled";
 import { Content } from "../../../styles/customGlobalStyled";
+
+import InterviewsTable from "./InterviewsTable"
 
 import TitleBar from "../../../components/TitleBar";
 
@@ -18,7 +20,9 @@ export default class extends Component {
     }
 
     render() {
+
         return (
+
             <Fragment>
                 <TitleBar titulo={this.state.tituloBarra} descricao={this.state.descricaoPagina} />
 
@@ -30,8 +34,12 @@ export default class extends Component {
                 <Container>
                     <Content>
 
+                        <InterviewsTable />
+
+
                     </Content>
                 </Container>
+
 
             </Fragment>
         );
