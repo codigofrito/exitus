@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from 'react';
 
-import { Container, Card, CardBody, Textarea } from "../../../../styles/BootstrapStyled";
+import { Card, CardBody } from "../../../../styles/BootstrapStyled";
+
+import { Input, CustomInput, CustomRadio } from "../../../../styles/BootstrapStyled"
+import { FormGroup } from '@material-ui/core';
 
 
 export default class extends Component {
@@ -8,7 +11,6 @@ export default class extends Component {
     constructor(props) {
 
         super(props);
-        console.log(this.props)
 
     }
 
@@ -17,22 +19,22 @@ export default class extends Component {
             <Fragment>
                 <Card>
                     <CardBody>
+
                         <h2>{this.props.question.pergunta}</h2>
 
-                        <ul>
+                        {this.props.question.alternativas.map((alternative, index) => {
 
-                            {this.props.question.alternativas.map((alternative, index) => {
-                                return (
-                                    <li>
-                                        <label key={index}>
-
-                                            {alternative.alternativa}
-                                        </label>
-
-                                    </li>
-                                );
-                            })}
-                        </ul>
+                            return (
+                                <Fragment>
+                                    <FormGroup columnGrid={"col-lg-6"}>
+                                        <CustomRadio key={index}>
+                                            <CustomInput type="radio" class="custom-control-input" id={"pergunta" + alternative.id} name={"alternativa" + alternative.id_pergunta} />
+                                            <label class="custom-control-label" for={"pergunta" + alternative.id} > {alternative.alternativa}</label>
+                                        </CustomRadio>
+                                    </FormGroup>
+                                </Fragment>
+                            );
+                        })}
 
                     </CardBody>
                 </Card>

@@ -114,7 +114,15 @@ export const CustomInput = styled.input.attrs(props => ({
   className: "custom-control-input"
 }))``;
 
+export const CustomRadio = styled.div.attrs(props => ({
+  className: "custom-control custom-radio"
+}))``;
+
 export const CustomDivCheckbox = styled.div.attrs(props => ({
+  className: "custom-control custom-checkbox"
+}))``;
+
+export const CustomDivRadioButton = styled.div.attrs(props => ({
   className: "custom-control custom-checkbox"
 }))``;
 
@@ -235,7 +243,7 @@ export const CardBodyRight = styled.div.attrs(props => ({
 }))``;
 
 export const Card = styled.div.attrs(props => ({
-  className: "card h-100"
+  className: props.columnGrid + " card h-100"
 }))``;
 
 export const CardBody = styled.div.attrs(props => ({
