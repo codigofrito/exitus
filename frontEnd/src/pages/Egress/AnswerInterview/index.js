@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { Helmet } from "react-helmet";
+import Axios from 'axios';
+import localStorage from 'local-storage';
 
-import { Container, } from "../../../styles/BootstrapStyled";
+import { Container } from "../../../styles/BootstrapStyled";
 import { Content } from "../../../styles/customGlobalStyled";
 
-import InterviewsTable from "./InterviewsTable"
+import Question  from "./Question"
 
 import TitleBar from "../../../components/TitleBar";
 
@@ -13,16 +15,38 @@ export default class extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tituloAba: "Responder Entrevistas",
-            tituloBarra: "Responder Entrevistas",
-            descricaoPagina: ""
+            tituloAba: "Responder Entrevista",
+            tituloBarra: "Responder Entrevista",
+            descricaoPagina: "",
+            interview: {
+                titulo: "",
+                descricao: "",
+                perguntas: []
+            }
         }
     }
 
+
+    componentDidMount() {
+
+        const idEntrevista = this.props.match.params.id
+
+        Axios.post('http://localhost:3001/questionario', { id: 1 }
+        ).then(result => {
+            this.setState({ interview: result.data.Questionario });
+            console.log(this.state.interview);
+
+        }
+        );
+
+
+    }
+
+
     render() {
 
-        return (
 
+        return (
             <Fragment>
                 <TitleBar titulo={this.state.tituloBarra} descricao={this.state.descricaoPagina} />
 
@@ -34,12 +58,20 @@ export default class extends Component {
                 <Container>
                     <Content>
 
-                        <InterviewsTable />
+                        <Fragment>
+                            {this.state.interview.perguntas.map((question, index) => {
+                                return (
+                                    <Fragment>
+                                        <Question question={question} key={index}/>
+                                       
+                                    </Fragment>
+                                );
+                            })}
 
+                        </Fragment>
 
                     </Content>
                 </Container>
-
 
             </Fragment>
         );
