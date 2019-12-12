@@ -1,79 +1,79 @@
 import React, { Component, Fragment } from 'react';
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet';
 import Axios from 'axios';
 import localStorage from 'local-storage';
 
-import { Container } from "../../../styles/BootstrapStyled";
-import { Content } from "../../../styles/customGlobalStyled";
+import { Container } from '../../../styles/BootstrapStyled';
+import { Content } from '../../../styles/customGlobalStyled';
 
-import Question  from "./Question"
+import Question  from './Question';
 
-import TitleBar from "../../../components/TitleBar";
+import TitleBar from '../../../components/TitleBar';
 
 export default class extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            tituloAba: "Responder Entrevista",
-            tituloBarra: "Responder Entrevista",
-            descricaoPagina: "",
-            interview: {
-                titulo: "",
-                descricao: "",
-                perguntas: []
-            }
-        }
-    }
+	constructor(props) {
+		super(props);
+		this.state = {
+			tituloAba: 'Responder Entrevista',
+			tituloBarra: 'Responder Entrevista',
+			descricaoPagina: '',
+			interview: {
+				titulo: '',
+				descricao: '',
+				perguntas: []
+			}
+		};
+	}
 
 
-    componentDidMount() {
+	componentDidMount() {
 
-        const idEntrevista = this.props.match.params.id
+		const idEntrevista = this.props.match.params.id;
 
-        Axios.post('http://localhost:3001/questionario', { id: 1 }
-        ).then(result => {
-            this.setState({ interview: result.data.Questionario });
-            console.log(this.state.interview);
+		Axios.post('http://localhost:3001/questionario', { id: 1}
+		).then(result => {
+			this.setState({ interview: result.data.Questionario });
+			console.log(this.state.interview);
 
-        }
-        );
-
-
-    }
+		}
+		);
 
 
-    render() {
+	}
 
 
-        return (
-            <Fragment>
-                <TitleBar titulo={this.state.tituloBarra} descricao={this.state.descricaoPagina} />
+	render() {
 
-                <Helmet>
-                    <title>{this.state.tituloAba}</title>
-                    <meta name="description" content={this.state.descricao} />
-                </Helmet>
 
-                <Container>
-                    <Content>
+		return (
+			<Fragment>
+				<TitleBar titulo={this.state.tituloBarra} descricao={this.state.descricaoPagina} />
 
-                        <Fragment>
-                            {this.state.interview.perguntas.map((question, index) => {
-                                return (
-                                    <Fragment>
-                                        <Question question={question} key={index}/>
+				<Helmet>
+					<title>{this.state.tituloAba}</title>
+					<meta name="description" content={this.state.descricao} />
+				</Helmet>
+
+				<Container>
+					<Content>
+
+						<Fragment>
+							{this.state.interview.perguntas.map((question, index) => {
+								return (
+									<Fragment>
+										<Question question={question} key={index}/>
                                        
-                                    </Fragment>
-                                );
-                            })}
+									</Fragment>
+								);
+							})}
 
-                        </Fragment>
+						</Fragment>
 
-                    </Content>
-                </Container>
+					</Content>
+				</Container>
 
-            </Fragment>
-        );
-    }
+			</Fragment>
+		);
+	}
 }

@@ -1,43 +1,43 @@
 import React, { Component, Fragment } from 'react';
 
-import { Container, Card, CardBody, Textarea } from "../../../../styles/BootstrapStyled";
+import { Container, Card, CardBody, Textarea } from '../../../../styles/BootstrapStyled';
 
 
 export default class extends Component {
 
-    constructor(props) {
+	constructor(props) {
 
-        super(props);
-        console.log(this.props)
+		super(props);
+		console.log(this.props);
 
-    }
+	}
 
-    render() {
-        return (
-            <Fragment>
-                <Card>
-                    <CardBody>
-                        <h2>{this.props.question.pergunta}</h2>
+	render() {
+		return (
+			<Fragment>
+				<Card>
+					<CardBody>
+						<h2>{this.props.question.pergunta}</h2>
 
-                        <ul>
+						<ul>
 
-                            {this.props.question.alternativas.map((alternative, index) => {
-                                return (
-                                    <li>
-                                        <label key={index}>
+							{this.props.question.alternativas.map((alternative, index) => {
+								return (
+									<li>
+										<label key={index}>
+											<input type="radio" value="pl"/>
+											{alternative.alternativa}
+										</label>
 
-                                            {alternative.alternativa}
-                                        </label>
+									</li>
+								);
+							})}
+						</ul>
 
-                                    </li>
-                                );
-                            })}
-                        </ul>
-
-                    </CardBody>
-                </Card>
-                <br />
-            </Fragment>
-        );
-    }
+					</CardBody>
+				</Card>
+				<br />
+			</Fragment>
+		);
+	}
 }
