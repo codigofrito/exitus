@@ -20,9 +20,10 @@ const ViewRespostaEgressoController = require('./controllers/ViewRespostaEgresso
 const AutenticacaoController = require('./controllers/AutenticacaoController');
 
 const QuestionarioController = require('./controllers/QuestionarioController');
+const ViewCursosController = require('./controllers/ViewCursosController');
 
 //=== === ===PessoaController.js Routes=== === ===//
-routes.post('/register/person', autenticacao.moderador, PessoaController.store);
+routes.post('/register/person', PessoaController.store);
 routes.post('/people', autenticacao.moderador, PessoaController.index);
 routes.post('/find/person', autenticacao.moderador, PessoaController.show);
 routes.delete('/remove/person', autenticacao.moderador, PessoaController.destroy);
@@ -38,7 +39,7 @@ routes.put('/update/egress', autenticacao.moderador, EgressoController.update);
 //=== === ===---------------------------=== === ===//
 
 //=== === ===EgressoPossuiCursoController.js Routes=== === ===//
-routes.post('/register/courseEgress', autenticacao.moderador, EgressoPossuiCursoController.store);
+routes.post('/register/courseEgress', EgressoPossuiCursoController.store);
 routes.post('/courseGraduates', EgressoPossuiCursoController.index);
 routes.post('/find/courseEgress', EgressoPossuiCursoController.show);
 routes.delete('/remove/courseEgress', autenticacao.moderador, EgressoPossuiCursoController.destroy);
@@ -87,7 +88,7 @@ routes.put('/update/alternative', autenticacao.moderador, AlternativaController.
 
 //=== === ===CursoController.js Routes=== === ===//
 routes.post('/register/course', autenticacao.moderador, CursoController.store);
-routes.post('/courses', CursoController.index);
+routes.post('/courses', ViewCursosController.index);
 routes.post('/find/course', CursoController.show);
 routes.delete('/remove/course', autenticacao.moderador, CursoController.destroy);
 routes.put('/update/course', autenticacao.moderador, CursoController.update);

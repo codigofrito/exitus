@@ -36,27 +36,21 @@ export default class extends Component {
 					<Table>
 						<TableHead>
 							<TableRow>
-								<TableColumnHeaderCentered columnGrid="col-sm-1"> # </TableColumnHeaderCentered>
-								<TableColumnHeader columnGrid="col-sm-7"> Curso </TableColumnHeader>
-								<TableColumnHeaderCentered columnGrid="col-sm-2"> Inicio </TableColumnHeaderCentered>
-								<TableColumnHeaderCentered columnGrid="col-sm-2"> Termino </TableColumnHeaderCentered>
+								<TableColumnHeader columnGrid="col-sm-4"> Curso </TableColumnHeader>
+								<TableColumnHeaderCentered columnGrid="col-sm-4"> Inicio </TableColumnHeaderCentered>
+								<TableColumnHeaderCentered columnGrid="col-sm-4"> Termino </TableColumnHeaderCentered>
 							</TableRow>
 						</TableHead>
 
-						<TableBody>	{this.props.dataTable.map((question, index) => {
+						<TableBody>	{this.props.dataTable.map((course, index) => {
 							return (
 								<Fragment>
 									<TableRowClicable
 										key={index}
-										onClick={() => { this.props.setCourseSelected(index); }}
-										data-toggle="modal"
-										href="#modal-maneger-egress"
-										alternativas={question.alternativas}
 									>
-										<TableColumnCentered columnGrid="col-sm-1">{index + 1}</TableColumnCentered>
-										<TableColumn columnGrid="col-sm-7">	{question.pergunta}	</TableColumn>
-										<TableColumnCentered columnGrid="col-sm-2">{question.alternativas.length} </TableColumnCentered>
-										<TableColumnCentered columnGrid="col-sm-2">{question.alternativas.length} </TableColumnCentered>
+										<TableColumnCentered columnGrid="col-sm-4">{course.nomeCurso}</TableColumnCentered>
+										<TableColumnCentered columnGrid="col-sm-4">{course.nomeFilial} </TableColumnCentered>
+										<TableColumnCentered columnGrid="col-sm-4">{course.area} </TableColumnCentered>
 									</TableRowClicable>
 								</Fragment>
 							);

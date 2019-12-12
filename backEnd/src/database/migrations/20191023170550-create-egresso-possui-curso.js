@@ -26,18 +26,15 @@ module.exports = {
 				type: Sequelize.INTEGER
 			},
 			concluiu: {
-				allowNull: false,
 				type: Sequelize.BOOLEAN
 			},
 			impressao: {
-				allowNull: false,
 				type: Sequelize.ENUM(['POSITIVA', 'NEGATIVA'])
 			},
 			observacao: {
 				type: Sequelize.STRING
 			},
 			atuacao: {
-				allowNull: false,
 				type: Sequelize.ENUM(['NUNCA ATUOU', 'ATUOU', 'ATUANDO'])
 			},
 			ano_inicio_curso: {
