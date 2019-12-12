@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import { Helmet } from "react-helmet";
 import BannerRotativo from "./RotativeBanner";
-
+import ModelSoli from "../../../components/ModalSolicita/index"
 import {
     Container,
     Div,
@@ -41,13 +41,13 @@ class HomePublico extends Component {
                                 <H1Light>Olá, Egresso!</H1Light>
                                 <hr />
                                 <p className="lead" align="justify">Queremos manter um vínculo contínuo com nossos ex-alunos, saber de seus sucessos e dificuldades, e acompanhar os profissionais que formamos em seu ingresso no mercado de trabalho. Assim, poderemos melhorar nossos cursos de graduação e pós-graduação a cada ano, e direcionar nossos projetos de formação continuada às necessidades dos profissionais de cada área.</p>
-                                <ButtonPrimary href="#">Solicitar Inclusão!</ButtonPrimary>
+                                <ButtonPrimary href="#modalSolicita" role= "button" data-toggle= "modal">Solicitar Inclusão!</ButtonPrimary>
                             </Div>
                         </CenteredRow>
 
                         <PrimaryColorCard>
                             <CardBody>
-                                <p class="text-white m-0">Alguma mensagem massa pra ficar aqui!</p>
+                                <p class="text-white m-0">“Se você não está disposto a arriscar, esteja disposto a uma vida comum” – Jim Rohn</p>
                             </CardBody>
                         </PrimaryColorCard>
 
@@ -92,6 +92,7 @@ class HomePublico extends Component {
 
                     </Content>
                 </Container>
+                <ModelSoli/>
             </Fragment>
         );
     }
