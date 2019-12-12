@@ -4,31 +4,29 @@ import localStorage from 'local-storage';
 import moment from 'moment'
 
 import {
-    Table,
-    TableColumnHeader,
-    TableRow,
-    TableRowClicable,
-    TableColumn,
-    TableHead,
-    TableBody,
-    AlertWarning
+	Table,
+	TableColumnHeader,
+	TableRow,
+	TableRowClicable,
+	TableColumn,
+	TableHead,
+	TableBody,
+	AlertWarning
 } from '../../../../styles/BootstrapStyled';
 
-
-
 export default class extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            interviews: []
-        };
-    }
+	constructor(props) {
+		super(props);
+		this.state = {
+			interviews: []
+		};
+	}
 
-    editarCurso(event) {
-        alert(event);
-    }
+	editarCurso(event) {
+		alert(event);
+	}
 
-    componentDidMount() {
+	componentDidMount() {
         Axios.post('http://localhost:3001/viewGraduates', {},
             { headers: { token: `bearer ${localStorage.get('TOKEN_KEY')}` } }
         ).then(result => {
@@ -37,20 +35,19 @@ export default class extends Component {
         }
         );
     }
+	render() {
 
-    render() {
+		if (this.state.interviews.length <= 0) {
 
-        if (this.state.interviews.length <= 0) {
+			return (
+				<AlertWarning>
+					<strong>Você ainda não cadastrou nenhuma entrevista!</strong>
+				</AlertWarning>
+			);
 
-            return (
-                <AlertWarning>
-                    <strong>Você ainda não cadastrou nenhuma entrevista!</strong>
-                </AlertWarning>
-            );
+		} else {
 
-        } else {
-
-            return (
+			return (
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -62,14 +59,14 @@ export default class extends Component {
                     </TableHead>
 
                     <TableBody>
-                        {this.state.interviews.map((entrevista, index) => {
+                        {this.state.interviews.map((egress, index) => {
                             return (
                                 <Fragment>
-                                    <TableRowClicable key={index} onClick={() => this.editarCurso(entrevista.id)}>
+                                    <TableRowClicable key={index} onClick={() => this.editarCurso(egress.id)}>
                                         <TableColumn columnGrid="col-sm-1">{index + 1}</TableColumn>
-                                        <TableColumn columnGrid="col-sm-5">{entrevista.nome.toUpperCase() + " " + entrevista.sobrenome.toUpperCase()}</TableColumn>
-                                        <TableColumn columnGrid="col-sm-4">{entrevista.email}</TableColumn>
-                                        <TableColumn columnGrid="col-sm-2">{moment(entrevista.createdAt).format("DD/MM/YYYY")}</TableColumn>
+                                        <TableColumn columnGrid="col-sm-5">{egress.nome.toUpperCase() + " " + egress.sobrenome.toUpperCase()}</TableColumn>
+                                        <TableColumn columnGrid="col-sm-4">{egress.email}</TableColumn>
+                                        <TableColumn columnGrid="col-sm-2">{moment(egress.createdAt).format("DD/MM/YYYY")}</TableColumn>
                                     </TableRowClicable>
                                 </Fragment>
                             );
@@ -78,7 +75,7 @@ export default class extends Component {
                 </Table>
 
             );
-        }
-    }
+		}
+	}
 }
 

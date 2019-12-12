@@ -21,13 +21,13 @@ export default class extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			pergunta: '',
+			course: '',
 			display: false
 		};
 		this.handleTitleChange = this.handleTitleChange.bind(this);
-		this.handleCreateQuestion = this.handleCreateQuestion.bind(this);
-		this.handleUpdateQuestion = this.handleUpdateQuestion.bind(this);
-		this.handleRemoveQuestion = this.handleRemoveQuestion.bind(this);
+		this.handleCreateCourse = this.handleCreateCourse.bind(this);
+		this.handleUpdateCourse = this.handleUpdateCourse.bind(this);
+		this.handleRemoveCourse = this.handleRemoveCourse.bind(this);
 		this.processFields = this.processFields.bind(this);
 	}
 
@@ -35,17 +35,17 @@ export default class extends Component {
 		this.setState({ pergunta: event.target.value });
 	}
 
-	handleCreateQuestion() {
+	handleCreateCourse() {
 		const result = this.processFields();
-		if (result.status) this.props.createQuestion(result.fields);
+		if (result.status) this.props.createCourse(result.fields);
 	}
 
-	handleUpdateQuestion() {
+	handleUpdateCourse() {
 		const result = this.processFields();
-		if (result.status) this.props.updateQuestion(result.fields);
+		if (result.status) this.props.updateCourse(result.fields);
 	}
-	handleRemoveQuestion() {
-		this.props.removeQuestion();
+	handleRemoveCourse() {
+		this.props.removeCourse();
 	}
 	processFields() {
 		const fields = document.querySelectorAll('.create-question-field');
@@ -164,7 +164,7 @@ export default class extends Component {
 						</ModalBody>
 
 						<ModalFooter>
-							<ButtonDanger type="button" onClick={this.handleRemoveQuestion}>
+							<ButtonDanger type="button" onClick={this.handleRemoveCourse}>
 								Deletar Pergunta
 							</ButtonDanger>
 
@@ -180,9 +180,9 @@ export default class extends Component {
 
 							<ButtonPrimary type="button" onClick={() => {
 								if (this.props.editModeStatus) {
-									this.handleUpdateQuestion();
+									this.handleUpdateCourse();
 								} else {
-									this.handleCreateQuestion();
+									this.handleCreateCourse();
 								}
 							}}>
 								{this.props.editModeName}
