@@ -41,7 +41,7 @@ export default class extends Component {
 								<Fragment>
 									<TableRowClicable
 										key={index}
-										onClick={() => { this.props.setQuestionSelected(index) }}
+										onClick={() => { this.props.setQuestionSelected(index); }}
 										data-toggle="modal"
 										href="#modalCriarPergunta"
 										alternativas={question.alternativas}

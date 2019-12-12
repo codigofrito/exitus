@@ -27,41 +27,67 @@ class CadastroEntrevista extends Component {
 		this.state = {
 			questionSelected: '',
 			modalDisplay: false,
+			editModeStatus: false,
+			editModeName: 'Salvar pergunta',
 			perguntas: []
 		};
 
 		this.handleQuestionSelected = this.handleQuestionSelected.bind(this);
 		this.handleFieldChange = this.handleFieldChange.bind(this);
 		this.handleModalDisplayingChange = this.handleModalDisplayingChange.bind(this);
-		this.handleNewQuestion = this.handleNewQuestion.bind(this);
+		this.handleCreateQuestion = this.handleCreateQuestion.bind(this);
 		this.handleSaveInterview = this.handleSaveInterview.bind(this);
+		this.handleUpdateQuestion = this.handleUpdateQuestion.bind(this);
+		this.handleRemoveQuestion = this.handleRemoveQuestion.bind(this);
+		this.processQuestion = this.processQuestion.bind(this);
 	}
 
 	async handleSaveInterview(event) {
 		event.preventDefault();
-		await Axios.post(
-			'http://localhost:3001/register/interview',
-			{
-				cpf_moderador: localStorage.get('user').cpf,
-				titulo: this.state.interviewTitle,
-				descricao: this.state.interviewDescription,
-				perguntas: this.state.perguntas.map(pergunta => {
-					return pergunta.pergunta;
-				}),
-				alternativas: this.state.perguntas.map(pergunta => {
-					return pergunta.alternativas;
-				})
-			},
-			{ headers: { token: `bearer ${localStorage.get('TOKEN_KEY')}` } }
-		);
+		if(this.state.perguntas.length > 0) {
+			await Axios.post(
+				'http://localhost:3001/register/interview',
+				{
+					cpf_moderador: localStorage.get('user').cpf,
+					titulo: this.state.interviewTitle,
+					descricao: this.state.interviewDescription,
+					perguntas: this.state.perguntas.map(pergunta => {
+						return pergunta.pergunta;
+					}),
+					alternativas: this.state.perguntas.map(pergunta => {
+						return pergunta.alternativas;
+					})
+				},
+				{ headers: { token: `bearer ${localStorage.get('TOKEN_KEY')}` } }
+			);
+			document.querySelector('#new-interview').dataToggle = 'collpase';
+			this.setState({perguntas: []});
+		}
 	}
 
-	handleNewQuestion(newQuestion) {
+	handleCreateQuestion(newQuestion) {
+		this.state.perguntas.push(this.processQuestion(newQuestion));
+		this.setState({ perguntas: this.state.perguntas });
+	}
+
+	handleUpdateQuestion(question) {
+		const perguntas = this.state.perguntas;
+		perguntas[this.state.questionSelectedId] = this.processQuestion(question);
+		this.setState({perguntas: perguntas});
+	}
+
+	handleRemoveQuestion(){
+		const perguntas = this.state.perguntas;
+		perguntas.splice(this.state.questionSelectedId, 1);
+		this.setState({perguntas: perguntas});
+	}
+
+	processQuestion(fields) {
 		const Question = {
 			pergunta: '',
 			alternativas: []
 		};
-		newQuestion.forEach((element, index) => {
+		fields.forEach((element, index) => {
 			if (index === 0) {
 				Question.pergunta = element.value;
 			} else {
@@ -71,13 +97,14 @@ class CadastroEntrevista extends Component {
 			}
 		});
 
-		this.state.perguntas.push(Question);
-		this.setState({ perguntas: this.state.perguntas });
+		return Question;
 	}
 
 	handleQuestionSelected(id) {
 		this.setState({ questionSelected: this.state.perguntas[id] });
+		this.setState({questionSelectedId: id});
 		this.setState({ modalDisplay: true });
+		this.setState({ editModeStatus: true, editModeName: 'Salvar alterações' });
 	}
 
 	handleFieldChange(event) {
@@ -93,22 +120,24 @@ class CadastroEntrevista extends Component {
 
 	render() {
 		return (
-
 			<Collapse id="new-interview">
-
 				<Form onSubmit={this.handleSaveInterview}>
 					<FormGroup>
 						<label htmlFor="exampleInputEmail1">Título da Entrevista:</label>
-						<Input onChange={this.handleFieldChange}
-							value={this.state.interviewTitle} type="text"
+						<Input
+							onChange={this.handleFieldChange}
+							value={this.state.interviewTitle}
+							type="text"
 							id="interviewTitle"
-							placeholder="Digite um título para a entrevista" 
-							required 
+							placeholder="Digite um título para a entrevista"
+							required
 						/>
 					</FormGroup>
 
 					<FormGroup>
-						<label htmlFor="interviewDescription">Descrição da Entrevista:</label>
+						<label htmlFor="interviewDescription">
+              Descrição da Entrevista:
+						</label>
 						<Textarea
 							onChange={this.handleFieldChange}
 							value={this.state.interviewDescription}
@@ -122,28 +151,51 @@ class CadastroEntrevista extends Component {
 					<br />
 
 					<FormGroup>
-						<ButtonSuccess type="button" data-toggle="modal" href="#modalCriarPergunta">
+						<ButtonSuccess
+							type="button"
+							data-toggle="modal"
+							href="#modalCriarPergunta"
+							onClick={event => {
+								event.preventDefault();
+								this.setState({
+									editModeStatus: false,
+									editModeName: 'Salvar pergunta'
+								});
+							}}
+						>
 							{plusIcon} ADICIONAR NOVA PERGUNTA
 						</ButtonSuccess>
 					</FormGroup>
 
 					<br />
 
-					<TableQuestions dataTable={this.state.perguntas} setQuestionSelected={this.handleQuestionSelected} />
+					<TableQuestions
+						dataTable={this.state.perguntas}
+						setQuestionSelected={this.handleQuestionSelected}
+					/>
 
 					<br />
 
 					<FormGroup>
-						<ButtonPrimary type="submit">SALVAR ENTREVISTA</ButtonPrimary>
+						<ButtonPrimary
+							data-toggle="collapse"
+							data-target="#new-interview"
+							type="submit"
+						>
+              SALVAR ENTREVISTA
+						</ButtonPrimary>
 					</FormGroup>
-
 				</Form>
 
 				<ModalManageQuestion
 					question={this.state.questionSelected}
-					createQuestion={this.handleNewQuestion}
+					createQuestion={this.handleCreateQuestion}
+					updateQuestion={this.handleUpdateQuestion}
+					removeQuestion={this.handleRemoveQuestion}
 					setModalDisplaying={this.handleModalDisplayingChange}
 					display={this.state.modalDisplay}
+					editModeStatus={this.state.editModeStatus}
+					editModeName={this.state.editModeName}
 				/>
 			</Collapse>
 		);
