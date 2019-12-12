@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import InputMask from "react-input-mask";
 
 export const Container = styled.div.attrs(props => ({
   className: "container clearfix"
@@ -97,7 +98,7 @@ export const ButtonCloseModal = styled.button.attrs(props => ({
   type: "button",
 }))``;
 
-export const Input = styled.input.attrs(props => ({
+export const Input = styled(InputMask).attrs(props => ({
   className: "form-control"
 }))``;
 

@@ -7,6 +7,7 @@ import Entrevistas from './pages/Moderator/ManageInterviews';
 import CadastroEntrevista from './pages/Moderator/ManageInterviews/InterviewRegister';
 import Relatorios from './pages/Moderator/Reports';
 import MeuHistorico from './pages/Egress/AcademicRecord';
+import EntrevistasDisponiveis from './pages/Egress/AvaliableInterviews';
 import ResponderEntrevista from './pages/Egress/AnswerInterview';
 import NotFound from './pages/Public/NotFound';
 
@@ -22,8 +23,10 @@ const Routes = () => (
 		<RouterGuard exact path="/Entrevistas" userTypeAllowed={['moderator']} component={Entrevistas} />
 		<RouterGuard exact path="/CadastroEntrevista" userTypeAllowed={['moderator']} component={CadastroEntrevista} />
 		<RouterGuard exact path="/Relatorios" userTypeAllowed={['moderator']} component={Relatorios} />
-		<RouterGuard exact path="/ResponderEntrevista" userTypeAllowed={['egress']} component={ResponderEntrevista} />
+		<RouterGuard exact path="/EntrevistasDisponiveis" userTypeAllowed={['egress']} component={EntrevistasDisponiveis} />
 		<RouterGuard exact path="/MeuHistorico" userTypeAllowed={['egress']} component={MeuHistorico} />
+		<Route path="/ReponderEntrevista/:id" component={ResponderEntrevista} />
+		<Route path="/ReponderEntrevista" component={ResponderEntrevista} />
 		<Route path="*" component={NotFound} />
 	</Switch>
 );
