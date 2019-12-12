@@ -47,12 +47,14 @@ export default class extends Component {
 				</Helmet>
 				<Container>
 					<Content>	
-						<h2>Minhas Entrevistas:</h2>				
-						<InterviewsTable dataTable={this.state.entrevistas} />
+						<h2>Minhas Entrevistas:</h2>	
+						<hr/>			
 						<FormRow>
 							<ButtonSuccessLink data-toggle="collapse" data-target="#new-interview"> {PlusIcon} NOVA ENTREVISTA </ButtonSuccessLink>
 						</FormRow>
+						<hr/>
 						<InterviewRegister />
+						<InterviewsTable dataTable={this.state.entrevistas} />
 
 					</Content>
 				</Container>

@@ -95,7 +95,7 @@ class CadastroEntrevista extends Component {
 		return (
 
 			<Collapse id="new-interview">
-				<br /><hr /><br />
+
 				<Form onSubmit={this.handleSaveInterview}>
 					<FormGroup>
 						<label htmlFor="exampleInputEmail1">Título da Entrevista:</label>

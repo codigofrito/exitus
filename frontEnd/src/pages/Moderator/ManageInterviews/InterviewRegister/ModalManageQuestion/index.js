@@ -15,9 +15,7 @@ import {
 	ButtonSecondary,
 	Textarea,
 	ButtonDanger
-
 } from '../../../../../styles/BootstrapStyled';
-
 
 export default class extends Component {
 	constructor(props) {
@@ -28,7 +26,6 @@ export default class extends Component {
 		};
 		this.handleTitleChange = this.handleTitleChange.bind(this);
 		this.handleCreateQuestion = this.handleCreateQuestion.bind(this);
-
 	}
 
 	handleTitleChange(event) {
@@ -40,12 +37,12 @@ export default class extends Component {
 		const alternatives = [];
 		fields.forEach((field, index) => {
 			if (index > 0) {
-				if(field.value && field.value !== '') {
+				if (field.value && field.value !== '') {
 					alternatives.push(field);
 				}
 			}
 		});
-		if(fields[0].value && fields[0].value !== '' && alternatives.length>= 2) {
+		if (fields[0].value && fields[0].value !== '' && alternatives.length >= 2) {
 			this.props.createQuestion(fields);
 		}
 	}
@@ -60,7 +57,7 @@ export default class extends Component {
 			if (!this.props.display) {
 				console.log('CLOSING');
 				this.setState({
-					pergunta: '',
+					pergunta: ''
 				});
 			} else {
 				this.setState({
@@ -153,18 +150,22 @@ export default class extends Component {
 						</ModalBody>
 
 						<ModalFooter>
-
 							<ButtonDanger type="button" onClick={this.handleCreateQuestion}>
-								Deletar Pergunta
+                Deletar Pergunta
 							</ButtonDanger>
 
-							<ButtonSecondary type="button"
-								onClick={() => { this.props.setModalDisplaying(false); }}
-								data-dismiss="modal">Cancelar
+							<ButtonSecondary
+								type="button"
+								onClick={() => {
+									this.props.setModalDisplaying(false);
+								}}
+								data-dismiss="modal"
+							>
+                Cancelar
 							</ButtonSecondary>
 
 							<ButtonPrimary type="button" onClick={this.handleCreateQuestion}>
-								Criar pergunta
+                Criar pergunta
 							</ButtonPrimary>
 						</ModalFooter>
 					</ModalContent>
@@ -173,4 +174,3 @@ export default class extends Component {
 		);
 	}
 }
-

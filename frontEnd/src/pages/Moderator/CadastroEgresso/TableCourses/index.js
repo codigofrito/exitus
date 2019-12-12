@@ -30,7 +30,7 @@ class TableCourses extends Component {
 				</TableHead>
 
 				<TableBody>
-					{this.props.dataTable.map((curso, index) => {
+					{this.props.dataTable.cursos.map((curso, index) => {
 						return (
 							<Fragment>
 								<TableRowClicable key={index} onClick={() => this.editarCurso(curso.id)}>
