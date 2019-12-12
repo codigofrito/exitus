@@ -26,6 +26,9 @@ export default class extends Component {
 		};
 		this.handleTitleChange = this.handleTitleChange.bind(this);
 		this.handleCreateQuestion = this.handleCreateQuestion.bind(this);
+		this.handleUpdateQuestion = this.handleUpdateQuestion.bind(this);
+		this.handleRemoveQuestion = this.handleRemoveQuestion.bind(this);
+		this.processFields = this.processFields.bind(this);
 	}
 
 	handleTitleChange(event) {
@@ -33,6 +36,18 @@ export default class extends Component {
 	}
 
 	handleCreateQuestion() {
+		const result = this.processFields();
+		if(result.status) this.props.createQuestion(result.fields);
+	}
+
+	handleUpdateQuestion() {
+		const result = this.processFields();
+		if (result.status) this.props.updateQuestion(result.fields);
+	}
+	handleRemoveQuestion(){
+		this.props.removeQuestion();
+	}
+	processFields () {
 		const fields = document.querySelectorAll('.create-question-field');
 		const alternatives = [];
 		fields.forEach((field, index) => {
@@ -43,19 +58,18 @@ export default class extends Component {
 			}
 		});
 		if (fields[0].value && fields[0].value !== '' && alternatives.length >= 2) {
-			this.props.createQuestion(fields);
+			return {status: true, fields};
+		} else {
+			return {status: false, fields: []};
 		}
 	}
-
 	componentDidUpdate() {
 		if (this.state.display !== this.props.display) {
-			console.log('DISPLAY CHANGE');
 			this.setState({
 				display: this.props.display
 			});
 
 			if (!this.props.display) {
-				console.log('CLOSING');
 				this.setState({
 					pergunta: ''
 				});
@@ -150,7 +164,7 @@ export default class extends Component {
 						</ModalBody>
 
 						<ModalFooter>
-							<ButtonDanger type="button" onClick={this.handleCreateQuestion}>
+							<ButtonDanger type="button" onClick={this.handleRemoveQuestion}>
                 Deletar Pergunta
 							</ButtonDanger>
 
@@ -161,11 +175,17 @@ export default class extends Component {
 								}}
 								data-dismiss="modal"
 							>
-                Cancelar
+								Cancelar
 							</ButtonSecondary>
 
-							<ButtonPrimary type="button" onClick={this.handleCreateQuestion}>
-                Criar pergunta
+							<ButtonPrimary type="button" onClick={() => {
+								if(this.props.editModeStatus) {
+									this.handleUpdateQuestion();
+								} else {
+									this.handleCreateQuestion();
+								}
+							}}>
+								{this.props.editModeName}
 							</ButtonPrimary>
 						</ModalFooter>
 					</ModalContent>
