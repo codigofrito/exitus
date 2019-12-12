@@ -1,15 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-	const egresso_possui_curso = sequelize.define('egresso_possui_curso', {
+	const egresso_possui_cursos = sequelize.define('egresso_possui_cursos', {
 		cpf_egresso: {
 			type: DataTypes.BIGINT(11).ZEROFILL,
 			primaryKey: true
 		},
 		id_curso: {
-			type: DataTypes.INTEGER,
-			primaryKey: true
-		},
-		id_filial: {
 			type: DataTypes.INTEGER,
 			primaryKey: true
 		},
@@ -20,17 +16,17 @@ module.exports = (sequelize, DataTypes) => {
 		ano_inicio_curso: DataTypes.INTEGER,
 		ano_termino_curso: DataTypes.INTEGER,
 	}, {});
-	egresso_possui_curso.associate = function (models) {
-		egresso_possui_curso.belongsTo(models.egresso, {
-			foreignKey: 'cpf',
+	egresso_possui_cursos.associate = function (models) {
+		egresso_possui_cursos.belongsTo(models.egresso, {
+			foreignKey: 'cpf_egresso',
 			onDelete: 'CASCADE',
 			onUpdate: 'CASCADE',
 		});
-		egresso_possui_curso.belongsTo(models.curso, {
-			foreignKey: 'id',
+		egresso_possui_cursos.belongsTo(models.curso, {
+			foreignKey: 'id_curso',
 			onDelete: 'CASCADE',
 			onUpdate: 'CASCADE',
 		});
 	};
-	return egresso_possui_curso;
+	return egresso_possui_cursos;
 };

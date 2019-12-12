@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet';
 import Axios from 'axios';
 import localStorage from 'local-storage';
 
@@ -8,7 +8,7 @@ import { Content } from "../../../styles/customGlobalStyled";
 
 import Question from "./Question"
 
-import TitleBar from "../../../components/TitleBar";
+import TitleBar from '../../../components/TitleBar';
 
 export default class extends Component {
 
@@ -25,11 +25,24 @@ export default class extends Component {
             }
         }
     }
+	constructor(props) {
+		super(props);
+		this.state = {
+			tituloAba: 'Responder Entrevista',
+			tituloBarra: 'Responder Entrevista',
+			descricaoPagina: '',
+			interview: {
+				titulo: '',
+				descricao: '',
+				perguntas: []
+			}
+		};
+	}
 
 
-    componentDidMount() {
+	componentDidMount() {
 
-        const idEntrevista = this.props.match.params.id
+		const idEntrevista = this.props.match.params.id;
 
         Axios.post('http://localhost:3001/questionario', { id: 1 }
         ).then(result => {
@@ -39,19 +52,18 @@ export default class extends Component {
         );
 
 
-    }
+	}
 
     render() {
 
+		return (
+			<Fragment>
+				<TitleBar titulo={this.state.tituloBarra} descricao={this.state.descricaoPagina} />
 
-        return (
-            <Fragment>
-                <TitleBar titulo={this.state.tituloBarra} descricao={this.state.descricaoPagina} />
-
-                <Helmet>
-                    <title>{this.state.tituloAba}</title>
-                    <meta name="description" content={this.state.descricao} />
-                </Helmet>
+				<Helmet>
+					<title>{this.state.tituloAba}</title>
+					<meta name="description" content={this.state.descricao} />
+				</Helmet>
 
                 <Container>
                     <Content>
@@ -71,7 +83,7 @@ export default class extends Component {
                     </Content>
                 </Container>
 
-            </Fragment>
-        );
-    }
+			</Fragment>
+		);
+	}
 }

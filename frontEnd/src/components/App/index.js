@@ -1,7 +1,6 @@
 import React from 'react';
 
 import LightTheme from '../../styles/themes/LightTheme';
-import Snow from "react-snow-effect";
 import Header from '../Header';
 import Footer from '../Footer';
 
@@ -17,7 +16,6 @@ function App() {
             <ThemeProvider theme={LightTheme}>
                 <Router>
                     <Header />
-                    <Snow/>
                     <Routes />
                     <Footer />
                 </Router>

@@ -26,104 +26,60 @@ class CadastroEntrevista extends Component {
 
 		super(props);
 		this.state = {
-			qcourseSelected: '',
-			modalDisplay: false,
-			editModeStatus: false,
-			editModeName: 'Salvar Curso',
 			cursos: []
 		};
 
-		this.handleCourseSelected = this.handleCourseSelected.bind(this);
 		this.handleFieldChange = this.handleFieldChange.bind(this);
-		this.handleModalDisplayingChange = this.handleModalDisplayingChange.bind(this);
-		this.handleCreateCourse = this.handleCreateCourse.bind(this);
-		this.handleSaveInterview = this.handleSaveInterview.bind(this);
-		this.handleUpdateCourse = this.handleUpdateCourse.bind(this);
-		this.handleRemoveCourse = this.handleRemoveCourse.bind(this);
-		this.processCourse = this.processCourse.bind(this);
-	}
-
-	async handleSaveInterview(event) {
-		event.preventDefault();
-		if (this.state.cursos.length > 0) {
-			await Axios.post(
-				'http://localhost:3001/register/interview',
-				{
-					cpf_moderador: localStorage.get('user').cpf,
-					titulo: this.state.interviewTitle,
-					descricao: this.state.interviewDescription,
-					cursos: this.state.cursos.map(pergunta => {
-						return pergunta.pergunta;
-					}),
-					alternativas: this.state.cursos.map(pergunta => {
-						return pergunta.alternativas;
-					})
-				},
-				{ headers: { token: `bearer ${localStorage.get('TOKEN_KEY')}` } }
-			);
-			document.querySelector('#new-interview').dataToggle = 'collpase';
-			this.setState({ cursos: [] });
-		}
-	}
-
-	handleCreateCourse(newCourse) {
-		this.state.cursos.push(this.processCourse(newCourse));
-		this.setState({ cursos: this.state.cursos });
-	}
-
-	handleUpdateCourse(question) {
-		const cursos = this.state.cursos;
-		cursos[this.state.qcourseSelectedId] = this.processCourse(question);
-		this.setState({ cursos: cursos });
-	}
-
-	handleRemoveCourse() {
-		const cursos = this.state.cursos;
-		cursos.splice(this.state.qcourseSelectedId, 1);
-		this.setState({ cursos: cursos });
-	}
-
-	processCourse(fields) {
-		const Course = {
-			pergunta: '',
-			alternativas: []
-		};
-		fields.forEach((element, index) => {
-			if (index === 0) {
-				Course.pergunta = element.value;
-			} else {
-				if (element.value && element.value !== '') {
-					Course.alternativas.push(element.value);
-				}
-			}
-		});
-
-		return Course;
-	}
-
-	handleCourseSelected(id) {
-		this.setState({ qcourseSelected: this.state.cursos[id] });
-		this.setState({ qcourseSelectedId: id });
-		this.setState({ modalDisplay: true });
-		this.setState({ editModeStatus: true, editModeName: 'Salvar alterações' });
+		this.handleCourses = this.handleCourses.bind(this);
+		this.registerEgress = this.registerEgress.bind(this);
 	}
 
 	handleFieldChange(event) {
 		this.setState(JSON.parse(`{"${event.target.id}":"${event.target.value}"}`));
 	}
 
-	handleModalDisplayingChange(displayStatus) {
-		this.setState({ modalDisplay: displayStatus });
-		if (!displayStatus) {
-			this.setState({ qcourseSelected: '' });
-		}
+	handleCourses(courses) {
+		console.log(courses);
+		this.setState({cursos: courses});
+	}
+
+	async registerEgress(event) {
+		event.preventDefault();
+		await Axios.post(
+			'http://localhost:3001/register/person',
+			{
+				nome: this.state.nome,
+				cpf: this.state.cpf,
+				sobrenome: this.state.sobrenome,
+				data_nascimento: this.state.dataNascimento,
+				email: this.state.email,
+				celular:this.state.celular,
+			}
+		).then(r => {console.log(r);});
+
+		await Axios.post('http://localhost:3001/register/egress', {
+			cpf: this.state.cpf,
+			senha: '123456789'
+		}).then(r => {console.log(r);});
+
+		await this.state.cursos
+			.forEach(async curso => {
+				console.log(curso.id, this.state.cpf);
+				await Axios.post('http://localhost:3001/register/courseEgress', {
+					id_curso: curso.id,
+					cpf_egresso: this.state.cpf
+				}).then(r => {
+					console.log(r);
+				}).catch(err => {console.log(err);});
+			});
+			
 	}
 
 	render() {
 		return (
 			<Collapse id="modal-maneger-egress">
 
-				<Form onSubmit={this.handleSaveInterview}>
+				<Form onSubmit={this.registerEgress}>
 
 					<FormRow>
 
@@ -214,7 +170,7 @@ class CadastroEntrevista extends Component {
 								});
 							}}
 						>
-							{plusIcon} ADICIONAR CURSO
+							{plusIcon} ADICIONAR / EDITAR CURSOS
 						</ButtonSuccess>
 					</FormGroup>
 
@@ -238,16 +194,7 @@ class CadastroEntrevista extends Component {
 					</FormGroup>
 				</Form>
 
-				<ModalManageCourse
-					question={this.state.courseSelected}
-					createCourse={this.handleCreateCourse}
-					updateCourse={this.handleUpdateCourse}
-					removeCourse={this.handleRemoveCourse}
-					setModalDisplaying={this.handleModalDisplayingChange}
-					display={this.state.modalDisplay}
-					editModeStatus={this.state.editModeStatus}
-					editModeName={this.state.editModeName}
-				/>
+				<ModalManageCourse confirmCoursesSelected={this.handleCourses}/>
 			</Collapse>
 		);
 	}

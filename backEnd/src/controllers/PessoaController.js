@@ -78,8 +78,8 @@ module.exports = {
 				mensagem: Mensagem.sucesso,
 				return: true
 			});
-		}).catch(() => {
-
+		}).catch((err) => {
+			console.log(err);
 			return response.status(400).json({
 				resultado: [],
 				mensagem: Mensagem.falha,

@@ -1,4 +1,4 @@
-const  EgressoPossuiCurso  = require('../models').egresso_possui_curso;
+const  EgressoPossuiCurso  = require('../models').egresso_possui_cursos;
 const Mensagem = require('./mensagem');
 
 module.exports = {
@@ -52,23 +52,11 @@ module.exports = {
 		const {
 			cpf_egresso,
 			id_curso,
-			concluiu,
-			impressao,
-			observacao,
-			atuacao,
-			ano_inicio_curso,
-			ano_terminocurso
 		} = request.body;
 
 		await EgressoPossuiCurso.create({
 			cpf_egresso,
 			id_curso,
-			concluiu,
-			impressao,
-			observacao,
-			atuacao,
-			ano_inicio_curso,
-			ano_terminocurso,
 
 		}).then((resultado) => {
 
@@ -78,7 +66,6 @@ module.exports = {
 				return: true
 			});
 		}).catch(() => {
-
 			return response.status(400).json({
 				resultado: [],
 				mensagem: Mensagem.falha,

@@ -53,7 +53,7 @@ export default class extends Component {
                         <TableRow>
                             <TableColumnHeader columnGrid="col-sm-1">#</TableColumnHeader>
                             <TableColumnHeader columnGrid="col-sm-5">Nome do Egresso</TableColumnHeader>
-                            <TableColumnHeader columnGrid="col-sm-4">Descrição da Entrevista</TableColumnHeader>
+                            <TableColumnHeader columnGrid="col-sm-4">E-mail</TableColumnHeader>
                             <TableColumnHeader columnGrid="col-sm-2">Registro</TableColumnHeader>
                         </TableRow>
                     </TableHead>

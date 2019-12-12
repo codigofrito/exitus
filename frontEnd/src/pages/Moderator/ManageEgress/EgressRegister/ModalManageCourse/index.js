@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-
+import React, {Fragment, Component } from 'react';
+import Axios from 'axios';
 import {
 	Modal,
 	ModalDialogMedium,
@@ -14,75 +14,121 @@ import {
 	ButtonPrimary,
 	ButtonSecondary,
 	Textarea,
-	ButtonDanger
+	ButtonDanger,
+	Table,
+	TableColumnHeader,
+	TableColumnHeaderCentered,
+	TableBody,
+	TableRow,
+	TableRowClicable,
+	TableColumn,
+	TableColumnCentered,
+	TableHead,
+	AlertWarning
 } from '../../../../../styles/BootstrapStyled';
+
+class Courses extends Component {
+	constructor(props) {
+		super(props);
+		this.state ={
+			courses: [],
+			selectedCourses:[]
+		};
+
+		this.selectCourse = this.selectCourse.bind(this);
+	}
+
+	selectCourse(event){
+		if(event.currentTarget.isSelected) {
+			event.currentTarget.isSelected = false;
+			event.currentTarget.style.background = 'rgb(255,255,255)';
+		} else {
+			event.currentTarget.isSelected = true;
+			event.currentTarget.style.background = 'rgba(188, 243, 144,0.9)';
+		}
+		
+	}
+
+	componentDidMount() {
+		Axios.post('http://localhost:3001/courses')
+			.then(result => {
+				this.setState({courses: result.data.resultado});
+			});
+	}
+
+	render(){
+		return (
+			<Fragment>
+				<Table>
+					<TableHead>
+						<TableRow>
+							<TableColumnHeaderCentered columnGrid="col-sm-4">Curso</TableColumnHeaderCentered>
+							<TableColumnHeaderCentered columnGrid="col-sm-4">Filial</TableColumnHeaderCentered>
+							<TableColumnHeaderCentered columnGrid="col-sm-4">Área</TableColumnHeaderCentered>
+						</TableRow>
+					</TableHead>
+
+					<TableBody>
+						{this.state.courses.map(course => {
+							return (
+								<Fragment>
+									<TableRowClicable id={course.id} className="add-course-to-egress" isSelected={false} onClick={this.selectCourse}>
+										<TableColumnCentered columnGrid="col-sm-4">
+											{course.nome_curso}
+										</TableColumnCentered>
+
+										<TableColumnCentered columnGrid="col-sm-4">
+											{course.nome_filial}
+										</TableColumnCentered>
+
+										<TableColumnCentered columnGrid="col-sm-4">
+											{course.area}
+										</TableColumnCentered>
+									</TableRowClicable>
+								</Fragment>
+							);
+						})}
+					</TableBody>
+				</Table>
+			</Fragment>
+		);
+	}
+}
 
 export default class extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			course: '',
-			display: false
-		};
-		this.handleTitleChange = this.handleTitleChange.bind(this);
-		this.handleCreateCourse = this.handleCreateCourse.bind(this);
-		this.handleUpdateCourse = this.handleUpdateCourse.bind(this);
-		this.handleRemoveCourse = this.handleRemoveCourse.bind(this);
-		this.processFields = this.processFields.bind(this);
+		this.state = {};
+		this.addCourse = this.addCourses.bind(this);
 	}
 
-	handleTitleChange(event) {
-		this.setState({ pergunta: event.target.value });
-	}
-
-	handleCreateCourse() {
-		const result = this.processFields();
-		if (result.status) this.props.createCourse(result.fields);
-	}
-
-	handleUpdateCourse() {
-		const result = this.processFields();
-		if (result.status) this.props.updateCourse(result.fields);
-	}
-	handleRemoveCourse() {
-		this.props.removeCourse();
-	}
-	processFields() {
-		const fields = document.querySelectorAll('.create-question-field');
-		const alternatives = [];
-		fields.forEach((field, index) => {
-			if (index > 0) {
-				if (field.value && field.value !== '') {
-					alternatives.push(field);
-				}
+	addCourses() {
+		const courses = document.querySelectorAll('.add-course-to-egress');
+		let coursesSelected = [];
+		courses.forEach(course => {
+			if(course.isSelected) {
+				coursesSelected.push(course);
 			}
 		});
-		if (fields[0].value && fields[0].value !== '' && alternatives.length >= 2) {
-			return { status: true, fields };
-		} else {
-			return { status: false, fields: [] };
-		}
-	}
-	componentDidUpdate() {
-		if (this.state.display !== this.props.display) {
-			this.setState({
-				display: this.props.display
-			});
 
-			if (!this.props.display) {
-				this.setState({
-					pergunta: ''
-				});
-			} else {
-				this.setState({
-					pergunta: this.props.question.pergunta
-				});
-			}
-		}
+		const coursesList = coursesSelected.map(course => {
+			return {
+				id: course.id,
+				nomeCurso: course.childNodes[0].innerHTML,
+				nomeFilial: course.childNodes[1].innerHTML,
+				area: course.childNodes[2].innerHTML
+			};
+		});
+
+		return coursesList;
+	}
+
+	componentDidUpdate() {
+		
 	}
 
 	componentDidMount() {
-		this.setState({ display: this.props.display });
+
 	}
 
 	render() {
@@ -91,13 +137,10 @@ export default class extends Component {
 				<ModalDialogMedium>
 					<ModalContent>
 						<ModalHeader>
-							<ModalTitle>Criar Nova Pergunta</ModalTitle>
+							<ModalTitle>Adicionar cursos</ModalTitle>
 							<ButtonCloseModal
 								type="button"
 								data-dismiss="modal"
-								onClick={() => {
-									this.props.setModalDisplaying(false);
-								}}
 							>
 								<span aria-hidden="true">&times;</span>
 							</ButtonCloseModal>
@@ -105,88 +148,25 @@ export default class extends Component {
 						<ModalBody>
 							<Form id="modalCriarPergunta">
 								<FormGroup>
-									<label htmlFor="pergunta">Pergunta</label>
-									<Textarea
-										id="question-field"
-										value={this.state.pergunta}
-										className="questions-modal-field create-question-field"
-										placeholder="Insira o texto da pergunta."
-										rows="2"
-										onChange={this.handleTitleChange}
-									></Textarea>
-								</FormGroup>
-
-								<FormGroup>
-									<Textarea
-										id="alternative-field-0"
-										className="create-question-field"
-										placeholder="Insira o texto da alternativa"
-										rows="1"
-									></Textarea>
-								</FormGroup>
-
-								<FormGroup>
-									<Textarea
-										id="alternative-field-1"
-										className="create-question-field"
-										placeholder="Insira o texto da alternativa"
-										rows="1"
-									></Textarea>
-								</FormGroup>
-
-								<FormGroup>
-									<Textarea
-										id="alternative-field-2"
-										className="create-question-field"
-										placeholder="Insira o texto da alternativa"
-										rows="1"
-									></Textarea>
-								</FormGroup>
-
-								<FormGroup>
-									<Textarea
-										id="alternative-field-3"
-										className="create-question-field"
-										placeholder="Insira o texto da alternativa"
-										rows="1"
-									></Textarea>
-								</FormGroup>
-
-								<FormGroup>
-									<Textarea
-										className="create-question-field"
-										id="alternative-field-4"
-										placeholder="Insira o texto da alternativa"
-										rows="1"
-									></Textarea>
+									<Courses id="select-courses-table"/>
 								</FormGroup>
 							</Form>
 						</ModalBody>
 
 						<ModalFooter>
-							<ButtonDanger type="button" onClick={this.handleRemoveCourse}>
-								Deletar Pergunta
-							</ButtonDanger>
 
 							<ButtonSecondary
 								type="button"
-								onClick={() => {
-									this.props.setModalDisplaying(false);
-								}}
 								data-dismiss="modal"
 							>
-								Cancelar
+                				Cancelar
 							</ButtonSecondary>
 
-							<ButtonPrimary type="button" onClick={() => {
-								if (this.props.editModeStatus) {
-									this.handleUpdateCourse();
-								} else {
-									this.handleCreateCourse();
-								}
-							}}>
-								{this.props.editModeName}
-							</ButtonPrimary>
+							<ButtonPrimary type="button" onClick={ () => {
+								this.props.confirmCoursesSelected(this.addCourses());
+							}
+							}
+							>Adicionar selecionados</ButtonPrimary>
 						</ModalFooter>
 					</ModalContent>
 				</ModalDialogMedium>
