@@ -2,14 +2,15 @@ import React, { Component } from "react";
 
 import { BoxBanner, ImageBanner } from "./styles"
 
-import img01 from "../../../../assets/bannerImages/01.jpg"
-import img02 from "../../../../assets/bannerImages/02.jpg"
-import img03 from "../../../../assets/bannerImages/03.jpg"
+import img04 from "../../../../assets/bannerImages/01.jpg"
+import img03 from "../../../../assets/bannerImages/02.jpg"
+import img02 from "../../../../assets/bannerImages/03.jpg"
+import img01 from "../../../../assets/bannerImages/04.jpg"
 
 import { Gallery } from "react-gesture-gallery";
 
 const images = [
-    img01, img02, img03
+    img01, img02, img03, img04
 ];
 
 class BannerRotativo extends Component {
