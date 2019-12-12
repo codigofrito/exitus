@@ -141,7 +141,7 @@ class CadastroEgresso extends React.Component {
 							</FormRow>
 							<hr />
 
-							<TableCourses dataTable={this.state, this.state.cursos} />
+							<TableCourses dataTable={this.state} />
 
 							<ButtonPrimary>Salvar</ButtonPrimary>
 

@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 import { AppHeader, Logo } from './styles';
 
-import MenuModerador from './MenuModerador';
+// import MenuModerador from './MenuModerador';
 import MenuEgresso from './MenuEgresso';
 import MenuPublico from './MenuPublico';
 

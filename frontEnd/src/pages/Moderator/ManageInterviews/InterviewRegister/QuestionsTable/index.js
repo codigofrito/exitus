@@ -17,7 +17,7 @@ export default class extends Component {
 
 
 	render() {
-		if (this.props.dataTable.length == 0) {
+		if (this.props.dataTable.length === 0) {
 			return (
 				<AlertWarning>
 					<strong>Essa entrevista ainda não possui perguntas, adicione ao menos uma antes de salvar.</strong>

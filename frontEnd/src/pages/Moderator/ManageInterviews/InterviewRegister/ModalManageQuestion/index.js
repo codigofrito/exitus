@@ -18,7 +18,6 @@ import {
 
 } from '../../../../../styles/BootstrapStyled';
 
-let quantidadeAlternativas = 0;
 
 export default class extends Component {
 	constructor(props) {

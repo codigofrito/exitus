@@ -62,7 +62,7 @@ class CadastroEntrevista extends Component {
 			alternativas: []
 		};
 		newQuestion.forEach((element, index) => {
-			if (index == 0) {
+			if (index === 0) {
 				Question.pergunta = element.value;
 			} else {
 				if (element.value && element.value !== '') {
